@@ -12,14 +12,14 @@ namespace TechnoBackend.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class REV
+    public partial class REVs
     {
         public int Rev_Id { get; set; }
         public string Prod_id { get; set; }
         public string User_ID { get; set; }
         public string Rev_text { get; set; }
     
-        public virtual PROD PROD { get; set; }
-        public virtual USER USER { get; set; }
+        public virtual PRODs PROD { get; set; }
+        public virtual USERs USER { get; set; }
     }
 }

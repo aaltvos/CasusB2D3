@@ -12,12 +12,12 @@ namespace TechnoBackend.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class USER
+    public partial class USERs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USER()
+        public USERs()
         {
-            this.REVs = new HashSet<REV>();
+            this.REVs = new HashSet<REVs>();
         }
     
         public int USER_Id { get; set; }
@@ -25,10 +25,9 @@ namespace TechnoBackend.DatabaseModel
         public string USER_PW { get; set; }
         public string USER_Sec { get; set; }
         public System.DateTime User_Val_dat { get; set; }
-        public int USER_Session { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REV> REVs { get; set; }
+        public virtual ICollection<REVs> REVs { get; set; }
         public virtual SESSIONS SESSIONS { get; set; }
     }
 }
