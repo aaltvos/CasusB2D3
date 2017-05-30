@@ -503,7 +503,7 @@
         </Association>
         <Association Name="USERSESSIONS">
           <End Type="DBModel.USER" Role="USER" Multiplicity="1" />
-          <End Type="DBModel.SESSIONS" Role="SESSIONS" Multiplicity="1" />
+          <End Type="DBModel.SESSIONS" Role="SESSIONS" Multiplicity="0..1" />
         </Association>
         <Association Name="CATEntity1">
           <End Type="DBModel.CAT" Role="CAT" Multiplicity="1" />
@@ -701,6 +701,7 @@
       <EndProperty Name="USER">
         <ScalarProperty Name="USER_Id" ColumnName="USER_Id" />
       </EndProperty>
+            <Condition ColumnName="SESSIONS_Sessions_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="CATEntity1" TypeName="DBModel.CATEntity1" StoreEntitySet="CAT_PROD">
       <EndProperty Name="CAT">
