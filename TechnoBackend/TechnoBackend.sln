@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnoBackend", "TechnoBackend\TechnoBackend.csproj", "{F1FFAF27-E061-45D6-A00C-44A4E8DF4582}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnoBackend.Tests", "TechnoBackend.Tests\TechnoBackend.Tests.csproj", "{D9CA5DFF-2DE4-4ACF-BE3D-75247F0BDA04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1FFAF27-E061-45D6-A00C-44A4E8DF4582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1FFAF27-E061-45D6-A00C-44A4E8DF4582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1FFAF27-E061-45D6-A00C-44A4E8DF4582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1FFAF27-E061-45D6-A00C-44A4E8DF4582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9CA5DFF-2DE4-4ACF-BE3D-75247F0BDA04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9CA5DFF-2DE4-4ACF-BE3D-75247F0BDA04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9CA5DFF-2DE4-4ACF-BE3D-75247F0BDA04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CA5DFF-2DE4-4ACF-BE3D-75247F0BDA04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
