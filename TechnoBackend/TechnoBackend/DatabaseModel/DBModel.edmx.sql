@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/30/2017 22:50:55
--- Generated from EDMX file: C:\Users\Gebruiker\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 05/31/2017 09:59:20
+-- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -120,9 +120,7 @@ GO
 
 -- Creating table 'HAND_SUB_GEB_PROD'
 CREATE TABLE [dbo].[HAND_SUB_GEB_PROD] (
-    [Hand_ID] int  NOT NULL,
-    [SUB_ID] int  NOT NULL,
-    [Prod_ID] int  NOT NULL,
+    [Couple_ID] int IDENTITY(1,1) NOT NULL,
     [HAND_GEB_Hand_ID] int  NOT NULL,
     [PROD_Prod_ID] int  NOT NULL,
     [SUB_BEG_Sub_ID] int  NOT NULL
@@ -139,10 +137,10 @@ GO
 
 -- Creating table 'REVs'
 CREATE TABLE [dbo].[REVs] (
-    [Rev_Id] int IDENTITY(1,1) NOT NULL,
-    [Prod_id] nvarchar(max)  NOT NULL,
-    [User_ID] nvarchar(max)  NOT NULL,
-    [Rev_text] nvarchar(max)  NOT NULL,
+    [REV_ID] int IDENTITY(1,1) NOT NULL,
+    [PROD_ID] nvarchar(max)  NOT NULL,
+    [USER_ID] nvarchar(max)  NOT NULL,
+    [REV_text] nvarchar(max)  NOT NULL,
     [PROD_Prod_ID] int  NOT NULL,
     [USER_USER_Id] int  NOT NULL
 );
@@ -154,7 +152,7 @@ CREATE TABLE [dbo].[USERs] (
     [USER_Name] nvarchar(max)  NOT NULL,
     [USER_PW] nvarchar(max)  NOT NULL,
     [USER_Sec] nvarchar(max)  NOT NULL,
-    [User_Val_dat] datetime  NOT NULL
+    [USER_Val_dat] datetime  NOT NULL
 );
 GO
 
@@ -168,8 +166,7 @@ GO
 
 -- Creating table 'CAT_PROD'
 CREATE TABLE [dbo].[CAT_PROD] (
-    [CAT_Id] int  NOT NULL,
-    [PROD_ID] int  NOT NULL,
+    [COUPLE_ID] int IDENTITY(1,1) NOT NULL,
     [PROD_Prod_ID] int  NOT NULL,
     [CAT_CAT_Id] int  NOT NULL
 );
@@ -177,9 +174,9 @@ GO
 
 -- Creating table 'SESSIONS'
 CREATE TABLE [dbo].[SESSIONS] (
-    [Sessions_ID] int IDENTITY(1,1) NOT NULL,
-    [Sessions_Token] nvarchar(max)  NOT NULL,
-    [Sessions_TTL] nvarchar(max)  NOT NULL,
+    [SESSIONS_ID] int IDENTITY(1,1) NOT NULL,
+    [SESSIONS_Token] nvarchar(max)  NOT NULL,
+    [SESSIONS_TTL] nvarchar(max)  NOT NULL,
     [USER_USER_Id] int  NOT NULL
 );
 GO
@@ -216,10 +213,10 @@ ADD CONSTRAINT [PK_PRODs]
     PRIMARY KEY CLUSTERED ([Prod_ID] ASC);
 GO
 
--- Creating primary key on [Hand_ID], [SUB_ID], [Prod_ID] in table 'HAND_SUB_GEB_PROD'
+-- Creating primary key on [Couple_ID] in table 'HAND_SUB_GEB_PROD'
 ALTER TABLE [dbo].[HAND_SUB_GEB_PROD]
 ADD CONSTRAINT [PK_HAND_SUB_GEB_PROD]
-    PRIMARY KEY CLUSTERED ([Hand_ID], [SUB_ID], [Prod_ID] ASC);
+    PRIMARY KEY CLUSTERED ([Couple_ID] ASC);
 GO
 
 -- Creating primary key on [Sub_ID] in table 'SUB_BEG'
@@ -228,10 +225,10 @@ ADD CONSTRAINT [PK_SUB_BEG]
     PRIMARY KEY CLUSTERED ([Sub_ID] ASC);
 GO
 
--- Creating primary key on [Rev_Id] in table 'REVs'
+-- Creating primary key on [REV_ID] in table 'REVs'
 ALTER TABLE [dbo].[REVs]
 ADD CONSTRAINT [PK_REVs]
-    PRIMARY KEY CLUSTERED ([Rev_Id] ASC);
+    PRIMARY KEY CLUSTERED ([REV_ID] ASC);
 GO
 
 -- Creating primary key on [USER_Id] in table 'USERs'
@@ -246,16 +243,16 @@ ADD CONSTRAINT [PK_CATs]
     PRIMARY KEY CLUSTERED ([CAT_Id] ASC);
 GO
 
--- Creating primary key on [CAT_Id], [PROD_ID] in table 'CAT_PROD'
+-- Creating primary key on [COUPLE_ID] in table 'CAT_PROD'
 ALTER TABLE [dbo].[CAT_PROD]
 ADD CONSTRAINT [PK_CAT_PROD]
-    PRIMARY KEY CLUSTERED ([CAT_Id], [PROD_ID] ASC);
+    PRIMARY KEY CLUSTERED ([COUPLE_ID] ASC);
 GO
 
--- Creating primary key on [Sessions_ID] in table 'SESSIONS'
+-- Creating primary key on [SESSIONS_ID] in table 'SESSIONS'
 ALTER TABLE [dbo].[SESSIONS]
 ADD CONSTRAINT [PK_SESSIONS]
-    PRIMARY KEY CLUSTERED ([Sessions_ID] ASC);
+    PRIMARY KEY CLUSTERED ([SESSIONS_ID] ASC);
 GO
 
 -- Creating primary key on [TAGS_Id] in table 'TAGS'

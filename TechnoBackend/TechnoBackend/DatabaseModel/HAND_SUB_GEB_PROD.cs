@@ -14,9 +14,7 @@ namespace TechnoBackend.DatabaseModel
     
     public partial class HAND_SUB_GEB_PROD
     {
-        public int Hand_ID { get; set; }
-        public int SUB_ID { get; set; }
-        public int Prod_ID { get; set; }
+        public int Couple_ID { get; set; }
     
         public virtual HAND_GEB HAND_GEB { get; set; }
         public virtual PRODs PROD { get; set; }

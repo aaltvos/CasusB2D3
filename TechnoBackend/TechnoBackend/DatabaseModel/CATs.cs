@@ -17,7 +17,7 @@ namespace TechnoBackend.DatabaseModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CATs()
         {
-            this.Entity1 = new HashSet<CAT_PROD>();
+            this.CAT_PROD = new HashSet<CAT_PROD>();
         }
     
         public int CAT_Id { get; set; }
@@ -25,6 +25,6 @@ namespace TechnoBackend.DatabaseModel
         public string CAT_IMG { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CAT_PROD> Entity1 { get; set; }
+        public virtual ICollection<CAT_PROD> CAT_PROD { get; set; }
     }
 }

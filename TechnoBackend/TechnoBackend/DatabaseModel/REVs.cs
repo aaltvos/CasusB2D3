@@ -14,10 +14,10 @@ namespace TechnoBackend.DatabaseModel
     
     public partial class REVs
     {
-        public int Rev_Id { get; set; }
-        public string Prod_id { get; set; }
-        public string User_ID { get; set; }
-        public string Rev_text { get; set; }
+        public int REV_ID { get; set; }
+        public string PROD_ID { get; set; }
+        public string USER_ID { get; set; }
+        public string REV_text { get; set; }
     
         public virtual PRODs PROD { get; set; }
         public virtual USERs USER { get; set; }
