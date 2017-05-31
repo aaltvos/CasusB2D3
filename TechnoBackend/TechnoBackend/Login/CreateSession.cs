@@ -8,9 +8,9 @@ namespace TechnoBackend.Login
 {
     public class CreateSession
     {
-        SESSIONS Session = new SESSIONS
+        private SESSIONS Session = new SESSIONS
         {
 
-        }
+        };
     }
 }

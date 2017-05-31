@@ -9,7 +9,7 @@ namespace TechnoBackend.Login
     {
         public TokenGen()
         {
-            (from )
+            
         }
     }
 }

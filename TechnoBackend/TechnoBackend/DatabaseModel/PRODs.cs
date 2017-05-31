@@ -19,7 +19,7 @@ namespace TechnoBackend.DatabaseModel
         {
             this.HAND_SUB_GEB_PROD = new HashSet<HAND_SUB_GEB_PROD>();
             this.REVs = new HashSet<REVs>();
-            this.Entity1 = new HashSet<CAT_PROD>();
+            this.CAT_PROD = new HashSet<HAND_SUB_GEB_PROD>();
             this.PRODTAGS = new HashSet<PRODTAGS>();
         }
     
@@ -44,7 +44,7 @@ namespace TechnoBackend.DatabaseModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REVs> REVs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CAT_PROD> Entity1 { get; set; }
+        public virtual ICollection<HAND_SUB_GEB_PROD> CAT_PROD { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODTAGS> PRODTAGS { get; set; }
     }

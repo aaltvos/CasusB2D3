@@ -14,9 +14,9 @@ namespace TechnoBackend.DatabaseModel
     
     public partial class SESSIONS
     {
-        public int Sessions_ID { get; set; }
-        public string Sessions_Token { get; set; }
-        public string Sessions_TTL { get; set; }
+        public int SESSIONS_ID { get; set; }
+        public string SESSIONS_Token { get; set; }
+        public string SESSIONS_TTL { get; set; }
     
         public virtual USERs USER { get; set; }
     }
