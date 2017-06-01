@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/31/2017 09:59:20
--- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 05/31/2017 17:41:04
+-- Generated from EDMX file: C:\Users\Gebruiker\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -177,7 +177,7 @@ CREATE TABLE [dbo].[SESSIONS] (
     [SESSIONS_ID] int IDENTITY(1,1) NOT NULL,
     [SESSIONS_Token] nvarchar(max)  NOT NULL,
     [SESSIONS_TTL] nvarchar(max)  NOT NULL,
-    [USER_USER_Id] int  NOT NULL
+    [USER_Id_USER_Id] int  NOT NULL
 );
 GO
 
@@ -376,10 +376,10 @@ ON [dbo].[REVs]
     ([USER_USER_Id]);
 GO
 
--- Creating foreign key on [USER_USER_Id] in table 'SESSIONS'
+-- Creating foreign key on [USER_Id_USER_Id] in table 'SESSIONS'
 ALTER TABLE [dbo].[SESSIONS]
 ADD CONSTRAINT [FK_USERSESSIONS]
-    FOREIGN KEY ([USER_USER_Id])
+    FOREIGN KEY ([USER_Id_USER_Id])
     REFERENCES [dbo].[USERs]
         ([USER_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -388,7 +388,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_USERSESSIONS'
 CREATE INDEX [IX_FK_USERSESSIONS]
 ON [dbo].[SESSIONS]
-    ([USER_USER_Id]);
+    ([USER_Id_USER_Id]);
 GO
 
 -- Creating foreign key on [CAT_CAT_Id] in table 'CAT_PROD'

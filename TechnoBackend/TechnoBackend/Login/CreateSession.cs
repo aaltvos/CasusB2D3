@@ -6,11 +6,34 @@ using TechnoBackend.DatabaseModel;
 
 namespace TechnoBackend.Login
 {
+
     public class CreateSession
     {
-        private SESSIONS Session = new SESSIONS
+        int UserID;
+        string Token;
+        public CreateSession(string token, int userID)
         {
+            this.UserID = userID;
+            this.Token = token;
+            DBModelContainer db = new DBModelContainer();
 
-        };
+            var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
+            var CurrentUser = CurrentUserQuery.FirstOrDefault<USERs>();
+
+            SESSIONS Session = new SESSIONS()
+            {
+                SESSIONS_Token = Token,
+                USER_Id = CurrentUser,
+                SESSIONS_TTL = "peni"
+            };
+
+            
+            db.SESSIONS.Add(Session);
+            db.SaveChanges();
+        }
+
+        
+
+       
     }
 }

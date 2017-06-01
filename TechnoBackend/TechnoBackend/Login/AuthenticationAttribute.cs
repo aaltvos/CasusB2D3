@@ -33,9 +33,10 @@ namespace TechnoBackend.Login
                 string username = usernamePasswordArray[0];
                 string password = usernamePasswordArray[1];
 
-                if (Authentication.Login(username, password))
-                {
+                if (Authentication.Login(username, password) != 0)
+                {                    
                     AuthToken = RandomString();
+                    CreateSession newSession = new CreateSession(AuthToken, Authentication.Login(username, password));
                     Thread.CurrentPrincipal = new GenericPrincipal(
                         new GenericIdentity(username), null);
                 }
