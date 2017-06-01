@@ -18,6 +18,6 @@ namespace TechnoBackend.DatabaseModel
         public string SESSIONS_Token { get; set; }
         public string SESSIONS_TTL { get; set; }
     
-        public virtual USERs USER { get; set; }
+        public virtual USERs USER_Id { get; set; }
     }
 }

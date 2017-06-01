@@ -240,7 +240,6 @@
     <Compile Include="Login\Authentication.cs" />
     <Compile Include="Login\AuthenticationAttribute.cs" />
     <Compile Include="Login\CreateSession.cs" />
-    <Compile Include="Login\TokenGen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

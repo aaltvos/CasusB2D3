@@ -20,7 +20,7 @@ namespace TechnoBackend.Controllers
                 switch (username.ToLower())
                 {
                     case "henk":
-                        return Request.CreateResponse(HttpStatusCode.OK);
+                        return Request.CreateResponse("Fuck jou");
 
                     default:
                         return Request.CreateResponse(HttpStatusCode.BadRequest);
