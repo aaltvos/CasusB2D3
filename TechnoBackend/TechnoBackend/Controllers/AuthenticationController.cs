@@ -13,20 +13,9 @@ namespace TechnoBackend.Controllers
         [BasicAuthentication]
         public HttpResponseMessage Get()
         {
-            
             string username = Thread.CurrentPrincipal.Identity.Name;
 
-            using (DBModelContainer db = new DBModelContainer())
-            {
-                switch (username.ToLower())
-                {
-                    case "henk":
-                        return Request.CreateResponse("Fuck jou");
-
-                    default:
-                        return Request.CreateResponse(HttpStatusCode.BadRequest);
-                }
-            }
+            return Request.CreateResponse(SessionCheck.GetToken(username));
         }
 
         // GET: api/Authentication/5
