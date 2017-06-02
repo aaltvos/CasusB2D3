@@ -19,14 +19,15 @@ namespace TechnoBackend.Login
 
             var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
             var CurrentUser = CurrentUserQuery.FirstOrDefault<USERs>();
+            DateTime ttl = DateTime.UtcNow;
+            ttl = ttl.AddHours(3);
 
             SESSIONS Session = new SESSIONS()
             {
                 SESSIONS_Token = Token,
                 USER_Id = CurrentUser,
-                SESSIONS_TTL = "peni"
+                SESSIONS_TTL = ttl
             };
-
             
             db.SESSIONS.Add(Session);
             db.SaveChanges();

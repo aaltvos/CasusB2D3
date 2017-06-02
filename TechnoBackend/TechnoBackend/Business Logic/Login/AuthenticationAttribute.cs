@@ -18,7 +18,8 @@ namespace TechnoBackend.Login
 
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            if (actionContext.Request.Headers.Authorization == null)
+            
+            if (actionContext.Request.Content == null)
             {
                 actionContext.Response = actionContext.Request
                     .CreateResponse(HttpStatusCode.Unauthorized);
@@ -36,10 +37,14 @@ namespace TechnoBackend.Login
                 if (Authentication.Login(username, password) != 0)
                 {                    
                     AuthToken = RandomString();
-                    CreateSession newSession = new CreateSession(AuthToken, Authentication.Login(username, password));
-                    Thread.CurrentPrincipal = new GenericPrincipal(
-                        new GenericIdentity(username), null);
+                    if(SessionCheck.GetToken(username) != "no current session")
+                    {
+                        CreateSession newSession = new CreateSession(AuthToken, Authentication.Login(username, password));
+                        Thread.CurrentPrincipal = new GenericPrincipal(
+                            new GenericIdentity(username), null);
+                    }
                 }
+
                 else
                 {
                     actionContext.Response = actionContext.Request
