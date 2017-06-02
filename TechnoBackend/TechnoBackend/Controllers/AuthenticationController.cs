@@ -13,6 +13,7 @@ namespace TechnoBackend.Controllers
         [BasicAuthentication]
         public HttpResponseMessage Get()
         {
+            
             string username = Thread.CurrentPrincipal.Identity.Name;
 
             using (DBModelContainer db = new DBModelContainer())
