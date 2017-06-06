@@ -27,7 +27,6 @@ namespace TechnoBackend.Login
                             SESSIONS CurrentSession = (from s in db.SESSIONS where s.SESSIONS_Token == token select s).First();
                             CurrentSession.SESSIONS_TTL = newTime;
                             db.SaveChanges();
-                            return "session legit";
                         }
 
                         else if (TimeLeft.Hours < 0)
@@ -40,10 +39,10 @@ namespace TechnoBackend.Login
                             return "no session";
                         }
 
-                        else { return "session legit"; }
+                        return token;
 
                     }
-                    return "session legit" ;
+                    return token;
                 }
                 catch
                 {

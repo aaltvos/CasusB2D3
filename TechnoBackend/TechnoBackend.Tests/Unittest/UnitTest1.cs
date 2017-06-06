@@ -1,30 +1,31 @@
-﻿//using System;
-//using System.Net;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using System.IO;
-//using System.Text;
+﻿using System;
+using System.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
+using System.Linq;
+using System.Text;
 
-//namespace TechnoBackend.Tests
-//{
-//    [TestClass]
-//    public class UsecaseLogin
-//    {
-//        [TestMethod]
-//        public void TestMethodLogin()
-//        {
+namespace TechnoBackend.Tests
+{
+    [TestClass]
+    public class UsecaseLogin
+    {
+        [TestMethod]
+        public void TestMethodLogin()
+        {
+            string test = "{ 'Username':'Henk','Password':'Knabbel'}";
+            var iets = UTF8Encoding.UTF8.GetBytes(test);
+            var request = WebRequest.CreateHttp("http://localhost:51516/api/Authentication");
+            request.Method = "POST";
+            var stream = request.GetRequestStream();
+            stream.Write(iets, 0, iets.Length);
 
-//            var request = WebRequest.CreateHttp("http://localhost:51516/api/Authentication");
-//            request.Headers.Add("authorization", "Basic SGVuazpLbmFiYmVs");
+            var response = request.GetResponse();
 
-//            var response = request.GetResponse();
-//            var expected = "\"AuthenticationResponse\"";
-//            response.Headers.GetValues()
-//            Stream receiveStream = response.GetResponseStream();
-//            Encoding encode = Encoding.GetEncoding("utf-8");
-//            // Pipes the stream to a higher level stream reader with the required encoding format. 
-//            StreamReader derp = new StreamReader(receiveStream, encode);
-//            string result = derp.ReadToEnd();
-//            Assert.AreEqual(expected, result);
-//        }
-//    }
-//}
+            var result = response.Headers.GetValues("Token").First();
+
+
+            Assert.AreEqual(100, result.Length);
+        }
+    }
+}
