@@ -12,10 +12,10 @@ namespace TechnoBackend.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class CATs
+    public partial class CAT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CATs()
+        public CAT()
         {
             this.CAT_PROD = new HashSet<CAT_PROD>();
         }

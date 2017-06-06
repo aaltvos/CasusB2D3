@@ -184,13 +184,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
+    <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DatabaseModel\CATs.cs">
+    <Compile Include="DatabaseModel\CAT.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\CAT_PROD.cs">
@@ -215,6 +216,9 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\HAND_SUB_GEB_PROD.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\NEWS.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\PRODs.cs">

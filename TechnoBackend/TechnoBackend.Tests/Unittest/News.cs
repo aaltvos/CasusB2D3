@@ -9,6 +9,7 @@ namespace TechnoBackend.Tests.Unittest
         [TestMethod]
         public void TestMethod1()
         {
+            var Testdata = "{'ArticleID':'1','ArticleTitle':'Henk','ArticleBody':'Knabbel','ArticleIMG':'IMG','ArticleLINK':'URL'}";
         }
     }
 }

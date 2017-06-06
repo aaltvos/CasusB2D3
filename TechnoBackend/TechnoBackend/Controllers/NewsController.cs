@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection.Emit;
 using System.Web.Http;
+using System.Web.WebPages;
+using TechnoBackend.Business_Logic.News;
+
 
 namespace TechnoBackend.Controllers
 {
@@ -22,10 +26,13 @@ namespace TechnoBackend.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post()
         {
-            var response = Request.CreateResponse(HttpStatusCode.OK);
+            
+            var message = CreateNews.AddArticle(ActionContext);
+            var response = Request.CreateResponse(message);
 
+            return response;
         }
 
         // PUT api/<controller>/5

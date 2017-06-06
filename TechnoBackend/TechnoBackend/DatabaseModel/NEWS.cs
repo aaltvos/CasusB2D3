@@ -12,11 +12,14 @@ namespace TechnoBackend.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class CAT_PROD
+    public partial class NEWS
     {
-        public int COUPLE_ID { get; set; }
+        public int News_Id { get; set; }
+        public string News_Title { get; set; }
+        public string News_Body { get; set; }
+        public string News_IMG { get; set; }
+        public string News_Link { get; set; }
     
-        public virtual PRODs PROD { get; set; }
-        public virtual CAT CAT { get; set; }
+        public virtual USERs USERs { get; set; }
     }
 }

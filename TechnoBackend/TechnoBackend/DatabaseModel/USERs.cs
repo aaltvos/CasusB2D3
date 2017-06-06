@@ -18,6 +18,7 @@ namespace TechnoBackend.DatabaseModel
         public USERs()
         {
             this.REVs = new HashSet<REVs>();
+            this.News = new HashSet<NEWS>();
         }
     
         public int USER_Id { get; set; }
@@ -29,5 +30,7 @@ namespace TechnoBackend.DatabaseModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REVs> REVs { get; set; }
         public virtual SESSIONS SESSIONS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWS> News { get; set; }
     }
 }

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/02/2017 16:44:28
--- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 06/06/2017 19:10:55
+-- Generated from EDMX file: C:\Users\woute\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -47,6 +47,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TAGSPRODTAGS]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PRODTAGS] DROP CONSTRAINT [FK_TAGSPRODTAGS];
 GO
+IF OBJECT_ID(N'[dbo].[FK_NewsUSERs]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[NEWS] DROP CONSTRAINT [FK_NewsUSERs];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -61,8 +64,8 @@ GO
 IF OBJECT_ID(N'[dbo].[HAND_SUB_GEB_PROD]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HAND_SUB_GEB_PROD];
 GO
-IF OBJECT_ID(N'[dbo].[SUB_BEG]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SUB_BEG];
+IF OBJECT_ID(N'[dbo].[SUB_GEB]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SUB_GEB];
 GO
 IF OBJECT_ID(N'[dbo].[REVs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[REVs];
@@ -70,8 +73,8 @@ GO
 IF OBJECT_ID(N'[dbo].[USERs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[USERs];
 GO
-IF OBJECT_ID(N'[dbo].[CATs]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CATs];
+IF OBJECT_ID(N'[dbo].[CAT]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CAT];
 GO
 IF OBJECT_ID(N'[dbo].[CAT_PROD]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CAT_PROD];
@@ -84,6 +87,9 @@ IF OBJECT_ID(N'[dbo].[TAGS]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PRODTAGS]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PRODTAGS];
+GO
+IF OBJECT_ID(N'[dbo].[NEWS]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[NEWS];
 GO
 
 -- --------------------------------------------------
@@ -127,8 +133,8 @@ CREATE TABLE [dbo].[HAND_SUB_GEB_PROD] (
 );
 GO
 
--- Creating table 'SUB_BEG'
-CREATE TABLE [dbo].[SUB_BEG] (
+-- Creating table 'SUB_GEB'
+CREATE TABLE [dbo].[SUB_GEB] (
     [Sub_ID] int IDENTITY(1,1) NOT NULL,
     [Sub_Name] nvarchar(max)  NOT NULL,
     [Sub_IMG] nvarchar(max)  NOT NULL
@@ -156,8 +162,8 @@ CREATE TABLE [dbo].[USERs] (
 );
 GO
 
--- Creating table 'CATs'
-CREATE TABLE [dbo].[CATs] (
+-- Creating table 'CAT'
+CREATE TABLE [dbo].[CAT] (
     [CAT_Id] int IDENTITY(1,1) NOT NULL,
     [CAT_Name] nvarchar(max)  NOT NULL,
     [CAT_IMG] nvarchar(max)  NOT NULL
@@ -197,6 +203,17 @@ CREATE TABLE [dbo].[PRODTAGS] (
 );
 GO
 
+-- Creating table 'NEWS'
+CREATE TABLE [dbo].[NEWS] (
+    [News_Id] int IDENTITY(1,1) NOT NULL,
+    [News_Title] nvarchar(max)  NOT NULL,
+    [News_Body] nvarchar(max)  NOT NULL,
+    [News_IMG] nvarchar(max)  NOT NULL,
+    [News_Link] nvarchar(max)  NOT NULL,
+    [USERs_USER_Id] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -219,9 +236,9 @@ ADD CONSTRAINT [PK_HAND_SUB_GEB_PROD]
     PRIMARY KEY CLUSTERED ([Couple_ID] ASC);
 GO
 
--- Creating primary key on [Sub_ID] in table 'SUB_BEG'
-ALTER TABLE [dbo].[SUB_BEG]
-ADD CONSTRAINT [PK_SUB_BEG]
+-- Creating primary key on [Sub_ID] in table 'SUB_GEB'
+ALTER TABLE [dbo].[SUB_GEB]
+ADD CONSTRAINT [PK_SUB_GEB]
     PRIMARY KEY CLUSTERED ([Sub_ID] ASC);
 GO
 
@@ -237,9 +254,9 @@ ADD CONSTRAINT [PK_USERs]
     PRIMARY KEY CLUSTERED ([USER_Id] ASC);
 GO
 
--- Creating primary key on [CAT_Id] in table 'CATs'
-ALTER TABLE [dbo].[CATs]
-ADD CONSTRAINT [PK_CATs]
+-- Creating primary key on [CAT_Id] in table 'CAT'
+ALTER TABLE [dbo].[CAT]
+ADD CONSTRAINT [PK_CAT]
     PRIMARY KEY CLUSTERED ([CAT_Id] ASC);
 GO
 
@@ -265,6 +282,12 @@ GO
 ALTER TABLE [dbo].[PRODTAGS]
 ADD CONSTRAINT [PK_PRODTAGS]
     PRIMARY KEY CLUSTERED ([PROD_Id] ASC);
+GO
+
+-- Creating primary key on [News_Id] in table 'NEWS'
+ALTER TABLE [dbo].[NEWS]
+ADD CONSTRAINT [PK_NEWS]
+    PRIMARY KEY CLUSTERED ([News_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -350,7 +373,7 @@ GO
 ALTER TABLE [dbo].[HAND_SUB_GEB_PROD]
 ADD CONSTRAINT [FK_SUB_BEGHAND_SUB_GEB_PROD]
     FOREIGN KEY ([SUB_BEG_Sub_ID])
-    REFERENCES [dbo].[SUB_BEG]
+    REFERENCES [dbo].[SUB_GEB]
         ([Sub_ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -395,7 +418,7 @@ GO
 ALTER TABLE [dbo].[CAT_PROD]
 ADD CONSTRAINT [FK_CATEntity1]
     FOREIGN KEY ([CAT_CAT_Id])
-    REFERENCES [dbo].[CATs]
+    REFERENCES [dbo].[CAT]
         ([CAT_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -419,6 +442,21 @@ GO
 CREATE INDEX [IX_FK_TAGSPRODTAGS]
 ON [dbo].[PRODTAGS]
     ([TAG_TAGS_Id]);
+GO
+
+-- Creating foreign key on [USERs_USER_Id] in table 'NEWS'
+ALTER TABLE [dbo].[NEWS]
+ADD CONSTRAINT [FK_NewsUSERs]
+    FOREIGN KEY ([USERs_USER_Id])
+    REFERENCES [dbo].[USERs]
+        ([USER_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_NewsUSERs'
+CREATE INDEX [IX_FK_NewsUSERs]
+ON [dbo].[NEWS]
+    ([USERs_USER_Id]);
 GO
 
 -- --------------------------------------------------
