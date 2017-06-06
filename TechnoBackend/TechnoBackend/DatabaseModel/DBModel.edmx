@@ -17,7 +17,7 @@
     <EntitySet Name="SESSIONS" EntityType="DBModel.Store.SESSIONS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TAGS" EntityType="DBModel.Store.TAGS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PRODTAGS" EntityType="DBModel.Store.PRODTAGS" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="NEWS1" EntityType="DBModel.Store.NEWS1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NEWS" EntityType="DBModel.Store.NEWS" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="HAND_GEBHAND_SUB_GEB_PROD" Association="DBModel.Store.HAND_GEBHAND_SUB_GEB_PROD">
       <End Role="HAND_GEB" EntitySet="HAND_GEB" />
       <End Role="HAND_SUB_GEB_PROD" EntitySet="HAND_SUB_GEB_PROD" />
@@ -59,7 +59,7 @@
       <End Role="PRODTAGS" EntitySet="PRODTAGS" />
     </AssociationSet>
     <AssociationSet Name="NewsUSERs" Association="DBModel.Store.NewsUSERs">
-      <End Role="News" EntitySet="NEWS1" />
+      <End Role="News" EntitySet="NEWS" />
       <End Role="USERs" EntitySet="USERs" />
     </AssociationSet>
   </EntityContainer>
@@ -170,7 +170,7 @@
     <Property Name="PROD_Prod_ID" Type="int" Nullable="false" />
     <Property Name="TAG_TAGS_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="NEWS1">
+  <EntityType Name="NEWS">
     <Key>
       <PropertyRef Name="News_Id" />
     </Key>
@@ -302,7 +302,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="NewsUSERs">
-    <End Role="News" Type="DBModel.Store.NEWS1" Multiplicity="*" />
+    <End Role="News" Type="DBModel.Store.NEWS" Multiplicity="*" />
     <End Role="USERs" Type="DBModel.Store.USERs" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="USERs">
@@ -369,9 +369,9 @@
             <End Role="TAGS" EntitySet="TAGS" />
             <End Role="PRODTAGS" EntitySet="PRODTAGS" />
           </AssociationSet>
-          <EntitySet Name="NEWS1" EntityType="DBModel.NEWS" />
+          <EntitySet Name="NEWS" EntityType="DBModel.NEWS" />
           <AssociationSet Name="NewsUSERs" Association="DBModel.NewsUSERs">
-            <End Role="News" EntitySet="NEWS1" />
+            <End Role="News" EntitySet="NEWS" />
             <End Role="USERs" EntitySet="USERs" />
           </AssociationSet>
         </EntityContainer>
@@ -662,9 +662,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NEWS1">
+    <EntitySetMapping Name="NEWS">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.NEWS)">
-        <MappingFragment StoreEntitySet="NEWS1">
+        <MappingFragment StoreEntitySet="NEWS">
           <ScalarProperty Name="News_Id" ColumnName="News_Id" />
           <ScalarProperty Name="News_Title" ColumnName="News_Title" />
           <ScalarProperty Name="News_Body" ColumnName="News_Body" />
@@ -753,7 +753,7 @@
         <ScalarProperty Name="PROD_Id" ColumnName="PROD_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="NewsUSERs" TypeName="DBModel.NewsUSERs" StoreEntitySet="NEWS1">
+    <AssociationSetMapping Name="NewsUSERs" TypeName="DBModel.NewsUSERs" StoreEntitySet="NEWS">
       <EndProperty Name="USERs">
         <ScalarProperty Name="USER_Id" ColumnName="USERs_USER_Id" />
       </EndProperty>
