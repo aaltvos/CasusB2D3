@@ -183,8 +183,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Business Logic\Login\JsonLogin.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SessionCheckController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DatabaseModel\CATs.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -237,10 +239,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Login\Authentication.cs" />
-    <Compile Include="Login\AuthenticationAttribute.cs" />
-    <Compile Include="Login\CreateSession.cs" />
-    <Compile Include="Login\TokenGen.cs" />
+    <Compile Include="Business Logic\Login\Authentication.cs" />
+    <Compile Include="Business Logic\Login\AuthenticationAttribute.cs" />
+    <Compile Include="Business Logic\Login\CreateSession.cs" />
+    <Compile Include="Business Logic\Login\SessionCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

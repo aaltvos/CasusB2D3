@@ -146,8 +146,8 @@
     </Key>
     <Property Name="SESSIONS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SESSIONS_Token" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SESSIONS_TTL" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="USER_USER_Id" Type="int" Nullable="false" />
+    <Property Name="SESSIONS_TTL" Type="datetime" Nullable="false" />
+    <Property Name="USER_Id_USER_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TAGS">
     <Key>
@@ -257,7 +257,7 @@
         <PropertyRef Name="USER_Id" />
       </Principal>
       <Dependent Role="SESSIONS">
-        <PropertyRef Name="USER_USER_Id" />
+        <PropertyRef Name="USER_Id_USER_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -439,8 +439,8 @@
           </Key>
           <Property Name="SESSIONS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SESSIONS_Token" Type="String" Nullable="false" />
-          <Property Name="SESSIONS_TTL" Type="String" Nullable="false" />
-          <NavigationProperty Name="USER" Relationship="DBModel.USERSESSIONS" FromRole="SESSIONS" ToRole="USER" />
+          <Property Name="SESSIONS_TTL" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="USER_Id" Relationship="DBModel.USERSESSIONS" FromRole="SESSIONS" ToRole="USER" />
         </EntityType>
         <EntityType Name="TAGS">
           <Key>
@@ -671,7 +671,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="USERSESSIONS" TypeName="DBModel.USERSESSIONS" StoreEntitySet="SESSIONS">
       <EndProperty Name="USER">
-        <ScalarProperty Name="USER_Id" ColumnName="USER_USER_Id" />
+        <ScalarProperty Name="USER_Id" ColumnName="USER_Id_USER_Id" />
       </EndProperty>
       <EndProperty Name="SESSIONS">
         <ScalarProperty Name="SESSIONS_ID" ColumnName="SESSIONS_ID" />
