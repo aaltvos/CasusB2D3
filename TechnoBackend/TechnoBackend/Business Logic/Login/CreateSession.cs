@@ -32,9 +32,5 @@ namespace TechnoBackend.Login
             db.SESSIONS.Add(Session);
             db.SaveChanges();
         }
-
-        
-
-       
     }
 }

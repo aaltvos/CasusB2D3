@@ -10,9 +10,14 @@ namespace TechnoBackend.Login
 
             using (DBModelContainer db = new DBModelContainer())
             {
-                var userId = (from user in db.USERs where user.USER_Name == username && user.USER_PW == password select user.USER_Id).First();
-                if ((from user in db.USERs where user.USER_Name == username && user.USER_PW == password select user.USER_Id).First() != null) { return userId ; }
-                else { return 0; }
+               
+                try
+                {
+                    var userId = (from user in db.USERs where user.USER_Name == username && user.USER_PW == password select user.USER_Id).First();
+                    return userId;
+                }
+                
+                catch { return 0; }
             }
         }
     }

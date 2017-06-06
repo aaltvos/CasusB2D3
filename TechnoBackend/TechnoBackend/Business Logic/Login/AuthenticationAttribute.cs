@@ -1,65 +1,55 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
+using Newtonsoft.Json;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
-using System.Linq;
 
 namespace TechnoBackend.Login
 {
-    public class BasicAuthenticationAttribute : AuthorizationFilterAttribute
+    public class AuthenticationAttribute
     {
-        Random random = new Random();
-        string AuthToken;
-        string gen = "";
 
-        public override void OnAuthorization(HttpActionContext actionContext)
+        public static string Authent(HttpActionContext actionContext)
         {
+            string AuthToken;
+
+            var json = actionContext.Request.Content.ReadAsStringAsync().Result;
+            JsonLogin Credentials = JsonConvert.DeserializeObject<JsonLogin>(json);
+            string username = Credentials.Username;
+            string password = Credentials.Password;
             
-            if (actionContext.Request.Content == null)
+
+            if (Authentication.Login(username, password) != 0)
             {
-                actionContext.Response = actionContext.Request
-                    .CreateResponse(HttpStatusCode.Unauthorized);
+
+                AuthToken = SessionCheck.GetToken(username);
+                if (AuthToken == "no session")
+                {
+                    AuthToken = RandomString();
+                    CreateSession newSession = new CreateSession(AuthToken, Authentication.Login(username, password));
+
+                }
+              
             }
+
             else
             {
-                string authenticationToken = actionContext.Request.Headers
-                                            .Authorization.Parameter;
-                string decodedAuthenticationToken = Encoding.UTF8.GetString(
-                    Convert.FromBase64String(authenticationToken));
-                string[] usernamePasswordArray = decodedAuthenticationToken.Split(':');
-                string username = usernamePasswordArray[0];
-                string password = usernamePasswordArray[1];
-
-                if (Authentication.Login(username, password) != 0)
-                {                    
-                    AuthToken = RandomString();
-                    if(SessionCheck.GetToken(username) != "no current session")
-                    {
-                        CreateSession newSession = new CreateSession(AuthToken, Authentication.Login(username, password));
-                        Thread.CurrentPrincipal = new GenericPrincipal(
-                            new GenericIdentity(username), null);
-                    }
-                }
-
-                else
-                {
-                    actionContext.Response = actionContext.Request
-                        .CreateResponse(HttpStatusCode.Unauthorized);
-                }
+                return "Unauthorized";
             }
+
+            return AuthToken;
         }
 
-        public string RandomString()
+        public static string RandomString()
         {
+            string gen = "";
+            Random random = new Random();
             var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            
+
             for (int i = 0; i < 100; i++)
             {
-             gen += chars[random.Next(chars.Length)].ToString(); ;
+                gen += chars[random.Next(chars.Length)].ToString(); ;
             }
             return gen;
         }

@@ -5,29 +5,34 @@ using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
 using TechnoBackend.Login;
+using System.IO;
+using System.Web.Http.Controllers;
+using System.Linq;
 
 namespace TechnoBackend.Controllers
 {
     public class AuthenticationController : ApiController
-    {
-        [BasicAuthentication]
-        public HttpResponseMessage Get()
+    { 
+        public HttpResponseMessage Post()
         {
-            string username = Thread.CurrentPrincipal.Identity.Name;
+            if(AuthenticationAttribute.Authent(ActionContext) != "Unauthorized")
+            {
+                var response = Request.CreateResponse(HttpStatusCode.OK);
+                response.Headers.Add("Token", AuthenticationAttribute.Authent(ActionContext));
 
-            return Request.CreateResponse(SessionCheck.GetToken(username));
+                return response;
+            }
+
+            else { return Request.CreateResponse(HttpStatusCode.Unauthorized);}
         }
 
         // GET: api/Authentication/5
         public string Get(int id)
         {
+            
             return "value";
         }
-
-        // POST: api/Authentication
-        public void Post([FromBody]string value)
-        {
-        }
+        
 
         // PUT: api/Authentication/5
         public void Put(int id, [FromBody]string value)
