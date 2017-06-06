@@ -293,7 +293,7 @@
           <EntitySet Name="HAND_GEB" EntityType="DBModel.HAND_GEB" />
           <EntitySet Name="PRODs" EntityType="DBModel.PRODs" />
           <EntitySet Name="HAND_SUB_GEB_PROD" EntityType="DBModel.HAND_SUB_GEB_PROD" />
-          <EntitySet Name="SUB_BEG" EntityType="DBModel.SUB_BEG" />
+          <EntitySet Name="SUB_GEB" EntityType="DBModel.SUB_GEB" />
           <EntitySet Name="REVs" EntityType="DBModel.REVs" />
           <EntitySet Name="USERs" EntityType="DBModel.USERs" />
           <EntitySet Name="CATs" EntityType="DBModel.CATs" />
@@ -322,7 +322,7 @@
             <End Role="PRODTAGS" EntitySet="PRODTAGS" />
           </AssociationSet>
           <AssociationSet Name="SUB_BEGHAND_SUB_GEB_PROD" Association="DBModel.SUB_BEGHAND_SUB_GEB_PROD">
-            <End Role="SUB_BEG" EntitySet="SUB_BEG" />
+            <End Role="SUB_BEG" EntitySet="SUB_GEB" />
             <End Role="HAND_SUB_GEB_PROD" EntitySet="HAND_SUB_GEB_PROD" />
           </AssociationSet>
           <AssociationSet Name="USERREV" Association="DBModel.USERREV">
@@ -384,7 +384,7 @@
           <NavigationProperty Name="PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="PROD" />
           <NavigationProperty Name="SUB_BEG" Relationship="DBModel.SUB_BEGHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="SUB_BEG" />
         </EntityType>
-        <EntityType Name="SUB_BEG">
+        <EntityType Name="SUB_GEB">
           <Key>
             <PropertyRef Name="Sub_ID" />
           </Key>
@@ -480,7 +480,7 @@
           <End Type="DBModel.PRODTAGS" Role="PRODTAGS" Multiplicity="*" />
         </Association>
         <Association Name="SUB_BEGHAND_SUB_GEB_PROD">
-          <End Type="DBModel.SUB_BEG" Role="SUB_BEG" Multiplicity="1" />
+          <End Type="DBModel.SUB_GEB" Role="SUB_BEG" Multiplicity="1" />
           <End Type="DBModel.HAND_SUB_GEB_PROD" Role="HAND_SUB_GEB_PROD" Multiplicity="*" />
         </Association>
         <Association Name="USERREV">
@@ -542,8 +542,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SUB_BEG">
-      <EntityTypeMapping TypeName="IsTypeOf(DBModel.SUB_BEG)">
+    <EntitySetMapping Name="SUB_GEB">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.SUB_GEB)">
         <MappingFragment StoreEntitySet="SUB_BEG">
           <ScalarProperty Name="Sub_ID" ColumnName="Sub_ID" />
           <ScalarProperty Name="Sub_Name" ColumnName="Sub_Name" />

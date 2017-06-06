@@ -18,6 +18,6 @@ namespace TechnoBackend.DatabaseModel
     
         public virtual HAND_GEB HAND_GEB { get; set; }
         public virtual PRODs PROD { get; set; }
-        public virtual SUB_BEG SUB_BEG { get; set; }
+        public virtual SUB_GEB SUB_BEG { get; set; }
     }
 }

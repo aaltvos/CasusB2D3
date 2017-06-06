@@ -225,7 +225,7 @@
     <Compile Include="DatabaseModel\SESSIONS.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\SUB_BEG.cs">
+    <Compile Include="DatabaseModel\SUB_GEB.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\TAGS.cs">

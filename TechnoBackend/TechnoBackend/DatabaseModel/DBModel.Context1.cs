@@ -28,7 +28,7 @@ namespace TechnoBackend.DatabaseModel
         public virtual DbSet<HAND_GEB> HAND_GEB { get; set; }
         public virtual DbSet<PRODs> PRODs { get; set; }
         public virtual DbSet<HAND_SUB_GEB_PROD> HAND_SUB_GEB_PROD { get; set; }
-        public virtual DbSet<SUB_BEG> SUB_BEG { get; set; }
+        public virtual DbSet<SUB_GEB> SUB_GEB { get; set; }
         public virtual DbSet<REVs> REVs { get; set; }
         public virtual DbSet<USERs> USERs { get; set; }
         public virtual DbSet<CATs> CATs { get; set; }

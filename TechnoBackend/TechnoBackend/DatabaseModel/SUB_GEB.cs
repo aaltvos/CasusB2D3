@@ -12,10 +12,10 @@ namespace TechnoBackend.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class SUB_BEG
+    public partial class SUB_GEB
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SUB_BEG()
+        public SUB_GEB()
         {
             this.HAND_SUB_GEB_PROD = new HashSet<HAND_SUB_GEB_PROD>();
         }
