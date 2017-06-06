@@ -1,18 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using TechnoBackend.DatabaseModel;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
+using TechnoBackend.Login;
 
 namespace TechnoBackend.Controllers
 {
     public class AuthenticationController : ApiController
     {
-        // GET: api/Authentication
-        public IEnumerable<string> Get()
+        [BasicAuthentication]
+        public HttpResponseMessage Get()
         {
-            return new string[] { "value1", "value2" };
+            string username = Thread.CurrentPrincipal.Identity.Name;
+
+            using (DBModelContainer db = new DBModelContainer())
+            {
+                switch (username.ToLower())
+                {
+                    case "henk":
+                        return Request.CreateResponse(HttpStatusCode.OK);
+
+                    default:
+                        return Request.CreateResponse(HttpStatusCode.BadRequest);
+                }
+            }
         }
 
         // GET: api/Authentication/5

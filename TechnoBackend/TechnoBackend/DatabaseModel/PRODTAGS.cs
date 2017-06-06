@@ -17,7 +17,7 @@ namespace TechnoBackend.DatabaseModel
         public int PROD_Id { get; set; }
         public string TAGS_id { get; set; }
     
-        public virtual PROD PROD { get; set; }
+        public virtual PRODs PROD { get; set; }
         public virtual TAGS TAG { get; set; }
     }
 }

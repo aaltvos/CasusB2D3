@@ -14,10 +14,9 @@ namespace TechnoBackend.DatabaseModel
     
     public partial class CAT_PROD
     {
-        public int CAT_Id { get; set; }
-        public int PROD_ID { get; set; }
+        public int COUPLE_ID { get; set; }
     
-        public virtual PROD PROD { get; set; }
-        public virtual CAT CAT { get; set; }
+        public virtual PRODs PROD { get; set; }
+        public virtual CATs CAT { get; set; }
     }
 }

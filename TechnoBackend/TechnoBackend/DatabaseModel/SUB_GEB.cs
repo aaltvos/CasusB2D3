@@ -12,23 +12,19 @@ namespace TechnoBackend.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class USER
+    public partial class SUB_GEB
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USER()
+        public SUB_GEB()
         {
-            this.REVs = new HashSet<REV>();
+            this.HAND_SUB_GEB_PROD = new HashSet<HAND_SUB_GEB_PROD>();
         }
     
-        public int USER_Id { get; set; }
-        public string USER_Name { get; set; }
-        public string USER_PW { get; set; }
-        public string USER_Sec { get; set; }
-        public System.DateTime User_Val_dat { get; set; }
-        public int USER_Session { get; set; }
+        public int Sub_ID { get; set; }
+        public string Sub_Name { get; set; }
+        public string Sub_IMG { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REV> REVs { get; set; }
-        public virtual SESSIONS SESSIONS { get; set; }
+        public virtual ICollection<HAND_SUB_GEB_PROD> HAND_SUB_GEB_PROD { get; set; }
     }
 }

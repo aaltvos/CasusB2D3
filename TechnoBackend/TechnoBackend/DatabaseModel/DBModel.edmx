@@ -88,13 +88,9 @@
   </EntityType>
   <EntityType Name="HAND_SUB_GEB_PROD">
     <Key>
-      <PropertyRef Name="Hand_ID" />
-      <PropertyRef Name="SUB_ID" />
-      <PropertyRef Name="Prod_ID" />
+      <PropertyRef Name="Couple_ID" />
     </Key>
-    <Property Name="Hand_ID" Type="int" Nullable="false" />
-    <Property Name="SUB_ID" Type="int" Nullable="false" />
-    <Property Name="Prod_ID" Type="int" Nullable="false" />
+    <Property Name="Couple_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HAND_GEB_Hand_ID" Type="int" Nullable="false" />
     <Property Name="PROD_Prod_ID" Type="int" Nullable="false" />
     <Property Name="SUB_BEG_Sub_ID" Type="int" Nullable="false" />
@@ -109,12 +105,12 @@
   </EntityType>
   <EntityType Name="REVs">
     <Key>
-      <PropertyRef Name="Rev_Id" />
+      <PropertyRef Name="REV_ID" />
     </Key>
-    <Property Name="Rev_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Prod_id" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="User_ID" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Rev_text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="REV_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PROD_ID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="USER_ID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="REV_text" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PROD_Prod_ID" Type="int" Nullable="false" />
     <Property Name="USER_USER_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -126,9 +122,7 @@
     <Property Name="USER_Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="USER_PW" Type="nvarchar(max)" Nullable="false" />
     <Property Name="USER_Sec" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="User_Val_dat" Type="datetime" Nullable="false" />
-    <Property Name="USER_Session" Type="int" Nullable="false" />
-    <Property Name="SESSIONS_Sessions_ID" Type="int" Nullable="false" />
+    <Property Name="USER_Val_dat" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="CATs">
     <Key>
@@ -140,21 +134,20 @@
   </EntityType>
   <EntityType Name="CAT_PROD">
     <Key>
-      <PropertyRef Name="CAT_Id" />
-      <PropertyRef Name="PROD_ID" />
+      <PropertyRef Name="COUPLE_ID" />
     </Key>
-    <Property Name="CAT_Id" Type="int" Nullable="false" />
-    <Property Name="PROD_ID" Type="int" Nullable="false" />
+    <Property Name="COUPLE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PROD_Prod_ID" Type="int" Nullable="false" />
     <Property Name="CAT_CAT_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SESSIONS">
     <Key>
-      <PropertyRef Name="Sessions_ID" />
+      <PropertyRef Name="SESSIONS_ID" />
     </Key>
-    <Property Name="Sessions_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Sessions_Token" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Sessions_TTL" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SESSIONS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SESSIONS_Token" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SESSIONS_TTL" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="USER_USER_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TAGS">
     <Key>
@@ -257,14 +250,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="USERSESSIONS">
-    <End Role="USER" Type="DBModel.Store.USERs" Multiplicity="*" />
-    <End Role="SESSIONS" Type="DBModel.Store.SESSIONS" Multiplicity="1" />
+    <End Role="USER" Type="DBModel.Store.USERs" Multiplicity="1" />
+    <End Role="SESSIONS" Type="DBModel.Store.SESSIONS" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SESSIONS">
-        <PropertyRef Name="Sessions_ID" />
+      <Principal Role="USER">
+        <PropertyRef Name="USER_Id" />
       </Principal>
-      <Dependent Role="USER">
-        <PropertyRef Name="SESSIONS_Sessions_ID" />
+      <Dependent Role="SESSIONS">
+        <PropertyRef Name="USER_USER_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -298,12 +291,12 @@
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="DBModelContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="HAND_GEB" EntityType="DBModel.HAND_GEB" />
-          <EntitySet Name="PRODs" EntityType="DBModel.PROD" />
+          <EntitySet Name="PRODs" EntityType="DBModel.PRODs" />
           <EntitySet Name="HAND_SUB_GEB_PROD" EntityType="DBModel.HAND_SUB_GEB_PROD" />
-          <EntitySet Name="SUB_BEG" EntityType="DBModel.SUB_BEG" />
-          <EntitySet Name="REVs" EntityType="DBModel.REV" />
-          <EntitySet Name="USERs" EntityType="DBModel.USER" />
-          <EntitySet Name="CATs" EntityType="DBModel.CAT" />
+          <EntitySet Name="SUB_GEB" EntityType="DBModel.SUB_GEB" />
+          <EntitySet Name="REVs" EntityType="DBModel.REVs" />
+          <EntitySet Name="USERs" EntityType="DBModel.USERs" />
+          <EntitySet Name="CATs" EntityType="DBModel.CATs" />
           <EntitySet Name="CAT_PROD" EntityType="DBModel.CAT_PROD" />
           <EntitySet Name="SESSIONS" EntityType="DBModel.SESSIONS" />
           <EntitySet Name="TAGS" EntityType="DBModel.TAGS" />
@@ -329,7 +322,7 @@
             <End Role="PRODTAGS" EntitySet="PRODTAGS" />
           </AssociationSet>
           <AssociationSet Name="SUB_BEGHAND_SUB_GEB_PROD" Association="DBModel.SUB_BEGHAND_SUB_GEB_PROD">
-            <End Role="SUB_BEG" EntitySet="SUB_BEG" />
+            <End Role="SUB_BEG" EntitySet="SUB_GEB" />
             <End Role="HAND_SUB_GEB_PROD" EntitySet="HAND_SUB_GEB_PROD" />
           </AssociationSet>
           <AssociationSet Name="USERREV" Association="DBModel.USERREV">
@@ -358,7 +351,7 @@
           <Property Name="Hand_IMG" Type="String" Nullable="false" />
           <NavigationProperty Name="HAND_SUB_GEB_PROD" Relationship="DBModel.HAND_GEBHAND_SUB_GEB_PROD" FromRole="HAND_GEB" ToRole="HAND_SUB_GEB_PROD" />
         </EntityType>
-        <EntityType Name="PROD">
+        <EntityType Name="PRODs">
           <Key>
             <PropertyRef Name="Prod_ID" />
           </Key>
@@ -379,23 +372,19 @@
           <Property Name="Prod_Val_Dat" Type="String" Nullable="false" />
           <NavigationProperty Name="HAND_SUB_GEB_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
           <NavigationProperty Name="REVs" Relationship="DBModel.PRODREV" FromRole="PROD" ToRole="REV" />
-          <NavigationProperty Name="Entity1" Relationship="DBModel.PRODEntity1" FromRole="PROD" ToRole="CAT_PROD" />
+          <NavigationProperty Name="CAT_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
           <NavigationProperty Name="PRODTAGS" Relationship="DBModel.PRODPRODTAGS" FromRole="PROD" ToRole="PRODTAGS" />
         </EntityType>
         <EntityType Name="HAND_SUB_GEB_PROD">
           <Key>
-            <PropertyRef Name="Hand_ID" />
-            <PropertyRef Name="SUB_ID" />
-            <PropertyRef Name="Prod_ID" />
+            <PropertyRef Name="Couple_ID" />
           </Key>
-          <Property Name="Hand_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="SUB_ID" Type="Int32" Nullable="false" />
-          <Property Name="Prod_ID" Type="Int32" Nullable="false" />
+          <Property Name="Couple_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="HAND_GEB" Relationship="DBModel.HAND_GEBHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="HAND_GEB" />
           <NavigationProperty Name="PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="PROD" />
           <NavigationProperty Name="SUB_BEG" Relationship="DBModel.SUB_BEGHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="SUB_BEG" />
         </EntityType>
-        <EntityType Name="SUB_BEG">
+        <EntityType Name="SUB_GEB">
           <Key>
             <PropertyRef Name="Sub_ID" />
           </Key>
@@ -404,18 +393,18 @@
           <Property Name="Sub_IMG" Type="String" Nullable="false" />
           <NavigationProperty Name="HAND_SUB_GEB_PROD" Relationship="DBModel.SUB_BEGHAND_SUB_GEB_PROD" FromRole="SUB_BEG" ToRole="HAND_SUB_GEB_PROD" />
         </EntityType>
-        <EntityType Name="REV">
+        <EntityType Name="REVs">
           <Key>
-            <PropertyRef Name="Rev_Id" />
+            <PropertyRef Name="REV_ID" />
           </Key>
-          <Property Name="Rev_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Prod_id" Type="String" Nullable="false" />
-          <Property Name="User_ID" Type="String" Nullable="false" />
-          <Property Name="Rev_text" Type="String" Nullable="false" />
+          <Property Name="REV_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROD_ID" Type="String" Nullable="false" />
+          <Property Name="USER_ID" Type="String" Nullable="false" />
+          <Property Name="REV_text" Type="String" Nullable="false" />
           <NavigationProperty Name="PROD" Relationship="DBModel.PRODREV" FromRole="REV" ToRole="PROD" />
           <NavigationProperty Name="USER" Relationship="DBModel.USERREV" FromRole="REV" ToRole="USER" />
         </EntityType>
-        <EntityType Name="USER">
+        <EntityType Name="USERs">
           <Key>
             <PropertyRef Name="USER_Id" />
           </Key>
@@ -423,37 +412,34 @@
           <Property Name="USER_Name" Type="String" Nullable="false" />
           <Property Name="USER_PW" Type="String" Nullable="false" />
           <Property Name="USER_Sec" Type="String" Nullable="false" />
-          <Property Name="User_Val_dat" Type="DateTime" Nullable="false" />
-          <Property Name="USER_Session" Type="Int32" Nullable="false" />
+          <Property Name="USER_Val_dat" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="REVs" Relationship="DBModel.USERREV" FromRole="USER" ToRole="REV" />
           <NavigationProperty Name="SESSIONS" Relationship="DBModel.USERSESSIONS" FromRole="USER" ToRole="SESSIONS" />
         </EntityType>
-        <EntityType Name="CAT">
+        <EntityType Name="CATs">
           <Key>
             <PropertyRef Name="CAT_Id" />
           </Key>
           <Property Name="CAT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CAT_Name" Type="String" Nullable="false" />
           <Property Name="CAT_IMG" Type="String" Nullable="false" />
-          <NavigationProperty Name="Entity1" Relationship="DBModel.CATEntity1" FromRole="CAT" ToRole="CAT_PROD" />
+          <NavigationProperty Name="CAT_PROD" Relationship="DBModel.CATEntity1" FromRole="CAT" ToRole="CAT_PROD" />
         </EntityType>
         <EntityType Name="CAT_PROD">
           <Key>
-            <PropertyRef Name="CAT_Id" />
-            <PropertyRef Name="PROD_ID" />
+            <PropertyRef Name="COUPLE_ID" />
           </Key>
-          <Property Name="CAT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="PROD_ID" Type="Int32" Nullable="false" />
+          <Property Name="COUPLE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="PROD" Relationship="DBModel.PRODEntity1" FromRole="CAT_PROD" ToRole="PROD" />
           <NavigationProperty Name="CAT" Relationship="DBModel.CATEntity1" FromRole="CAT_PROD" ToRole="CAT" />
         </EntityType>
         <EntityType Name="SESSIONS">
           <Key>
-            <PropertyRef Name="Sessions_ID" />
+            <PropertyRef Name="SESSIONS_ID" />
           </Key>
-          <Property Name="Sessions_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Sessions_Token" Type="String" Nullable="false" />
-          <Property Name="Sessions_TTL" Type="String" Nullable="false" />
+          <Property Name="SESSIONS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SESSIONS_Token" Type="String" Nullable="false" />
+          <Property Name="SESSIONS_TTL" Type="String" Nullable="false" />
           <NavigationProperty Name="USER" Relationship="DBModel.USERSESSIONS" FromRole="SESSIONS" ToRole="USER" />
         </EntityType>
         <EntityType Name="TAGS">
@@ -478,35 +464,35 @@
           <End Type="DBModel.HAND_SUB_GEB_PROD" Role="HAND_SUB_GEB_PROD" Multiplicity="*" />
         </Association>
         <Association Name="PRODHAND_SUB_GEB_PROD">
-          <End Type="DBModel.PROD" Role="PROD" Multiplicity="1" />
+          <End Type="DBModel.PRODs" Role="PROD" Multiplicity="1" />
           <End Type="DBModel.HAND_SUB_GEB_PROD" Role="HAND_SUB_GEB_PROD" Multiplicity="*" />
         </Association>
         <Association Name="PRODREV">
-          <End Type="DBModel.PROD" Role="PROD" Multiplicity="1" />
-          <End Type="DBModel.REV" Role="REV" Multiplicity="*" />
+          <End Type="DBModel.PRODs" Role="PROD" Multiplicity="1" />
+          <End Type="DBModel.REVs" Role="REV" Multiplicity="*" />
         </Association>
         <Association Name="PRODEntity1">
-          <End Type="DBModel.PROD" Role="PROD" Multiplicity="1" />
+          <End Type="DBModel.PRODs" Role="PROD" Multiplicity="1" />
           <End Type="DBModel.CAT_PROD" Role="CAT_PROD" Multiplicity="*" />
         </Association>
         <Association Name="PRODPRODTAGS">
-          <End Type="DBModel.PROD" Role="PROD" Multiplicity="1" />
+          <End Type="DBModel.PRODs" Role="PROD" Multiplicity="1" />
           <End Type="DBModel.PRODTAGS" Role="PRODTAGS" Multiplicity="*" />
         </Association>
         <Association Name="SUB_BEGHAND_SUB_GEB_PROD">
-          <End Type="DBModel.SUB_BEG" Role="SUB_BEG" Multiplicity="1" />
+          <End Type="DBModel.SUB_GEB" Role="SUB_BEG" Multiplicity="1" />
           <End Type="DBModel.HAND_SUB_GEB_PROD" Role="HAND_SUB_GEB_PROD" Multiplicity="*" />
         </Association>
         <Association Name="USERREV">
-          <End Type="DBModel.USER" Role="USER" Multiplicity="1" />
-          <End Type="DBModel.REV" Role="REV" Multiplicity="*" />
+          <End Type="DBModel.USERs" Role="USER" Multiplicity="1" />
+          <End Type="DBModel.REVs" Role="REV" Multiplicity="*" />
         </Association>
         <Association Name="USERSESSIONS">
-          <End Type="DBModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="DBModel.USERs" Role="USER" Multiplicity="1" />
           <End Type="DBModel.SESSIONS" Role="SESSIONS" Multiplicity="0..1" />
         </Association>
         <Association Name="CATEntity1">
-          <End Type="DBModel.CAT" Role="CAT" Multiplicity="1" />
+          <End Type="DBModel.CATs" Role="CAT" Multiplicity="1" />
           <End Type="DBModel.CAT_PROD" Role="CAT_PROD" Multiplicity="*" />
         </Association>
         <Association Name="TAGSPRODTAGS">
@@ -529,7 +515,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PRODs">
-      <EntityTypeMapping TypeName="IsTypeOf(DBModel.PROD)">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.PRODs)">
         <MappingFragment StoreEntitySet="PRODs">
           <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
           <ScalarProperty Name="Prod_Name" ColumnName="Prod_Name" />
@@ -552,14 +538,12 @@
     <EntitySetMapping Name="HAND_SUB_GEB_PROD">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.HAND_SUB_GEB_PROD)">
         <MappingFragment StoreEntitySet="HAND_SUB_GEB_PROD">
-          <ScalarProperty Name="Hand_ID" ColumnName="Hand_ID" />
-          <ScalarProperty Name="SUB_ID" ColumnName="SUB_ID" />
-          <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+          <ScalarProperty Name="Couple_ID" ColumnName="Couple_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SUB_BEG">
-      <EntityTypeMapping TypeName="IsTypeOf(DBModel.SUB_BEG)">
+    <EntitySetMapping Name="SUB_GEB">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.SUB_GEB)">
         <MappingFragment StoreEntitySet="SUB_BEG">
           <ScalarProperty Name="Sub_ID" ColumnName="Sub_ID" />
           <ScalarProperty Name="Sub_Name" ColumnName="Sub_Name" />
@@ -568,29 +552,28 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="REVs">
-      <EntityTypeMapping TypeName="IsTypeOf(DBModel.REV)">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.REVs)">
         <MappingFragment StoreEntitySet="REVs">
-          <ScalarProperty Name="Rev_Id" ColumnName="Rev_Id" />
-          <ScalarProperty Name="Prod_id" ColumnName="Prod_id" />
-          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
-          <ScalarProperty Name="Rev_text" ColumnName="Rev_text" />
+          <ScalarProperty Name="REV_ID" ColumnName="REV_ID" />
+          <ScalarProperty Name="PROD_ID" ColumnName="PROD_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="REV_text" ColumnName="REV_text" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="USERs">
-      <EntityTypeMapping TypeName="IsTypeOf(DBModel.USER)">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.USERs)">
         <MappingFragment StoreEntitySet="USERs">
           <ScalarProperty Name="USER_Id" ColumnName="USER_Id" />
           <ScalarProperty Name="USER_Name" ColumnName="USER_Name" />
           <ScalarProperty Name="USER_PW" ColumnName="USER_PW" />
           <ScalarProperty Name="USER_Sec" ColumnName="USER_Sec" />
-          <ScalarProperty Name="User_Val_dat" ColumnName="User_Val_dat" />
-          <ScalarProperty Name="USER_Session" ColumnName="USER_Session" />
+          <ScalarProperty Name="USER_Val_dat" ColumnName="USER_Val_dat" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CATs">
-      <EntityTypeMapping TypeName="IsTypeOf(DBModel.CAT)">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.CATs)">
         <MappingFragment StoreEntitySet="CATs">
           <ScalarProperty Name="CAT_Id" ColumnName="CAT_Id" />
           <ScalarProperty Name="CAT_Name" ColumnName="CAT_Name" />
@@ -601,17 +584,16 @@
     <EntitySetMapping Name="CAT_PROD">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.CAT_PROD)">
         <MappingFragment StoreEntitySet="CAT_PROD">
-          <ScalarProperty Name="CAT_Id" ColumnName="CAT_Id" />
-          <ScalarProperty Name="PROD_ID" ColumnName="PROD_ID" />
+          <ScalarProperty Name="COUPLE_ID" ColumnName="COUPLE_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SESSIONS">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.SESSIONS)">
         <MappingFragment StoreEntitySet="SESSIONS">
-          <ScalarProperty Name="Sessions_ID" ColumnName="Sessions_ID" />
-          <ScalarProperty Name="Sessions_Token" ColumnName="Sessions_Token" />
-          <ScalarProperty Name="Sessions_TTL" ColumnName="Sessions_TTL" />
+          <ScalarProperty Name="SESSIONS_ID" ColumnName="SESSIONS_ID" />
+          <ScalarProperty Name="SESSIONS_Token" ColumnName="SESSIONS_Token" />
+          <ScalarProperty Name="SESSIONS_TTL" ColumnName="SESSIONS_TTL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -636,9 +618,7 @@
         <ScalarProperty Name="Hand_ID" ColumnName="HAND_GEB_Hand_ID" />
       </EndProperty>
       <EndProperty Name="HAND_SUB_GEB_PROD">
-        <ScalarProperty Name="Hand_ID" ColumnName="Hand_ID" />
-        <ScalarProperty Name="SUB_ID" ColumnName="SUB_ID" />
-        <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+        <ScalarProperty Name="Couple_ID" ColumnName="Couple_ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PRODHAND_SUB_GEB_PROD" TypeName="DBModel.PRODHAND_SUB_GEB_PROD" StoreEntitySet="HAND_SUB_GEB_PROD">
@@ -646,9 +626,7 @@
         <ScalarProperty Name="Prod_ID" ColumnName="PROD_Prod_ID" />
       </EndProperty>
       <EndProperty Name="HAND_SUB_GEB_PROD">
-        <ScalarProperty Name="Hand_ID" ColumnName="Hand_ID" />
-        <ScalarProperty Name="SUB_ID" ColumnName="SUB_ID" />
-        <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+        <ScalarProperty Name="Couple_ID" ColumnName="Couple_ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PRODREV" TypeName="DBModel.PRODREV" StoreEntitySet="REVs">
@@ -656,7 +634,7 @@
         <ScalarProperty Name="Prod_ID" ColumnName="PROD_Prod_ID" />
       </EndProperty>
       <EndProperty Name="REV">
-        <ScalarProperty Name="Rev_Id" ColumnName="Rev_Id" />
+        <ScalarProperty Name="REV_ID" ColumnName="REV_ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PRODEntity1" TypeName="DBModel.PRODEntity1" StoreEntitySet="CAT_PROD">
@@ -664,8 +642,7 @@
         <ScalarProperty Name="Prod_ID" ColumnName="PROD_Prod_ID" />
       </EndProperty>
       <EndProperty Name="CAT_PROD">
-        <ScalarProperty Name="CAT_Id" ColumnName="CAT_Id" />
-        <ScalarProperty Name="PROD_ID" ColumnName="PROD_ID" />
+        <ScalarProperty Name="COUPLE_ID" ColumnName="COUPLE_ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PRODPRODTAGS" TypeName="DBModel.PRODPRODTAGS" StoreEntitySet="PRODTAGS">
@@ -681,9 +658,7 @@
         <ScalarProperty Name="Sub_ID" ColumnName="SUB_BEG_Sub_ID" />
       </EndProperty>
       <EndProperty Name="HAND_SUB_GEB_PROD">
-        <ScalarProperty Name="Hand_ID" ColumnName="Hand_ID" />
-        <ScalarProperty Name="SUB_ID" ColumnName="SUB_ID" />
-        <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+        <ScalarProperty Name="Couple_ID" ColumnName="Couple_ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="USERREV" TypeName="DBModel.USERREV" StoreEntitySet="REVs">
@@ -691,25 +666,23 @@
         <ScalarProperty Name="USER_Id" ColumnName="USER_USER_Id" />
       </EndProperty>
       <EndProperty Name="REV">
-        <ScalarProperty Name="Rev_Id" ColumnName="Rev_Id" />
+        <ScalarProperty Name="REV_ID" ColumnName="REV_ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="USERSESSIONS" TypeName="DBModel.USERSESSIONS" StoreEntitySet="USERs">
-      <EndProperty Name="SESSIONS">
-        <ScalarProperty Name="Sessions_ID" ColumnName="SESSIONS_Sessions_ID" />
-      </EndProperty>
+    <AssociationSetMapping Name="USERSESSIONS" TypeName="DBModel.USERSESSIONS" StoreEntitySet="SESSIONS">
       <EndProperty Name="USER">
-        <ScalarProperty Name="USER_Id" ColumnName="USER_Id" />
+        <ScalarProperty Name="USER_Id" ColumnName="USER_USER_Id" />
       </EndProperty>
-            <Condition ColumnName="SESSIONS_Sessions_ID" IsNull="false" />
+      <EndProperty Name="SESSIONS">
+        <ScalarProperty Name="SESSIONS_ID" ColumnName="SESSIONS_ID" />
+      </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="CATEntity1" TypeName="DBModel.CATEntity1" StoreEntitySet="CAT_PROD">
       <EndProperty Name="CAT">
         <ScalarProperty Name="CAT_Id" ColumnName="CAT_CAT_Id" />
       </EndProperty>
       <EndProperty Name="CAT_PROD">
-        <ScalarProperty Name="CAT_Id" ColumnName="CAT_Id" />
-        <ScalarProperty Name="PROD_ID" ColumnName="PROD_ID" />
+        <ScalarProperty Name="COUPLE_ID" ColumnName="COUPLE_ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="TAGSPRODTAGS" TypeName="DBModel.TAGSPRODTAGS" StoreEntitySet="PRODTAGS">

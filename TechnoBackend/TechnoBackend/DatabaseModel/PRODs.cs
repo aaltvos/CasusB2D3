@@ -12,14 +12,14 @@ namespace TechnoBackend.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class PROD
+    public partial class PRODs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PROD()
+        public PRODs()
         {
             this.HAND_SUB_GEB_PROD = new HashSet<HAND_SUB_GEB_PROD>();
-            this.REVs = new HashSet<REV>();
-            this.Entity1 = new HashSet<CAT_PROD>();
+            this.REVs = new HashSet<REVs>();
+            this.CAT_PROD = new HashSet<HAND_SUB_GEB_PROD>();
             this.PRODTAGS = new HashSet<PRODTAGS>();
         }
     
@@ -42,9 +42,9 @@ namespace TechnoBackend.DatabaseModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HAND_SUB_GEB_PROD> HAND_SUB_GEB_PROD { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REV> REVs { get; set; }
+        public virtual ICollection<REVs> REVs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CAT_PROD> Entity1 { get; set; }
+        public virtual ICollection<HAND_SUB_GEB_PROD> CAT_PROD { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODTAGS> PRODTAGS { get; set; }
     }

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/30/2017 17:27:11
--- Generated from EDMX file: c:\users\woute\documents\visual studio 2017\Projects\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 05/31/2017 09:59:20
+-- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,74 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_HAND_GEBHAND_SUB_GEB_PROD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HAND_SUB_GEB_PROD] DROP CONSTRAINT [FK_HAND_GEBHAND_SUB_GEB_PROD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PRODHAND_SUB_GEB_PROD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HAND_SUB_GEB_PROD] DROP CONSTRAINT [FK_PRODHAND_SUB_GEB_PROD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PRODREV]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[REVs] DROP CONSTRAINT [FK_PRODREV];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PRODEntity1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CAT_PROD] DROP CONSTRAINT [FK_PRODEntity1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PRODPRODTAGS]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PRODTAGS] DROP CONSTRAINT [FK_PRODPRODTAGS];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SUB_BEGHAND_SUB_GEB_PROD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HAND_SUB_GEB_PROD] DROP CONSTRAINT [FK_SUB_BEGHAND_SUB_GEB_PROD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_USERREV]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[REVs] DROP CONSTRAINT [FK_USERREV];
+GO
+IF OBJECT_ID(N'[dbo].[FK_USERSESSIONS]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SESSIONS] DROP CONSTRAINT [FK_USERSESSIONS];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CATEntity1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CAT_PROD] DROP CONSTRAINT [FK_CATEntity1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TAGSPRODTAGS]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PRODTAGS] DROP CONSTRAINT [FK_TAGSPRODTAGS];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[HAND_GEB]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HAND_GEB];
+GO
+IF OBJECT_ID(N'[dbo].[PRODs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PRODs];
+GO
+IF OBJECT_ID(N'[dbo].[HAND_SUB_GEB_PROD]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HAND_SUB_GEB_PROD];
+GO
+IF OBJECT_ID(N'[dbo].[SUB_BEG]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SUB_BEG];
+GO
+IF OBJECT_ID(N'[dbo].[REVs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[REVs];
+GO
+IF OBJECT_ID(N'[dbo].[USERs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[USERs];
+GO
+IF OBJECT_ID(N'[dbo].[CATs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CATs];
+GO
+IF OBJECT_ID(N'[dbo].[CAT_PROD]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CAT_PROD];
+GO
+IF OBJECT_ID(N'[dbo].[SESSIONS]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SESSIONS];
+GO
+IF OBJECT_ID(N'[dbo].[TAGS]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TAGS];
+GO
+IF OBJECT_ID(N'[dbo].[PRODTAGS]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PRODTAGS];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -57,9 +120,7 @@ GO
 
 -- Creating table 'HAND_SUB_GEB_PROD'
 CREATE TABLE [dbo].[HAND_SUB_GEB_PROD] (
-    [Hand_ID] int  NOT NULL,
-    [SUB_ID] int  NOT NULL,
-    [Prod_ID] int  NOT NULL,
+    [Couple_ID] int IDENTITY(1,1) NOT NULL,
     [HAND_GEB_Hand_ID] int  NOT NULL,
     [PROD_Prod_ID] int  NOT NULL,
     [SUB_BEG_Sub_ID] int  NOT NULL
@@ -76,10 +137,10 @@ GO
 
 -- Creating table 'REVs'
 CREATE TABLE [dbo].[REVs] (
-    [Rev_Id] int IDENTITY(1,1) NOT NULL,
-    [Prod_id] nvarchar(max)  NOT NULL,
-    [User_ID] nvarchar(max)  NOT NULL,
-    [Rev_text] nvarchar(max)  NOT NULL,
+    [REV_ID] int IDENTITY(1,1) NOT NULL,
+    [PROD_ID] nvarchar(max)  NOT NULL,
+    [USER_ID] nvarchar(max)  NOT NULL,
+    [REV_text] nvarchar(max)  NOT NULL,
     [PROD_Prod_ID] int  NOT NULL,
     [USER_USER_Id] int  NOT NULL
 );
@@ -91,9 +152,7 @@ CREATE TABLE [dbo].[USERs] (
     [USER_Name] nvarchar(max)  NOT NULL,
     [USER_PW] nvarchar(max)  NOT NULL,
     [USER_Sec] nvarchar(max)  NOT NULL,
-    [User_Val_dat] datetime  NOT NULL,
-    [USER_Session] int  NOT NULL,
-    [SESSIONS_Sessions_ID] int  NOT NULL
+    [USER_Val_dat] datetime  NOT NULL
 );
 GO
 
@@ -107,8 +166,7 @@ GO
 
 -- Creating table 'CAT_PROD'
 CREATE TABLE [dbo].[CAT_PROD] (
-    [CAT_Id] int  NOT NULL,
-    [PROD_ID] int  NOT NULL,
+    [COUPLE_ID] int IDENTITY(1,1) NOT NULL,
     [PROD_Prod_ID] int  NOT NULL,
     [CAT_CAT_Id] int  NOT NULL
 );
@@ -116,9 +174,10 @@ GO
 
 -- Creating table 'SESSIONS'
 CREATE TABLE [dbo].[SESSIONS] (
-    [Sessions_ID] int IDENTITY(1,1) NOT NULL,
-    [Sessions_Token] nvarchar(max)  NOT NULL,
-    [Sessions_TTL] nvarchar(max)  NOT NULL
+    [SESSIONS_ID] int IDENTITY(1,1) NOT NULL,
+    [SESSIONS_Token] nvarchar(max)  NOT NULL,
+    [SESSIONS_TTL] nvarchar(max)  NOT NULL,
+    [USER_USER_Id] int  NOT NULL
 );
 GO
 
@@ -154,10 +213,10 @@ ADD CONSTRAINT [PK_PRODs]
     PRIMARY KEY CLUSTERED ([Prod_ID] ASC);
 GO
 
--- Creating primary key on [Hand_ID], [SUB_ID], [Prod_ID] in table 'HAND_SUB_GEB_PROD'
+-- Creating primary key on [Couple_ID] in table 'HAND_SUB_GEB_PROD'
 ALTER TABLE [dbo].[HAND_SUB_GEB_PROD]
 ADD CONSTRAINT [PK_HAND_SUB_GEB_PROD]
-    PRIMARY KEY CLUSTERED ([Hand_ID], [SUB_ID], [Prod_ID] ASC);
+    PRIMARY KEY CLUSTERED ([Couple_ID] ASC);
 GO
 
 -- Creating primary key on [Sub_ID] in table 'SUB_BEG'
@@ -166,10 +225,10 @@ ADD CONSTRAINT [PK_SUB_BEG]
     PRIMARY KEY CLUSTERED ([Sub_ID] ASC);
 GO
 
--- Creating primary key on [Rev_Id] in table 'REVs'
+-- Creating primary key on [REV_ID] in table 'REVs'
 ALTER TABLE [dbo].[REVs]
 ADD CONSTRAINT [PK_REVs]
-    PRIMARY KEY CLUSTERED ([Rev_Id] ASC);
+    PRIMARY KEY CLUSTERED ([REV_ID] ASC);
 GO
 
 -- Creating primary key on [USER_Id] in table 'USERs'
@@ -184,16 +243,16 @@ ADD CONSTRAINT [PK_CATs]
     PRIMARY KEY CLUSTERED ([CAT_Id] ASC);
 GO
 
--- Creating primary key on [CAT_Id], [PROD_ID] in table 'CAT_PROD'
+-- Creating primary key on [COUPLE_ID] in table 'CAT_PROD'
 ALTER TABLE [dbo].[CAT_PROD]
 ADD CONSTRAINT [PK_CAT_PROD]
-    PRIMARY KEY CLUSTERED ([CAT_Id], [PROD_ID] ASC);
+    PRIMARY KEY CLUSTERED ([COUPLE_ID] ASC);
 GO
 
--- Creating primary key on [Sessions_ID] in table 'SESSIONS'
+-- Creating primary key on [SESSIONS_ID] in table 'SESSIONS'
 ALTER TABLE [dbo].[SESSIONS]
 ADD CONSTRAINT [PK_SESSIONS]
-    PRIMARY KEY CLUSTERED ([Sessions_ID] ASC);
+    PRIMARY KEY CLUSTERED ([SESSIONS_ID] ASC);
 GO
 
 -- Creating primary key on [TAGS_Id] in table 'TAGS'
@@ -317,19 +376,19 @@ ON [dbo].[REVs]
     ([USER_USER_Id]);
 GO
 
--- Creating foreign key on [SESSIONS_Sessions_ID] in table 'USERs'
-ALTER TABLE [dbo].[USERs]
+-- Creating foreign key on [USER_USER_Id] in table 'SESSIONS'
+ALTER TABLE [dbo].[SESSIONS]
 ADD CONSTRAINT [FK_USERSESSIONS]
-    FOREIGN KEY ([SESSIONS_Sessions_ID])
-    REFERENCES [dbo].[SESSIONS]
-        ([Sessions_ID])
+    FOREIGN KEY ([USER_USER_Id])
+    REFERENCES [dbo].[USERs]
+        ([USER_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_USERSESSIONS'
 CREATE INDEX [IX_FK_USERSESSIONS]
-ON [dbo].[USERs]
-    ([SESSIONS_Sessions_ID]);
+ON [dbo].[SESSIONS]
+    ([USER_USER_Id]);
 GO
 
 -- Creating foreign key on [CAT_CAT_Id] in table 'CAT_PROD'
