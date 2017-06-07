@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/06/2017 19:10:55
+-- Date Created: 06/07/2017 17:59:03
 -- Generated from EDMX file: C:\Users\woute\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
@@ -73,8 +73,8 @@ GO
 IF OBJECT_ID(N'[dbo].[USERs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[USERs];
 GO
-IF OBJECT_ID(N'[dbo].[CAT]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CAT];
+IF OBJECT_ID(N'[dbo].[CATs1]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CATs1];
 GO
 IF OBJECT_ID(N'[dbo].[CAT_PROD]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CAT_PROD];
@@ -157,13 +157,13 @@ CREATE TABLE [dbo].[USERs] (
     [USER_Id] int IDENTITY(1,1) NOT NULL,
     [USER_Name] nvarchar(max)  NOT NULL,
     [USER_PW] nvarchar(max)  NOT NULL,
-    [USER_Sec] nvarchar(max)  NOT NULL,
+    [USER_Sec] int  NOT NULL,
     [USER_Val_dat] datetime  NOT NULL
 );
 GO
 
--- Creating table 'CAT'
-CREATE TABLE [dbo].[CAT] (
+-- Creating table 'CATs1'
+CREATE TABLE [dbo].[CATs1] (
     [CAT_Id] int IDENTITY(1,1) NOT NULL,
     [CAT_Name] nvarchar(max)  NOT NULL,
     [CAT_IMG] nvarchar(max)  NOT NULL
@@ -254,9 +254,9 @@ ADD CONSTRAINT [PK_USERs]
     PRIMARY KEY CLUSTERED ([USER_Id] ASC);
 GO
 
--- Creating primary key on [CAT_Id] in table 'CAT'
-ALTER TABLE [dbo].[CAT]
-ADD CONSTRAINT [PK_CAT]
+-- Creating primary key on [CAT_Id] in table 'CATs1'
+ALTER TABLE [dbo].[CATs1]
+ADD CONSTRAINT [PK_CATs1]
     PRIMARY KEY CLUSTERED ([CAT_Id] ASC);
 GO
 
@@ -418,7 +418,7 @@ GO
 ALTER TABLE [dbo].[CAT_PROD]
 ADD CONSTRAINT [FK_CATEntity1]
     FOREIGN KEY ([CAT_CAT_Id])
-    REFERENCES [dbo].[CAT]
+    REFERENCES [dbo].[CATs1]
         ([CAT_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
