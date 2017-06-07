@@ -121,7 +121,7 @@
     <Property Name="USER_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="USER_Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="USER_PW" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="USER_Sec" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="USER_Sec" Type="int" Nullable="false" />
     <Property Name="USER_Val_dat" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="CATs">
@@ -411,7 +411,7 @@
           <Property Name="USER_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="USER_Name" Type="String" Nullable="false" />
           <Property Name="USER_PW" Type="String" Nullable="false" />
-          <Property Name="USER_Sec" Type="String" Nullable="false" />
+          <Property Name="USER_Sec" Type="Int32" Nullable="false" />
           <Property Name="USER_Val_dat" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="REVs" Relationship="DBModel.USERREV" FromRole="USER" ToRole="REV" />
           <NavigationProperty Name="SESSIONS" Relationship="DBModel.USERSESSIONS" FromRole="USER" ToRole="SESSIONS" />
