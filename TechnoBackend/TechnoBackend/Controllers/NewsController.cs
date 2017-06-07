@@ -7,6 +7,7 @@ using System.Reflection.Emit;
 using System.Web.Http;
 using System.Web.WebPages;
 using TechnoBackend.Business_Logic.News;
+using TechnoBackend.Login;
 
 
 namespace TechnoBackend.Controllers
@@ -22,9 +23,16 @@ namespace TechnoBackend.Controllers
         // GET api/<controller>/5
         public HttpResponseMessage Get(int id)
         {
-            var message = ShowNews.GetNews(ActionContext, id);
-            var response = Request.CreateResponse(message);
-            return response;
+            var token = ActionContext.Request.Headers.GetValues("Token").First();
+            var newtoken = SessionCheck.Check(token);
+            if (newtoken != "no session")
+            {
+                var message = ShowNews.GetNews(id);
+                Request.Headers.Add("Token",newtoken);
+                var response = Request.CreateResponse(message);
+                return response;
+            }
+            return Request.CreateResponse(newtoken);
         }
 
         // POST api/<controller>

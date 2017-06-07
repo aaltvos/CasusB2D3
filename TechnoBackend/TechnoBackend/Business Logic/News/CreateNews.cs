@@ -26,7 +26,7 @@ namespace TechnoBackend.Business_Logic.News
             var UserID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == Token select sessions.USER_Id.USER_Id).First();
             var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
             var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
-            //TODO: Figure out the LINQ querry to retain the USER_ID from Session
+            
 
             //Create new Article in DB with info from tje object and the user id
             NEWS news = new NEWS()
@@ -47,7 +47,7 @@ namespace TechnoBackend.Business_Logic.News
                 return e.ToString();
             }
             
-            return "Article Added succes";
+            return "Article Added succesfully";
         }
     }
 }
