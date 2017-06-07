@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Controllers;
 using TechnoBackend.DatabaseModel;
@@ -8,7 +9,7 @@ namespace TechnoBackend.Login
     public class SessionCheck
     {
 
-        public static string Check(string token)
+        public static Tuple<string,int> Check(string token)
         {
             //string token;
             //token = actioncontext.Request.Headers.GetValues("Token").First();
@@ -36,24 +37,22 @@ namespace TechnoBackend.Login
                             db.SESSIONS.Remove(CurrentSession);
                             db.SaveChanges();
                             
-                            return "no session";
+                            return new Tuple<string, int>("no session", 0);
                         }
 
-                        return token;
+                        return new Tuple<string,int>(token, GetSecRole(token));
 
                     }
-                    return token;
+                    return new Tuple<string, int>(token, GetSecRole(token));
                 }
                 catch
                 {
-                    return "no session";
+                    return new Tuple<string, int>("no session", 0);
                 }
-               
             }
-                
         }
 
-        public static string GetToken(string username)
+        public static Tuple<string, int> GetToken(string username)
         {
             string Token;
             using(DBModelContainer db = new DBModelContainer())
@@ -65,17 +64,23 @@ namespace TechnoBackend.Login
                 try
                 {
                     Token = (from session in db.SESSIONS where session.USER_Id.USER_Id == CurrentUser.USER_Id select session.SESSIONS_Token).First();
-                    string CurrentSession = Check(Token);
-                    return CurrentSession;
+                    return Check(Token);
                 }
 
                 catch
                 {
-                    Token = "no session";
-                    return Token;
+                    return new Tuple<string, int>("no session", 0);
                 }
             }
         }
-        
+
+        public static int GetSecRole(string token)
+        {
+            using (DBModelContainer db = new DBModelContainer())
+            {
+                int SecRole = (from s in db.SESSIONS where s.SESSIONS_Token == token select s.USER_Id.USER_Sec).First();
+                return SecRole;
+            }
+        }
     }
 }

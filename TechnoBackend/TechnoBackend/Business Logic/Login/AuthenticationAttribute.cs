@@ -1,8 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using System.Security.Principal;
-using System.Text;
-using System.Threading;
 using System.Web.Http.Controllers;
 
 namespace TechnoBackend.Login
@@ -19,18 +16,14 @@ namespace TechnoBackend.Login
             string username = Credentials.Username;
             string password = Credentials.Password;
             
-
             if (Authentication.Login(username, password) != 0)
             {
-
-                AuthToken = SessionCheck.GetToken(username);
+                AuthToken = SessionCheck.GetToken(username).Item1;
                 if (AuthToken == "no session")
                 {
                     AuthToken = RandomString();
                     CreateSession newSession = new CreateSession(AuthToken, Authentication.Login(username, password));
-
                 }
-              
             }
 
             else

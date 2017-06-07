@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
-using TechnoBackend.DatabaseModel;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Web.Http;
 using TechnoBackend.Login;
-using System.IO;
-using System.Web.Http.Controllers;
-using System.Linq;
 
 namespace TechnoBackend.Controllers
 {
