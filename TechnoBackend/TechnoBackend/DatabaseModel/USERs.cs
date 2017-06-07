@@ -24,7 +24,7 @@ namespace TechnoBackend.DatabaseModel
         public int USER_Id { get; set; }
         public string USER_Name { get; set; }
         public string USER_PW { get; set; }
-        public string USER_Sec { get; set; }
+        public int USER_Sec { get; set; }
         public System.DateTime USER_Val_dat { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
