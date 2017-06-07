@@ -20,9 +20,11 @@ namespace TechnoBackend.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            return "value";
+            var message = ShowNews.GetNews(ActionContext, id);
+            var response = Request.CreateResponse(message);
+            return response;
         }
 
         // POST api/<controller>
