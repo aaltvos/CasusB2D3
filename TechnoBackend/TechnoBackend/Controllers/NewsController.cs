@@ -25,24 +25,29 @@ namespace TechnoBackend.Controllers
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
-            if (newtoken != "no session")
+            if (newtoken.Item1 != "no session" && newtoken.Item2>=2)
             {
                 var message = ShowNews.GetNews(id);
-                Request.Headers.Add("Token",newtoken);
+                Request.Headers.Add("Token",newtoken.Item1);
                 var response = Request.CreateResponse(message);
                 return response;
             }
-            return Request.CreateResponse(newtoken);
+            return Request.CreateResponse(newtoken.Item1);
         }
 
         // POST api/<controller>
         public HttpResponseMessage Post()
         {
-            
-            var message = CreateNews.AddArticle(ActionContext);
-            var response = Request.CreateResponse(message);
-
-            return response;
+            var token = ActionContext.Request.Headers.GetValues("Token").First();
+            var newtoken = SessionCheck.Check(token);
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 2)
+            {
+                var message = CreateNews.AddArticle(ActionContext);
+                Request.Headers.Add("Token", newtoken.Item1);
+                var response = Request.CreateResponse(message);
+                return response;
+            }
+            return Request.CreateResponse(newtoken.Item1);
         }
 
         // PUT api/<controller>/5
