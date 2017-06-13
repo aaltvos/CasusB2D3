@@ -1,7 +1,5 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -14,7 +12,7 @@ namespace TechnoBackend.Tests
         public void TestMethodLogin()
         {
             string test = "{ 'Username':'Henk','Password':'Knabbel'}";
-            var iets = UTF8Encoding.UTF8.GetBytes(test);
+            var iets = Encoding.UTF8.GetBytes(test);
             var request = WebRequest.CreateHttp("http://localhost:51516/api/Authentication");
             request.Method = "POST";
             var stream = request.GetRequestStream();
