@@ -156,6 +156,7 @@
     <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Business Logic\News\ShowNews.cs" />
+    <Compile Include="Business Logic\Werkoverzicht\JsonWorkitem.cs" />
     <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtStart.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />

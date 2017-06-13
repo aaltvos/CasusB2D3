@@ -13,16 +13,14 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 {
     public class WerkoverzichtStart
     {
-        public static string WorkItemsFetchen(int id)
+        public List<PRODs> WorkItemsFetchen(int id)
         {
-            String TestWorkItems;
-
             switch (id)
             {
                 case 1:
-                    return TestWorkItems = FetchValidators();
+                    return FetchValidators();
                 case 2:
-                    return TestWorkItems = FetchExpiredDates();
+                    return FetchExpiredDates();
                 default:
                     return TestWorkItems = "Geen enkele van je ids zijn goede ids";
             }
@@ -30,14 +28,34 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 
         }
 
-        private static string FetchValidators()
+        private List<PRODs> FetchValidators()
         {
-            return "Fetched all workitems which are not verified!";
+            using (DBModelContainer db = new DBModelContainer())
+            {
+                List<PRODs> FetchedItems = new List<PRODs>();
+                var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Validator == "0"); //magisch nummer weghalen
+                foreach (var item in FetchedItemsQuery)
+                {
+                    FetchedItems.Add(item);
+                }
+                return FetchedItems;
+            }
         }
 
-        private static string FetchExpiredDates()
+        private List<PRODs> FetchExpiredDates()
         {
-            return "Fetched all workitems with an expired date!";
+            using (DBModelContainer db = new DBModelContainer())
+            {
+                List<PRODs> FetchedItems = new List<PRODs>();
+                //verander validator in de dates ding
+                var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Validator == "0"); //magisch nummer weghalen
+                foreach (var item in FetchedItemsQuery)
+                {
+                    FetchedItems.Add(item);
+                }
+                return FetchedItems;
+            }
         }
     }
 }
+
