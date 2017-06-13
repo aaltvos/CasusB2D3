@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/31/2017 09:59:20
--- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 06/13/2017 21:42:17
+-- Generated from EDMX file: C:\Users\kidpo\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -114,7 +114,7 @@ CREATE TABLE [dbo].[PRODs] (
     [Prod_Mov] nvarchar(max)  NULL,
     [Prod_Views] bigint  NULL,
     [Prod_Validator] nvarchar(max)  NOT NULL,
-    [Prod_Val_Dat] nvarchar(max)  NOT NULL
+    [Prod_Val_Dat] datetime  NOT NULL
 );
 GO
 
@@ -127,8 +127,8 @@ CREATE TABLE [dbo].[HAND_SUB_GEB_PROD] (
 );
 GO
 
--- Creating table 'SUB_BEG'
-CREATE TABLE [dbo].[SUB_BEG] (
+-- Creating table 'SUB_GEB'
+CREATE TABLE [dbo].[SUB_GEB] (
     [Sub_ID] int IDENTITY(1,1) NOT NULL,
     [Sub_Name] nvarchar(max)  NOT NULL,
     [Sub_IMG] nvarchar(max)  NOT NULL
@@ -219,9 +219,9 @@ ADD CONSTRAINT [PK_HAND_SUB_GEB_PROD]
     PRIMARY KEY CLUSTERED ([Couple_ID] ASC);
 GO
 
--- Creating primary key on [Sub_ID] in table 'SUB_BEG'
-ALTER TABLE [dbo].[SUB_BEG]
-ADD CONSTRAINT [PK_SUB_BEG]
+-- Creating primary key on [Sub_ID] in table 'SUB_GEB'
+ALTER TABLE [dbo].[SUB_GEB]
+ADD CONSTRAINT [PK_SUB_GEB]
     PRIMARY KEY CLUSTERED ([Sub_ID] ASC);
 GO
 
@@ -350,7 +350,7 @@ GO
 ALTER TABLE [dbo].[HAND_SUB_GEB_PROD]
 ADD CONSTRAINT [FK_SUB_BEGHAND_SUB_GEB_PROD]
     FOREIGN KEY ([SUB_BEG_Sub_ID])
-    REFERENCES [dbo].[SUB_BEG]
+    REFERENCES [dbo].[SUB_GEB]
         ([Sub_ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO

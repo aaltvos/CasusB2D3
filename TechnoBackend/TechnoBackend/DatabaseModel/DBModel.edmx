@@ -9,7 +9,7 @@
     <EntitySet Name="HAND_GEB" EntityType="DBModel.Store.HAND_GEB" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PRODs" EntityType="DBModel.Store.PRODs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HAND_SUB_GEB_PROD" EntityType="DBModel.Store.HAND_SUB_GEB_PROD" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="SUB_BEG" EntityType="DBModel.Store.SUB_BEG" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SUB_GEB" EntityType="DBModel.Store.SUB_GEB" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="REVs" EntityType="DBModel.Store.REVs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="USERs" EntityType="DBModel.Store.USERs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CATs" EntityType="DBModel.Store.CATs" store:Type="Tables" Schema="dbo" />
@@ -38,7 +38,7 @@
       <End Role="PRODTAGS" EntitySet="PRODTAGS" />
     </AssociationSet>
     <AssociationSet Name="SUB_BEGHAND_SUB_GEB_PROD" Association="DBModel.Store.SUB_BEGHAND_SUB_GEB_PROD">
-      <End Role="SUB_BEG" EntitySet="SUB_BEG" />
+      <End Role="SUB_BEG" EntitySet="SUB_GEB" />
       <End Role="HAND_SUB_GEB_PROD" EntitySet="HAND_SUB_GEB_PROD" />
     </AssociationSet>
     <AssociationSet Name="USERREV" Association="DBModel.Store.USERREV">
@@ -84,7 +84,7 @@
     <Property Name="Prod_Mov" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Prod_Views" Type="bigint" Nullable="true" />
     <Property Name="Prod_Validator" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Prod_Val_Dat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prod_Val_Dat" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="HAND_SUB_GEB_PROD">
     <Key>
@@ -95,7 +95,7 @@
     <Property Name="PROD_Prod_ID" Type="int" Nullable="false" />
     <Property Name="SUB_BEG_Sub_ID" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="SUB_BEG">
+  <EntityType Name="SUB_GEB">
     <Key>
       <PropertyRef Name="Sub_ID" />
     </Key>
@@ -226,7 +226,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="SUB_BEGHAND_SUB_GEB_PROD">
-    <End Role="SUB_BEG" Type="DBModel.Store.SUB_BEG" Multiplicity="1" />
+    <End Role="SUB_BEG" Type="DBModel.Store.SUB_GEB" Multiplicity="1" />
     <End Role="HAND_SUB_GEB_PROD" Type="DBModel.Store.HAND_SUB_GEB_PROD" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SUB_BEG">
@@ -369,7 +369,7 @@
           <Property Name="Prod_Mov" Type="String" Nullable="true" />
           <Property Name="Prod_Views" Type="Int64" Nullable="true" />
           <Property Name="Prod_Validator" Type="String" Nullable="false" />
-          <Property Name="Prod_Val_Dat" Type="String" Nullable="false" />
+          <Property Name="Prod_Val_Dat" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="HAND_SUB_GEB_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
           <NavigationProperty Name="REVs" Relationship="DBModel.PRODREV" FromRole="PROD" ToRole="REV" />
           <NavigationProperty Name="CAT_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
@@ -544,7 +544,7 @@
     </EntitySetMapping>
     <EntitySetMapping Name="SUB_GEB">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.SUB_GEB)">
-        <MappingFragment StoreEntitySet="SUB_BEG">
+        <MappingFragment StoreEntitySet="SUB_GEB">
           <ScalarProperty Name="Sub_ID" ColumnName="Sub_ID" />
           <ScalarProperty Name="Sub_Name" ColumnName="Sub_Name" />
           <ScalarProperty Name="Sub_IMG" ColumnName="Sub_IMG" />
