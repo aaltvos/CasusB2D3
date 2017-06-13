@@ -48,7 +48,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
             {
                 List<PRODs> FetchedItems = new List<PRODs>();
                 //verander validator in de dates ding
-                var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Validator == "0"); //magisch nummer weghalen
+                var FetchedItemsQuery = (from penis in db.PRODs select penis.Prod_Name && penis.Prod_Val_Dat); //magisch nummer weghalen
                 foreach (var item in FetchedItemsQuery)
                 {
                     FetchedItems.Add(item);
