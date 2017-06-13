@@ -13,46 +13,61 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 {
     public class WerkoverzichtStart
     {
-        public List<PRODs> WorkItemsFetchen(int id)
+        public static List<Object> WorkItemsFetchen(int id)
         {
             switch (id)
             {
                 case 1:
+                    // 1: alleen ongevalideerde Workitems ophalen
                     return FetchValidators();
-                case 2:
-                    return FetchExpiredDates();
+                //case 2:
+                //    // 2: Haal verlopen items op
+                //    return FetchExpiredDates();
                 default:
-                    return TestWorkItems = "Geen enkele van je ids zijn goede ids";
+                    // Als er een ander getal of woord ingegeven is dan 1 of 2 dan komt het programma hierop uit
+                    return null;
             }
 
 
         }
 
-        private List<PRODs> FetchValidators()
+        private static List<Object> FetchValidators()
         {
+            // In database staat 0 voor ongevalideerd
+            string ongevalideerd = "0";
+            List<Object> Lijstje = new List<Object>();
+
+            // Geef aan met welke database de linq querry wordt uitgevoerd
             using (DBModelContainer db = new DBModelContainer())
             {
-                List<PRODs> FetchedItems = new List<PRODs>();
-                var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Validator == "0"); //magisch nummer weghalen
-                foreach (var item in FetchedItemsQuery)
+                // initaliseren van de lijst voor ongevalideerde workitems en een linq query on
+                // deze workitems uit de database te halen
+                IQueryable Workitems;
+                Workitems = (from item in db.PRODs where item.Prod_Validator == ongevalideerd select item.Prod_Name);
+
+                // parser om linq querryable om te zetten naar lijst met PRODs
+                foreach (var item in Workitems)
                 {
-                    FetchedItems.Add(item);
+                    Lijstje.Add(item);
                 }
-                return FetchedItems;
+
+                // return Lijst met ongevalideerde workitems
+                return Lijstje;
             }
         }
 
-        private List<PRODs> FetchExpiredDates()
+        private static List<PRODs> FetchExpiredDates()
         {
             using (DBModelContainer db = new DBModelContainer())
             {
                 List<PRODs> FetchedItems = new List<PRODs>();
-                //verander validator in de dates ding
-                var FetchedItemsQuery = (from penis in db.PRODs select penis.Prod_Name && penis.Prod_Val_Dat); //magisch nummer weghalen
+                var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Val_Dat == "Waarom is dit geen datetime object :C");
+
                 foreach (var item in FetchedItemsQuery)
                 {
                     FetchedItems.Add(item);
                 }
+
                 return FetchedItems;
             }
         }
