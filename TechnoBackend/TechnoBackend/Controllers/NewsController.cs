@@ -43,6 +43,7 @@ namespace TechnoBackend.Controllers
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 2)
             {
                 var message = CreateNews.AddArticle(ActionContext);
+                
                 Request.Headers.Add("Token", newtoken.Item1);
                 var response = Request.CreateResponse(message);
                 return response;
