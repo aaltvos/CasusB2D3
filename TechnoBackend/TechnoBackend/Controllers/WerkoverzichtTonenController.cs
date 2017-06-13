@@ -12,13 +12,13 @@ namespace TechnoBackend.Controllers
 {
     public class WerkoverzichtTonenController : ApiController
     {
-        public HttpResponseMessage Post()
+        public HttpResponseMessage Get(int id)
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 1)
             {
-                var message = WerkoverzichtStart.WorkItemsFetchen();
+                var message = WerkoverzichtStart.WorkItemsFetchen(id);
                 Request.Headers.Add("Token", newtoken.Item1);
                 var response = Request.CreateResponse(message);
                 return response;

@@ -13,11 +13,31 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 {
     public class WerkoverzichtStart
     {
-        public static string WorkItemsFetchen()
+        public static string WorkItemsFetchen(int id)
         {
-            string Test = "Testen";
-            return Test;
-       
+            String TestWorkItems;
+
+            switch (id)
+            {
+                case 1:
+                    return TestWorkItems = FetchValidators();
+                case 2:
+                    return TestWorkItems = FetchExpiredDates();
+                default:
+                    return TestWorkItems = "Geen enkele van je ids zijn goede ids";
+            }
+
+
+        }
+
+        private static string FetchValidators()
+        {
+            return "Fetched all workitems which are not verified!";
+        }
+
+        private static string FetchExpiredDates()
+        {
+            return "Fetched all workitems with an expired date!";
         }
     }
 }
