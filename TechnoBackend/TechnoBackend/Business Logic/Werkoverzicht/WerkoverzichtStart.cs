@@ -20,16 +20,15 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                 case 1:
                     // 1: alleen ongevalideerde Workitems ophalen
                     return FetchValidators();
-                //case 2:
-                //    // 2: Haal verlopen items op
-                //    return FetchExpiredDates();
+                case 2:
+                    // 2: Haal verlopen items op
+                    return FetchExpiredDates();
                 default:
                     // Als er een ander getal of woord ingegeven is dan 1 of 2 dan komt het programma hierop uit
                     return null;
             }
-
-
         }
+
 
         private static List<Object> FetchValidators()
         {
@@ -55,6 +54,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                 return Lijstje;
             }
         }
+
 
         private static List<PRODs> FetchExpiredDates()
         {
