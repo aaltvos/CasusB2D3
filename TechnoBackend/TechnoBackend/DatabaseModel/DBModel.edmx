@@ -93,7 +93,7 @@
     <Property Name="Couple_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HAND_GEB_Hand_ID" Type="int" Nullable="false" />
     <Property Name="PROD_Prod_ID" Type="int" Nullable="false" />
-    <Property Name="SUB_BEG_Sub_ID" Type="int" Nullable="false" />
+    <Property Name="SUB_GEB_Sub_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SUB_GEB">
     <Key>
@@ -233,7 +233,7 @@
         <PropertyRef Name="Sub_ID" />
       </Principal>
       <Dependent Role="HAND_SUB_GEB_PROD">
-        <PropertyRef Name="SUB_BEG_Sub_ID" />
+        <PropertyRef Name="SUB_GEB_Sub_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -382,7 +382,7 @@
           <Property Name="Couple_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="HAND_GEB" Relationship="DBModel.HAND_GEBHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="HAND_GEB" />
           <NavigationProperty Name="PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="PROD" />
-          <NavigationProperty Name="SUB_BEG" Relationship="DBModel.SUB_BEGHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="SUB_BEG" />
+          <NavigationProperty Name="SUB_GEB" Relationship="DBModel.SUB_BEGHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="SUB_BEG" />
         </EntityType>
         <EntityType Name="SUB_GEB">
           <Key>
@@ -655,7 +655,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="SUB_BEGHAND_SUB_GEB_PROD" TypeName="DBModel.SUB_BEGHAND_SUB_GEB_PROD" StoreEntitySet="HAND_SUB_GEB_PROD">
       <EndProperty Name="SUB_BEG">
-        <ScalarProperty Name="Sub_ID" ColumnName="SUB_BEG_Sub_ID" />
+        <ScalarProperty Name="Sub_ID" ColumnName="SUB_GEB_Sub_ID" />
       </EndProperty>
       <EndProperty Name="HAND_SUB_GEB_PROD">
         <ScalarProperty Name="Couple_ID" ColumnName="Couple_ID" />

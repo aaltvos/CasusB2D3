@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/13/2017 21:42:17
--- Generated from EDMX file: C:\Users\kidpo\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 06/14/2017 13:54:42
+-- Generated from EDMX file: C:\Users\Gebruiker\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -61,8 +61,8 @@ GO
 IF OBJECT_ID(N'[dbo].[HAND_SUB_GEB_PROD]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HAND_SUB_GEB_PROD];
 GO
-IF OBJECT_ID(N'[dbo].[SUB_BEG]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SUB_BEG];
+IF OBJECT_ID(N'[dbo].[SUB_GEB]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SUB_GEB];
 GO
 IF OBJECT_ID(N'[dbo].[REVs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[REVs];
@@ -123,7 +123,7 @@ CREATE TABLE [dbo].[HAND_SUB_GEB_PROD] (
     [Couple_ID] int IDENTITY(1,1) NOT NULL,
     [HAND_GEB_Hand_ID] int  NOT NULL,
     [PROD_Prod_ID] int  NOT NULL,
-    [SUB_BEG_Sub_ID] int  NOT NULL
+    [SUB_GEB_Sub_ID] int  NOT NULL
 );
 GO
 
@@ -346,10 +346,10 @@ ON [dbo].[PRODTAGS]
     ([PROD_Prod_ID]);
 GO
 
--- Creating foreign key on [SUB_BEG_Sub_ID] in table 'HAND_SUB_GEB_PROD'
+-- Creating foreign key on [SUB_GEB_Sub_ID] in table 'HAND_SUB_GEB_PROD'
 ALTER TABLE [dbo].[HAND_SUB_GEB_PROD]
 ADD CONSTRAINT [FK_SUB_BEGHAND_SUB_GEB_PROD]
-    FOREIGN KEY ([SUB_BEG_Sub_ID])
+    FOREIGN KEY ([SUB_GEB_Sub_ID])
     REFERENCES [dbo].[SUB_GEB]
         ([Sub_ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -358,7 +358,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_SUB_BEGHAND_SUB_GEB_PROD'
 CREATE INDEX [IX_FK_SUB_BEGHAND_SUB_GEB_PROD]
 ON [dbo].[HAND_SUB_GEB_PROD]
-    ([SUB_BEG_Sub_ID]);
+    ([SUB_GEB_Sub_ID]);
 GO
 
 -- Creating foreign key on [USER_USER_Id] in table 'REVs'
