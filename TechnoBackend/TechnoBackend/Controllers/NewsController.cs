@@ -43,6 +43,7 @@ namespace TechnoBackend.Controllers
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 2)
             {
                 var message = CreateNews.AddArticle(ActionContext);
+                
                 Request.Headers.Add("Token", newtoken.Item1);
                 var response = Request.CreateResponse(message);
                 return response;
@@ -56,8 +57,19 @@ namespace TechnoBackend.Controllers
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            var token = ActionContext.Request.Headers.GetValues("Token").First();
+            var newtoken = SessionCheck.Check(token);
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
+            {
+                var message = DeleteNews.DeleteArticle(id);
+
+                Request.Headers.Add("Token", newtoken.Item1);
+                var response = Request.CreateResponse(message);
+                return response;
+            }
+            return Request.CreateResponse("Invalid action");
         }
     }
 }
