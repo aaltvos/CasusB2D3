@@ -89,7 +89,7 @@
     <Property Name="Prod_Mov" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Prod_Views" Type="bigint" Nullable="true" />
     <Property Name="Prod_Validator" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Prod_Val_Dat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prod_Val_Dat" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="HAND_SUB_GEB_PROD">
     <Key>
@@ -402,7 +402,7 @@
           <Property Name="Prod_Mov" Type="String" Nullable="true" />
           <Property Name="Prod_Views" Type="Int64" Nullable="true" />
           <Property Name="Prod_Validator" Type="String" Nullable="false" />
-          <Property Name="Prod_Val_Dat" Type="String" Nullable="false" />
+          <Property Name="Prod_Val_Dat" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="HAND_SUB_GEB_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
           <NavigationProperty Name="REVs" Relationship="DBModel.PRODREV" FromRole="PROD" ToRole="REV" />
           <NavigationProperty Name="CAT_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
