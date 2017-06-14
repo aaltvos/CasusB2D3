@@ -37,7 +37,7 @@ namespace TechnoBackend.DatabaseModel
         public string Prod_Mov { get; set; }
         public Nullable<long> Prod_Views { get; set; }
         public string Prod_Validator { get; set; }
-        public string Prod_Val_Dat { get; set; }
+        public System.DateTime Prod_Val_Dat { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HAND_SUB_GEB_PROD> HAND_SUB_GEB_PROD { get; set; }

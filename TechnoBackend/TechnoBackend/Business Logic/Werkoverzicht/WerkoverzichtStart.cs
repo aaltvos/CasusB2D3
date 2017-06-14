@@ -20,9 +20,9 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                 case 1:
                     // 1: alleen ongevalideerde Workitems ophalen
                     return FetchValidators();
-                //case 2:
-                //    // 2: Haal verlopen items op
-                //    return FetchExpiredDates();
+                case 2:
+                    // 2: Haal verlopen items op
+                    return FetchExpiredDates();
                 default:
                     // Als er een ander getal of woord ingegeven is dan 1 of 2 dan komt het programma hierop uit
                     return null;
@@ -56,12 +56,13 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
             }
         }
 
-        private static List<PRODs> FetchExpiredDates()
+        private static List<Object> FetchExpiredDates()
         {
             using (DBModelContainer db = new DBModelContainer())
             {
-                List<PRODs> FetchedItems = new List<PRODs>();
-                var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Val_Dat == "Waarom is dit geen datetime object :C");
+                List<Object> FetchedItems = new List<Object>();
+                TimeSpan t = new TimeSpan(365 * 3);
+                var FetchedItemsQuery = (from item in db.PRODs where item.Prod_Val_Dat == DateTime.Today select item.Prod_Name);
 
                 foreach (var item in FetchedItemsQuery)
                 {

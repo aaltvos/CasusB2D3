@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/07/2017 17:59:03
--- Generated from EDMX file: C:\Users\woute\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 06/14/2017 10:41:47
+-- Generated from EDMX file: C:\Users\TLAsm\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -120,7 +120,7 @@ CREATE TABLE [dbo].[PRODs] (
     [Prod_Mov] nvarchar(max)  NULL,
     [Prod_Views] bigint  NULL,
     [Prod_Validator] nvarchar(max)  NOT NULL,
-    [Prod_Val_Dat] nvarchar(max)  NOT NULL
+    [Prod_Val_Dat] datetime  NOT NULL
 );
 GO
 
