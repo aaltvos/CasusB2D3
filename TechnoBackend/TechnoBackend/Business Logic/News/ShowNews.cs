@@ -14,12 +14,12 @@ namespace TechnoBackend.Business_Logic.News
 {
     public class ShowNews
     {
-        public static object GetNews(int numberOfArticles)
+        public static IList<NEWS> GetNews(int numberOfArticles)
         {
             var newsmax = 0;
             var newscount = 0;
             
-            List<object> articleList = new List<object>();
+            var articleList = new List<NEWS>();
             DBModelContainer db = new DBModelContainer();
             //getting highest article # from DB and getting # of articles from db
             try
@@ -53,7 +53,7 @@ namespace TechnoBackend.Business_Logic.News
                         wantedarticle.Link = currentArticle.News_Link;
                         wantedarticle.Title = currentArticle.News_Title;
 
-                        articleList.Add(wantedarticle);
+                        articleList.Add(currentArticle);
                     }
                     newsmax -= 1;
 
