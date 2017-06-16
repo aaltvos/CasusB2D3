@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
@@ -13,11 +14,12 @@ namespace TechnoBackend.Business_Logic.News
 {
     public class ShowNews
     {
-        public static string GetNews(int numberOfArticles)
+        public static IList<NEWS> GetNews(int numberOfArticles)
         {
             var newsmax = 0;
             var newscount = 0;
-            List<object> articleList = new List<object>();
+            
+            var articleList = new List<NEWS>();
             DBModelContainer db = new DBModelContainer();
             //getting highest article # from DB and getting # of articles from db
             try
@@ -44,6 +46,13 @@ namespace TechnoBackend.Business_Logic.News
                     var currentArticle = currentarticleQuery.FirstOrDefault();
                     if (currentArticle != null)
                     {
+                        var wantedarticle = new JsonNews();
+                        wantedarticle.Body = currentArticle.News_Body;
+                        wantedarticle.ID = currentArticle.News_Id.ToString();
+                        wantedarticle.Img = currentArticle.News_IMG;
+                        wantedarticle.Link = currentArticle.News_Link;
+                        wantedarticle.Title = currentArticle.News_Title;
+
                         articleList.Add(currentArticle);
                     }
                     newsmax -= 1;
@@ -56,14 +65,10 @@ namespace TechnoBackend.Business_Logic.News
 
             }
             //TODO: Fix string formatting and object messup
-            var jsonstring = JsonConvert.SerializeObject(articleList[0],
-                new JsonSerializerSettings
-                {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                    //ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
-            return jsonstring;
-          
+//            var jsonstring = JsonConvert.SerializeObject(articleList,Formatting.Indented);
+//            return jsonstring;
+            return articleList;
+
         }    
 
         
