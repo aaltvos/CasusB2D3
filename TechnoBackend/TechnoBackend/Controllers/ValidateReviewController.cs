@@ -16,14 +16,15 @@ namespace TechnoBackend.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            return "value";
+            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Session not found");
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]string value)
         {
+            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Session not found");
         }
 
         // PUT api/<controller>/5
@@ -32,8 +33,9 @@ namespace TechnoBackend.Controllers
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Session not found");
         }
     }
 }
