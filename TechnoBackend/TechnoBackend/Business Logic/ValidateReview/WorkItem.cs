@@ -17,6 +17,36 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             Debug.WriteLine("[WorkItem] - id=" + product.Prod_ID);
         }
 
+        public bool Accept(string validator)
+        {
+            DBModelContainer database = new DBModelContainer();
+            PRODs current = database.PRODs.Where(p => p.Prod_ID == _product.Prod_ID).First();
+            if (current != null)
+            {
+                current.Prod_Validator = validator;
+                current.Prod_Val_Dat = DateTime.Now;
+
+                database.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Deny(string validator)
+        {
+            DBModelContainer database = new DBModelContainer();
+            PRODs current = database.PRODs.Where(p => p.Prod_ID == _product.Prod_ID).First();
+            if (current != null)
+            {
+                database.PRODs.Remove(current);
+                database.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
         public string ToJson()
         {
             string result = "";
