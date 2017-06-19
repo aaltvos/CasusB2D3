@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TechnoBackend.Login;
 
 namespace TechnoBackend.Tests.Unittest
 {
@@ -13,7 +12,7 @@ namespace TechnoBackend.Tests.Unittest
         [TestMethod]
         public void NewsCreate()
         {
-            var testdataCreate = "{'ArticleID':'1','ArticleTitle':'Henk','ArticleBody':'Knabbel','ArticleIMG':'IMG','ArticleLINK':'URL'}";
+            /*var testdataCreate = "{'ArticleID':'1','ArticleTitle':'Henk','ArticleBody':'Knabbel','ArticleIMG':'IMG','ArticleLINK':'URL'}";
             string LoginData = "{ 'Username':'Henk','Password':'Knabbel'}";
 
             var checkreturn = SessionCheck.GetToken("Henk");
@@ -35,7 +34,7 @@ namespace TechnoBackend.Tests.Unittest
             Assert.AreEqual(response,expected);
 
 
-
+    */
         }
     }
 }

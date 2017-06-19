@@ -29,7 +29,7 @@ namespace TechnoBackend.Business_Logic.News
             }
             catch (Exception e)
             {
-                return (e.ToString());
+                return null; //(e.ToString());
             }
             //check if the # of requested articles isent more then the ammount of articles in the db
             if (numberOfArticles > newscount)
