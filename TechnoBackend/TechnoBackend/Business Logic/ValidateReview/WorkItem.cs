@@ -49,8 +49,6 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             try
             {
                 products = database.PRODs;
-                foreach (PRODs product in products)
-                    Debug.WriteLine(product.Prod_Val_Dat);
                     //.Where(p => String.IsNullOrEmpty(p.Prod_Validator) || now.Year - p.Prod_Val_Dat.Year >= 3);
             } catch (Exception e)
             {
