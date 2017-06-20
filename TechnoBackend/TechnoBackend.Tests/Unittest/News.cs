@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Web.Http.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechnoBackend.Login;
 
@@ -28,11 +30,14 @@ namespace TechnoBackend.Tests.Unittest
             var response = testCreateNews.GetResponse();
 
             //TODO: Decode response message to get body
-
+            var encoding = Encoding.UTF8;
+            var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding);
+            string responseText = reader.ReadToEnd();
+            
 
             var expected = "Article Added succesfully";
 
-            Assert.AreEqual(response,expected);
+            Assert.AreEqual(responseText, expected);
 
 
 
