@@ -9,7 +9,7 @@ namespace TechnoBackend.Tests
     public class UsecaseLogin
     {
         [TestMethod]
-        public void TestMethodLogin()
+        public static string TestMethodLogin()
         {
             string test = "{ 'Username':'Henk','Password':'Knabbel'}";
             var iets = Encoding.UTF8.GetBytes(test);
@@ -24,6 +24,7 @@ namespace TechnoBackend.Tests
 
 
             Assert.AreEqual(100, result.Length);
+            return result;
         }
 
         [TestMethod]

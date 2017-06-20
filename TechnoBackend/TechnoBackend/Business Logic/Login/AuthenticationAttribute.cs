@@ -22,7 +22,7 @@ namespace TechnoBackend.Login
                 if (AuthToken == "no session")
                 {
                     AuthToken = RandomString();
-                    CreateSession newSession = new CreateSession(AuthToken, Authentication.Login(username, password));
+                    CreateSession.Create(AuthToken, Authentication.Login(username, password));
                 }
             }
 
