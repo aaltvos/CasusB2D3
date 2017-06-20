@@ -12,12 +12,13 @@
     <EntitySet Name="SUB_GEB" EntityType="DBModel.Store.SUB_GEB" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="REVs" EntityType="DBModel.Store.REVs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="USERs" EntityType="DBModel.Store.USERs" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CATs1" EntityType="DBModel.Store.CATs1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CATs" EntityType="DBModel.Store.CATs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CAT_PROD" EntityType="DBModel.Store.CAT_PROD" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SESSIONS" EntityType="DBModel.Store.SESSIONS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TAGS" EntityType="DBModel.Store.TAGS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PRODTAGS" EntityType="DBModel.Store.PRODTAGS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NEWS" EntityType="DBModel.Store.NEWS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EVENTs" EntityType="DBModel.Store.EVENTs" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="HAND_GEBHAND_SUB_GEB_PROD" Association="DBModel.Store.HAND_GEBHAND_SUB_GEB_PROD">
       <End Role="HAND_GEB" EntitySet="HAND_GEB" />
       <End Role="HAND_SUB_GEB_PROD" EntitySet="HAND_SUB_GEB_PROD" />
@@ -51,7 +52,7 @@
       <End Role="SESSIONS" EntitySet="SESSIONS" />
     </AssociationSet>
     <AssociationSet Name="CATEntity1" Association="DBModel.Store.CATEntity1">
-      <End Role="CAT" EntitySet="CATs1" />
+      <End Role="CAT" EntitySet="CATs" />
       <End Role="CAT_PROD" EntitySet="CAT_PROD" />
     </AssociationSet>
     <AssociationSet Name="TAGSPRODTAGS" Association="DBModel.Store.TAGSPRODTAGS">
@@ -60,6 +61,10 @@
     </AssociationSet>
     <AssociationSet Name="NewsUSERs" Association="DBModel.Store.NewsUSERs">
       <End Role="News" EntitySet="NEWS" />
+      <End Role="USERs" EntitySet="USERs" />
+    </AssociationSet>
+    <AssociationSet Name="EVENTUSERs" Association="DBModel.Store.EVENTUSERs">
+      <End Role="EVENT" EntitySet="EVENTs" />
       <End Role="USERs" EntitySet="USERs" />
     </AssociationSet>
   </EntityContainer>
@@ -89,7 +94,7 @@
     <Property Name="Prod_Mov" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Prod_Views" Type="bigint" Nullable="true" />
     <Property Name="Prod_Validator" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Prod_Val_Dat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prod_Val_Dat" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="HAND_SUB_GEB_PROD">
     <Key>
@@ -98,7 +103,7 @@
     <Property Name="Couple_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HAND_GEB_Hand_ID" Type="int" Nullable="false" />
     <Property Name="PROD_Prod_ID" Type="int" Nullable="false" />
-    <Property Name="SUB_BEG_Sub_ID" Type="int" Nullable="false" />
+    <Property Name="SUB_GEB_Sub_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SUB_GEB">
     <Key>
@@ -129,7 +134,7 @@
     <Property Name="USER_Sec" Type="int" Nullable="false" />
     <Property Name="USER_Val_dat" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="CATs1">
+  <EntityType Name="CATs">
     <Key>
       <PropertyRef Name="CAT_Id" />
     </Key>
@@ -179,6 +184,17 @@
     <Property Name="News_Body" Type="nvarchar(max)" Nullable="false" />
     <Property Name="News_IMG" Type="nvarchar(max)" Nullable="false" />
     <Property Name="News_Link" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="USERs_USER_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EVENTs">
+    <Key>
+      <PropertyRef Name="Event_Id" />
+    </Key>
+    <Property Name="Event_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Event_Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Link" Type="nvarchar(max)" Nullable="false" />
     <Property Name="USERs_USER_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="HAND_GEBHAND_SUB_GEB_PROD">
@@ -249,7 +265,7 @@
         <PropertyRef Name="Sub_ID" />
       </Principal>
       <Dependent Role="HAND_SUB_GEB_PROD">
-        <PropertyRef Name="SUB_BEG_Sub_ID" />
+        <PropertyRef Name="SUB_GEB_Sub_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -278,7 +294,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CATEntity1">
-    <End Role="CAT" Type="DBModel.Store.CATs1" Multiplicity="1" />
+    <End Role="CAT" Type="DBModel.Store.CATs" Multiplicity="1" />
     <End Role="CAT_PROD" Type="DBModel.Store.CAT_PROD" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CAT">
@@ -313,6 +329,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="EVENTUSERs">
+    <End Role="EVENT" Type="DBModel.Store.EVENTs" Multiplicity="*" />
+    <End Role="USERs" Type="DBModel.Store.USERs" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="USERs">
+        <PropertyRef Name="USER_Id" />
+      </Principal>
+      <Dependent Role="EVENT">
+        <PropertyRef Name="USERs_USER_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -324,7 +352,7 @@
           <EntitySet Name="SUB_GEB" EntityType="DBModel.SUB_GEB" />
           <EntitySet Name="REVs" EntityType="DBModel.REVs" />
           <EntitySet Name="USERs" EntityType="DBModel.USERs" />
-          <EntitySet Name="CATs1" EntityType="DBModel.CAT" />
+          <EntitySet Name="CATs" EntityType="DBModel.CAT" />
           <EntitySet Name="CAT_PROD" EntityType="DBModel.CAT_PROD" />
           <EntitySet Name="SESSIONS" EntityType="DBModel.SESSIONS" />
           <EntitySet Name="TAGS" EntityType="DBModel.TAGS" />
@@ -362,7 +390,7 @@
             <End Role="SESSIONS" EntitySet="SESSIONS" />
           </AssociationSet>
           <AssociationSet Name="CATEntity1" Association="DBModel.CATEntity1">
-            <End Role="CAT" EntitySet="CATs1" />
+            <End Role="CAT" EntitySet="CATs" />
             <End Role="CAT_PROD" EntitySet="CAT_PROD" />
           </AssociationSet>
           <AssociationSet Name="TAGSPRODTAGS" Association="DBModel.TAGSPRODTAGS">
@@ -372,6 +400,11 @@
           <EntitySet Name="NEWS" EntityType="DBModel.NEWS" />
           <AssociationSet Name="NewsUSERs" Association="DBModel.NewsUSERs">
             <End Role="News" EntitySet="NEWS" />
+            <End Role="USERs" EntitySet="USERs" />
+          </AssociationSet>
+          <EntitySet Name="EVENTs" EntityType="DBModel.EVENT" />
+          <AssociationSet Name="EVENTUSERs" Association="DBModel.EVENTUSERs">
+            <End Role="EVENT" EntitySet="EVENTs" />
             <End Role="USERs" EntitySet="USERs" />
           </AssociationSet>
         </EntityContainer>
@@ -402,7 +435,7 @@
           <Property Name="Prod_Mov" Type="String" Nullable="true" />
           <Property Name="Prod_Views" Type="Int64" Nullable="true" />
           <Property Name="Prod_Validator" Type="String" Nullable="false" />
-          <Property Name="Prod_Val_Dat" Type="String" Nullable="false" />
+          <Property Name="Prod_Val_Dat" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="HAND_SUB_GEB_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
           <NavigationProperty Name="REVs" Relationship="DBModel.PRODREV" FromRole="PROD" ToRole="REV" />
           <NavigationProperty Name="CAT_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
@@ -415,7 +448,7 @@
           <Property Name="Couple_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="HAND_GEB" Relationship="DBModel.HAND_GEBHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="HAND_GEB" />
           <NavigationProperty Name="PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="PROD" />
-          <NavigationProperty Name="SUB_BEG" Relationship="DBModel.SUB_BEGHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="SUB_BEG" />
+          <NavigationProperty Name="SUB_GEB" Relationship="DBModel.SUB_BEGHAND_SUB_GEB_PROD" FromRole="HAND_SUB_GEB_PROD" ToRole="SUB_BEG" />
         </EntityType>
         <EntityType Name="SUB_GEB">
           <Key>
@@ -449,6 +482,7 @@
           <NavigationProperty Name="REVs" Relationship="DBModel.USERREV" FromRole="USER" ToRole="REV" />
           <NavigationProperty Name="SESSIONS" Relationship="DBModel.USERSESSIONS" FromRole="USER" ToRole="SESSIONS" />
           <NavigationProperty Name="News" Relationship="DBModel.NewsUSERs" FromRole="USERs" ToRole="News" />
+          <NavigationProperty Name="EVENT" Relationship="DBModel.EVENTUSERs" FromRole="USERs" ToRole="EVENT" />
         </EntityType>
         <EntityType Name="CAT">
           <Key>
@@ -548,6 +582,21 @@
           <End Type="DBModel.NEWS" Role="News" Multiplicity="*" />
           <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
         </Association>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="Event_Id" />
+          </Key>
+          <Property Name="Event_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_Name" Type="String" Nullable="false" />
+          <Property Name="Event_Body" Type="String" Nullable="false" />
+          <Property Name="Event_Address" Type="String" Nullable="false" />
+          <Property Name="Event_Link" Type="String" Nullable="false" />
+          <NavigationProperty Name="USERs" Relationship="DBModel.EVENTUSERs" FromRole="EVENT" ToRole="USERs" />
+        </EntityType>
+        <Association Name="EVENTUSERs">
+          <End Type="DBModel.EVENT" Role="EVENT" Multiplicity="0..1" />
+          <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -621,9 +670,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CATs1">
+    <EntitySetMapping Name="CATs">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.CAT)">
-        <MappingFragment StoreEntitySet="CATs1">
+        <MappingFragment StoreEntitySet="CATs">
           <ScalarProperty Name="CAT_Id" ColumnName="CAT_Id" />
           <ScalarProperty Name="CAT_Name" ColumnName="CAT_Name" />
           <ScalarProperty Name="CAT_IMG" ColumnName="CAT_IMG" />
@@ -673,6 +722,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EVENTs">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.EVENT)">
+        <MappingFragment StoreEntitySet="EVENTs">
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="Event_Name" ColumnName="Event_Name" />
+          <ScalarProperty Name="Event_Body" ColumnName="Event_Body" />
+          <ScalarProperty Name="Event_Address" ColumnName="Event_Address" />
+          <ScalarProperty Name="Event_Link" ColumnName="Event_Link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="HAND_GEBHAND_SUB_GEB_PROD" TypeName="DBModel.HAND_GEBHAND_SUB_GEB_PROD" StoreEntitySet="HAND_SUB_GEB_PROD">
       <EndProperty Name="HAND_GEB">
         <ScalarProperty Name="Hand_ID" ColumnName="HAND_GEB_Hand_ID" />
@@ -715,7 +775,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="SUB_BEGHAND_SUB_GEB_PROD" TypeName="DBModel.SUB_BEGHAND_SUB_GEB_PROD" StoreEntitySet="HAND_SUB_GEB_PROD">
       <EndProperty Name="SUB_BEG">
-        <ScalarProperty Name="Sub_ID" ColumnName="SUB_BEG_Sub_ID" />
+        <ScalarProperty Name="Sub_ID" ColumnName="SUB_GEB_Sub_ID" />
       </EndProperty>
       <EndProperty Name="HAND_SUB_GEB_PROD">
         <ScalarProperty Name="Couple_ID" ColumnName="Couple_ID" />
@@ -759,6 +819,14 @@
       </EndProperty>
       <EndProperty Name="News">
         <ScalarProperty Name="News_Id" ColumnName="News_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EVENTUSERs" TypeName="DBModel.EVENTUSERs" StoreEntitySet="EVENTs">
+      <EndProperty Name="USERs">
+        <ScalarProperty Name="USER_Id" ColumnName="USERs_USER_Id" />
+      </EndProperty>
+      <EndProperty Name="EVENT">
+        <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

@@ -12,12 +12,14 @@ namespace TechnoBackend.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class HAND_SUB_GEB_PROD
+    public partial class EVENT
     {
-        public int Couple_ID { get; set; }
+        public int Event_Id { get; set; }
+        public string Event_Name { get; set; }
+        public string Event_Body { get; set; }
+        public string Event_Address { get; set; }
+        public string Event_Link { get; set; }
     
-        public virtual HAND_GEB HAND_GEB { get; set; }
-        public virtual PRODs PROD { get; set; }
-        public virtual SUB_GEB SUB_GEB { get; set; }
+        public virtual USERs USERs { get; set; }
     }
 }
