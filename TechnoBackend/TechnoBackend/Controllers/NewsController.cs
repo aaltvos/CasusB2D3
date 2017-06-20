@@ -28,7 +28,7 @@ namespace TechnoBackend.Controllers
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 1)
             {
                 try
-                {
+                 {
                     var message = ShowNews.GetNews(id);
                     Request.Headers.Add("Token", newtoken.Item1);
                     var response = Request.CreateResponse(message);
