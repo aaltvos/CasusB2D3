@@ -31,10 +31,7 @@ namespace TechnoBackend.Tests.Unittest
 
             var expected = "Article Added succesfully";
 
-            Assert.AreEqual(response,expected);
-
-
-    */
+            Assert.AreEqual(response,expected);*/
         }
     }
 }

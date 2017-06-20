@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -59,7 +58,6 @@ namespace TechnoBackend.Controllers
         // GET api/<controller>/5
         public HttpResponseMessage Get(int id)
         {
-            // auth validation
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             
