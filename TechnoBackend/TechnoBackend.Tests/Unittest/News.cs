@@ -5,8 +5,6 @@ using System.Net;
 using System.Text;
 using System.Web.Http.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TechnoBackend.Login;
-
 namespace TechnoBackend.Tests.Unittest
 {
     [TestClass]
@@ -16,10 +14,10 @@ namespace TechnoBackend.Tests.Unittest
         public void NewsCreate()
         {
             var testdataCreate = "{'ArticleID':'1','ArticleTitle':'Henk','ArticleBody':'Knabbel','ArticleIMG':'IMG','ArticleLINK':'URL'}";
-            string LoginData = "{ 'Username':'Henk','Password':'Knabbel'}";
+            //string LoginData = "{ 'Username':'Henk','Password':'Knabbel'}";
 
-            var checkreturn = SessionCheck.GetToken("Henk");
-            var token = checkreturn.Item1;
+
+            var token = UsecaseLogin.TestMethodLogin();
 
             var body = UTF8Encoding.UTF8.GetBytes(testdataCreate);
             var testCreateNews = WebRequest.CreateHttp("http://localhost:51516/api/News");
@@ -29,15 +27,14 @@ namespace TechnoBackend.Tests.Unittest
             stream.Write(body,0,body.Length);
             var response = testCreateNews.GetResponse();
 
-            //TODO: Decode response message to get body
             var encoding = Encoding.UTF8;
             var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding);
             string responseText = reader.ReadToEnd();
             
 
-            var expected = "Article Added succesfully";
+            var expected = "\"Article Added succesfully\"";
 
-            Assert.AreEqual(responseText, expected);
+            Assert.AreEqual(expected,responseText);
 
 
 

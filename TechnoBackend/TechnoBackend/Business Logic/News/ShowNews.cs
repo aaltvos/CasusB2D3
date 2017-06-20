@@ -22,15 +22,10 @@ namespace TechnoBackend.Business_Logic.News
             var articleList = new List<NEWS>();
             DBModelContainer db = new DBModelContainer();
             //getting highest article # from DB and getting # of articles from db
-            try
-            {
-                newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
-                newscount = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Count();
-            }
-            catch (Exception e)
-            {
-                return (e.ToString());
-            }
+
+            newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
+            newscount = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Count();
+
             //check if the # of requested articles isent more then the ammount of articles in the db
             if (numberOfArticles > newscount)
             {

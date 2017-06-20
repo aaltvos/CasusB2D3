@@ -32,5 +32,6 @@ namespace TechnoBackend.DatabaseModel
         public virtual SESSIONS SESSIONS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS> News { get; set; }
+        public virtual EVENT EVENT { get; set; }
     }
 }

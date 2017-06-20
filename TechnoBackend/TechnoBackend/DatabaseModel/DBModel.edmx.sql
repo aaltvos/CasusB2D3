@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/19/2017 13:17:26
--- Generated from EDMX file: C:\Users\woute\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 06/20/2017 10:56:01
+-- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -50,6 +50,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_NewsUSERs]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NEWS] DROP CONSTRAINT [FK_NewsUSERs];
 GO
+IF OBJECT_ID(N'[dbo].[FK_EVENTUSERs]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EVENTs] DROP CONSTRAINT [FK_EVENTUSERs];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -90,6 +93,9 @@ IF OBJECT_ID(N'[dbo].[PRODTAGS]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[NEWS]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NEWS];
+GO
+IF OBJECT_ID(N'[dbo].[EVENTs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EVENTs];
 GO
 
 -- --------------------------------------------------
@@ -162,8 +168,8 @@ CREATE TABLE [dbo].[USERs] (
 );
 GO
 
--- Creating table 'CATs1'
-CREATE TABLE [dbo].[CATs1] (
+-- Creating table 'CATs'
+CREATE TABLE [dbo].[CATs] (
     [CAT_Id] int IDENTITY(1,1) NOT NULL,
     [CAT_Name] nvarchar(max)  NOT NULL,
     [CAT_IMG] nvarchar(max)  NOT NULL
@@ -265,9 +271,9 @@ ADD CONSTRAINT [PK_USERs]
     PRIMARY KEY CLUSTERED ([USER_Id] ASC);
 GO
 
--- Creating primary key on [CAT_Id] in table 'CATs1'
-ALTER TABLE [dbo].[CATs1]
-ADD CONSTRAINT [PK_CATs1]
+-- Creating primary key on [CAT_Id] in table 'CATs'
+ALTER TABLE [dbo].[CATs]
+ADD CONSTRAINT [PK_CATs]
     PRIMARY KEY CLUSTERED ([CAT_Id] ASC);
 GO
 
@@ -435,7 +441,7 @@ GO
 ALTER TABLE [dbo].[CAT_PROD]
 ADD CONSTRAINT [FK_CATEntity1]
     FOREIGN KEY ([CAT_CAT_Id])
-    REFERENCES [dbo].[CATs1]
+    REFERENCES [dbo].[CATs]
         ([CAT_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO

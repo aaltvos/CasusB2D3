@@ -12,7 +12,7 @@
     <EntitySet Name="SUB_GEB" EntityType="DBModel.Store.SUB_GEB" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="REVs" EntityType="DBModel.Store.REVs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="USERs" EntityType="DBModel.Store.USERs" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CATs1" EntityType="DBModel.Store.CATs1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CATs" EntityType="DBModel.Store.CATs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CAT_PROD" EntityType="DBModel.Store.CAT_PROD" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SESSIONS" EntityType="DBModel.Store.SESSIONS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TAGS" EntityType="DBModel.Store.TAGS" store:Type="Tables" Schema="dbo" />
@@ -52,7 +52,7 @@
       <End Role="SESSIONS" EntitySet="SESSIONS" />
     </AssociationSet>
     <AssociationSet Name="CATEntity1" Association="DBModel.Store.CATEntity1">
-      <End Role="CAT" EntitySet="CATs1" />
+      <End Role="CAT" EntitySet="CATs" />
       <End Role="CAT_PROD" EntitySet="CAT_PROD" />
     </AssociationSet>
     <AssociationSet Name="TAGSPRODTAGS" Association="DBModel.Store.TAGSPRODTAGS">
@@ -134,7 +134,7 @@
     <Property Name="USER_Sec" Type="int" Nullable="false" />
     <Property Name="USER_Val_dat" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="CATs1">
+  <EntityType Name="CATs">
     <Key>
       <PropertyRef Name="CAT_Id" />
     </Key>
@@ -294,7 +294,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CATEntity1">
-    <End Role="CAT" Type="DBModel.Store.CATs1" Multiplicity="1" />
+    <End Role="CAT" Type="DBModel.Store.CATs" Multiplicity="1" />
     <End Role="CAT_PROD" Type="DBModel.Store.CAT_PROD" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CAT">
@@ -352,7 +352,7 @@
           <EntitySet Name="SUB_GEB" EntityType="DBModel.SUB_GEB" />
           <EntitySet Name="REVs" EntityType="DBModel.REVs" />
           <EntitySet Name="USERs" EntityType="DBModel.USERs" />
-          <EntitySet Name="CATs1" EntityType="DBModel.CAT" />
+          <EntitySet Name="CATs" EntityType="DBModel.CAT" />
           <EntitySet Name="CAT_PROD" EntityType="DBModel.CAT_PROD" />
           <EntitySet Name="SESSIONS" EntityType="DBModel.SESSIONS" />
           <EntitySet Name="TAGS" EntityType="DBModel.TAGS" />
@@ -390,7 +390,7 @@
             <End Role="SESSIONS" EntitySet="SESSIONS" />
           </AssociationSet>
           <AssociationSet Name="CATEntity1" Association="DBModel.CATEntity1">
-            <End Role="CAT" EntitySet="CATs1" />
+            <End Role="CAT" EntitySet="CATs" />
             <End Role="CAT_PROD" EntitySet="CAT_PROD" />
           </AssociationSet>
           <AssociationSet Name="TAGSPRODTAGS" Association="DBModel.TAGSPRODTAGS">
@@ -670,9 +670,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CATs1">
+    <EntitySetMapping Name="CATs">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.CAT)">
-        <MappingFragment StoreEntitySet="CATs1">
+        <MappingFragment StoreEntitySet="CATs">
           <ScalarProperty Name="CAT_Id" ColumnName="CAT_Id" />
           <ScalarProperty Name="CAT_Name" ColumnName="CAT_Name" />
           <ScalarProperty Name="CAT_IMG" ColumnName="CAT_IMG" />
