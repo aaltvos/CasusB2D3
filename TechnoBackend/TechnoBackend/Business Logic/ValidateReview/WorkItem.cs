@@ -17,39 +17,48 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             Debug.WriteLine("[WorkItem] - id=" + product.Prod_ID);
         }
 
-        public bool Accept(string validator)
+        public string Accept(string token)
         {
             DBModelContainer database = new DBModelContainer();
             PRODs current = database.PRODs.Where(p => p.Prod_ID == _product.Prod_ID).First();
             if (current != null)
             {
-                current.Prod_Validator = validator;
+                SESSIONS session = database.SESSIONS.Where(s => s.SESSIONS_Token == token).First();
+                if (session == null) return "{\"status\":\"Error\", \"message\":\"No session found\"}";
+
+                USERs user = database.USERs.Where(s => s.USER_Id == session.USER_Id.USER_Id).First();
+                if (user == null) return "{\"status\":\"Error\", \"message\":\"No user found\"}";
+
+                current.Prod_Validator = user.USER_Name;
                 current.Prod_Val_Dat = DateTime.Now;
 
                 database.SaveChanges();
-                return true;
+                return "{\"status\":\"Success\"}";
             }
 
-            return false;
+            return "{\"status\":\"Error\", \"message\":\"WorkItem not found\"}";
         }
 
-        public bool Deny(string validator)
+        public string Deny()
         {
             DBModelContainer database = new DBModelContainer();
             PRODs current = database.PRODs.Where(p => p.Prod_ID == _product.Prod_ID).First();
             if (current != null)
             {
+                // This is the part where an email would be send stating the WorkItem has been denied
+
                 database.PRODs.Remove(current);
                 database.SaveChanges();
-                return true;
+                return "{\"status\":\"Success\"}";
             }
 
-            return false;
+            return "{\"status\":\"Error\", \"message\":\"WorkItem not found\"}";
         }
 
         public string ToJson()
         {
             string result = "";
+            result += "{";
             result += "\"id\":\"" + _product.Prod_ID + "\",";
             result += "\"name\":\"" + _product.Prod_Name + "\",";
             result += "\"dat\":\"" + _product.Prod_Dat + "\",";
@@ -65,6 +74,7 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             result += "\"views\":\"" + _product.Prod_Views + "\",";
             result += "\"validator\":\"" + _product.Prod_Validator + "\",";
             result += "\"val_dat\":\"" + _product.Prod_Val_Dat + "\"";
+            result += "}";
             return result;
         }
 
@@ -78,8 +88,7 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             IQueryable<PRODs> products = null;
             try
             {
-                products = database.PRODs;
-                    //.Where(p => String.IsNullOrEmpty(p.Prod_Validator) || now.Year - p.Prod_Val_Dat.Year >= 3);
+                products = database.PRODs.Where(p => String.IsNullOrEmpty(p.Prod_Validator) || now.Year - p.Prod_Val_Dat.Year >= 3);
             } catch (Exception e)
             {
                 Debug.WriteLine("[WorkItem::LoadAll] - " + e.ToString());

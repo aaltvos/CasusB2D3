@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,13 +13,13 @@ namespace TechnoBackend.Controllers
 {
     public class ValidateReviewController : ApiController
     {
-        private readonly List<WorkItem> cache;
+        private readonly List<WorkItem> _cache;
 
-        private WorkItem _item;
+        private WorkItem _selected;
 
         public ValidateReviewController()
         {
-            cache = new List<WorkItem>();
+            _cache = new List<WorkItem>();
         }
         
         // GET api/<controller>
@@ -29,22 +30,23 @@ namespace TechnoBackend.Controllers
 
             if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 1*/)
             {
-                cache.Clear();
-                cache.AddRange(WorkItem.LoadAll());
+                _cache.Clear();
+                _cache.AddRange(WorkItem.LoadAll());
                 
                 string message = "";
-                if (cache.Count == 0)
-                    message = "{\"status\":\"Error: No WorkItems could be loaded\"}";
+                if (_cache.Count == 0)
+                    message = "{\"status\":\"Error\", \"message\":\"No WorkItems could be loaded\"}";
                 else
                 {
-                    message += "{";
-                    for (int i = 0; i < cache.Count; i++)
+                    message = "{\"status\":\"Success\", \"items\":[";
+                    for (int i = 0; i < _cache.Count; i++)
                     {
-                        message += cache[i].ToJson();
-                        if (i < cache.Count - 1)
+                        message += _cache[i].ToJson();
+
+                        if (i < _cache.Count - 1)
                             message += ",";
                     }
-                    message += "}";
+                    message += "]}";
                 }
                 
                 Request.Headers.Add("Token", newtoken.Item1);
@@ -61,19 +63,19 @@ namespace TechnoBackend.Controllers
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             
-            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 1*/)
+            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 2*/)
             {
                 string message = "";
-                if (cache.Count == 0)
-                    message = "{\"status\":\"Error: Cache is empty, please call Get() before sending an index\"}";
+                if (_cache.Count == 0)
+                    message = "{\"status\":\"Error\", \"message\":\"Cache is empty, please call Get() before sending an index\"}";
                 else
                 {
-                    if (id < 0 || id >= cache.Count)
-                        message = "{\"status\":\"Error: Invalid id\"}";
+                    if (id < 0 || id >= _cache.Count)
+                        message = "{\"status\":\"Error\", \"message\":\"Invalid id\"}";
                     else
                     {
-                        message = "{\"status\":\"Succes\"}";
-                        _item = cache[id];
+                        _selected = _cache[id];
+                        message = "{\"status\":\"Succes\", \"item\":" + _selected.ToJson() + "}";
                     }
                 }
 
@@ -85,9 +87,9 @@ namespace TechnoBackend.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]string value)
         {
-            throw new NotImplementedException("[ValidateReview::Post] - Should not be used, use Put instead");
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "[ValidateReview::Post] - Should not be used, use Put instead");
         }
 
         // PUT api/<controller>/5
@@ -97,11 +99,24 @@ namespace TechnoBackend.Controllers
 
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
-            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 2*/)
+            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 4*/)
             {
                 string message = "";
-                if (_item == null)
-                    message = "{\"status\":\"Error: No WorkItem selected\"}";
+                if (_selected == null)
+                    message = "{\"status\":\"Error\", \"message\":\"No WorkItem selected\"}";
+                else
+                {
+                    dynamic json = JsonConvert.DeserializeObject(value);
+                    if (json != null)
+                    {
+                        string action = json.action;
+                        if (action.Equals("Accept"))
+                            message = _selected.Accept(token);
+                        else
+                            message = _selected.Deny();
+                    } else
+                        message = "{\"status\":\"Error\", \"message\":\"Invalid json parsed\"}";
+                }
 
                 Request.Headers.Add("Token", newtoken.Item1);
                 return Request.CreateResponse(message);
@@ -113,18 +128,7 @@ namespace TechnoBackend.Controllers
         // DELETE api/<controller>/5
         public HttpResponseMessage Delete(int id)
         {
-            var token = ActionContext.Request.Headers.GetValues("Token").First();
-            var newtoken = SessionCheck.Check(token);
-            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
-            {
-                // TODO: fill message
-                var message = "";
-                Request.Headers.Add("Token", newtoken.Item1);
-                var response = Request.CreateResponse(message);
-                return response;
-            }
-
-            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Session not found");
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "[ValidateReview::Delete] - Should not be used");
         }
 
     }
