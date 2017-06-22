@@ -160,13 +160,14 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
-    <Compile Include="Business Logic\NewProduct\tmpclass.cs" />
+    <Compile Include="Business Logic\NewProduct\Form.cs" />
+    <Compile Include="Business Logic\NewProduct\Product.cs" />
     <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\DeleteNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Business Logic\News\ShowNews.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\NewProductController.cs" />
+    <Compile Include="Controllers\FormNewProductController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
     <Compile Include="DatabaseModel\CAT.cs">

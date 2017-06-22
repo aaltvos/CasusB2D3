@@ -4,10 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TechnoBackend.Business_Logic.NewProduct;
 
 namespace TechnoBackend.Controllers
 {
-    public class NewProductController : ApiController
+    public class FormNewProductController : ApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()
