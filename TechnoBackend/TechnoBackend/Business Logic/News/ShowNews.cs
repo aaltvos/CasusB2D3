@@ -31,7 +31,7 @@ namespace TechnoBackend.Business_Logic.News
             {
                 numberOfArticles = newscount;
             }
-
+            
             //Retrieving numberOfArticles and put them as object in a list
             while (numberOfArticles > articleList.Count)
             {
