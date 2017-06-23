@@ -6,7 +6,7 @@ namespace TechnoBackend.Login
 {
     public class AuthenticationAttribute
     {
-
+        // Take username and password from body and call Login and SessionCheck method
         public static string Authent(HttpActionContext actionContext)
         {
             string AuthToken;
@@ -34,6 +34,7 @@ namespace TechnoBackend.Login
             return AuthToken;
         }
 
+        //Generate Token
         public static string RandomString()
         {
             string gen = "";

@@ -5,6 +5,7 @@ using TechnoBackend.DatabaseModel;
 namespace TechnoBackend.Login
 {
 
+    //Creates a new session
     public class CreateSession
     {
         int UserID;

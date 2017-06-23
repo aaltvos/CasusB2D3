@@ -166,7 +166,6 @@
     <Compile Include="Business Logic\News\ShowNews.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\SessionCheckController.cs" />
     <Compile Include="DatabaseModel\CAT.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
