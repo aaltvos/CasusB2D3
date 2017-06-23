@@ -19,7 +19,7 @@ namespace TechnoBackend.Controllers
         public HttpResponseMessage Get()
         {   
             DBModelContainer db = new DBModelContainer();
-            var newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
+            var newsmax = (from news in db.NEWS where news.News_Title != null select news.News_Id).Max();
             var response = Request.CreateResponse(newsmax);
             return response;
         }

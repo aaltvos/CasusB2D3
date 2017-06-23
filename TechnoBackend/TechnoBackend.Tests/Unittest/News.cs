@@ -73,7 +73,9 @@ namespace TechnoBackend.Tests.Unittest
         [TestMethod]
         public void DeleteNews()
         {
+            var beforeMax = maxarticle();
             var token = UsecaseLogin.TestMethodLogin();
+            //If running together with test show news set test show news to 1 otherwise to 0
             var toBeDeleted = testShowNews(1);
             foreach (var article in toBeDeleted)
             {
@@ -85,10 +87,27 @@ namespace TechnoBackend.Tests.Unittest
                 var encoding = Encoding.UTF8;
                 var reader = new StreamReader(response.GetResponseStream(), encoding);
                 string responseText = reader.ReadToEnd();
-                var expected = "Article with ID :" + article.ID + "has been deleted";
+                var expected = "\"Article with ID :" + article.ID + "has been deleted\"";
+             
                 Assert.AreEqual(expected, responseText);
             }
-
+            var afterMax = maxarticle();
+            Assert.AreEqual(Convert.ToInt32(beforeMax)-3,Convert.ToInt32(afterMax));
         }
+
+        public string maxarticle()
+        {
+            var token = UsecaseLogin.TestMethodLogin();
+            var testCreateNews = WebRequest.CreateHttp("http://localhost:51516/api/News/");
+            testCreateNews.Method = "GET";
+            testCreateNews.Headers.Add("Token", token);
+            var response = testCreateNews.GetResponse();
+
+            var encoding = Encoding.UTF8;
+            var reader = new StreamReader(response.GetResponseStream(), encoding);
+            string responseText = reader.ReadToEnd();
+            return responseText;
+        }
+
     }
 }
