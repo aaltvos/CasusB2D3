@@ -45,12 +45,16 @@ namespace TechnoBackend.Tests.Unittest
         }
 
         [TestMethod]
-        public void ShowNews()
+        public JsonNews[] testShowNews(int skip = 0)
         {
             var token = UsecaseLogin.TestMethodLogin();
-            NewsCreate();
-            NewsCreate();
-            NewsCreate();
+            if (skip == 0)
+            {
+                NewsCreate();
+                NewsCreate();
+                NewsCreate();
+            }
+            
 
             var testCreateNews = WebRequest.CreateHttp("http://localhost:51516/api/News/3");
             testCreateNews.Method = "GET";
@@ -63,6 +67,28 @@ namespace TechnoBackend.Tests.Unittest
             var responselist =  JsonConvert.DeserializeObject<JsonNews[]>(responseText);
             int expected = 3;
             Assert.AreEqual(expected,responselist.Count());
+            return responselist;
+        }
+
+        [TestMethod]
+        public void DeleteNews()
+        {
+            var token = UsecaseLogin.TestMethodLogin();
+            var toBeDeleted = testShowNews(1);
+            foreach (var article in toBeDeleted)
+            {
+                var testCreateNews = WebRequest.CreateHttp("http://localhost:51516/api/News/" + article.ID);
+                testCreateNews.Method = "DELETE";
+                testCreateNews.Headers.Add("Token", token);
+                var response = testCreateNews.GetResponse();
+
+                var encoding = Encoding.UTF8;
+                var reader = new StreamReader(response.GetResponseStream(), encoding);
+                string responseText = reader.ReadToEnd();
+                var expected = "Article with ID :" + article.ID + "has been deleted";
+                Assert.AreEqual(expected, responseText);
+            }
+
         }
     }
 }

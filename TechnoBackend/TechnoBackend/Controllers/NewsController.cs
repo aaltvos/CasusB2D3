@@ -7,6 +7,7 @@ using System.Reflection.Emit;
 using System.Web.Http;
 using System.Web.WebPages;
 using TechnoBackend.Business_Logic.News;
+using TechnoBackend.DatabaseModel;
 using TechnoBackend.Login;
 
 
@@ -15,9 +16,12 @@ namespace TechnoBackend.Controllers
     public class NewsController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        public HttpResponseMessage Get()
+        {   
+            DBModelContainer db = new DBModelContainer();
+            var newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
+            var response = Request.CreateResponse(newsmax);
+            return response;
         }
 
         // GET api/<controller>/5
@@ -56,11 +60,6 @@ namespace TechnoBackend.Controllers
                 return response;
             }
             return Request.CreateResponse("Invalid action");
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
         }
 
         // DELETE api/<controller>/5
