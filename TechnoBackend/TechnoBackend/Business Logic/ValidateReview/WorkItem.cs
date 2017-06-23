@@ -87,7 +87,10 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             IQueryable<PRODs> products = null;
             try
             {
-                products = database.PRODs.Where(p => String.IsNullOrEmpty(p.Prod_Validator) || now.Year - p.Prod_Val_Dat.Year >= 3);
+                products = database.PRODs.Where(p => 
+                    String.IsNullOrEmpty(p.Prod_Validator) 
+                    || now.Year - p.Prod_Val_Dat.Year >= 3
+                );
             } catch (Exception e)
             {
                 Debug.WriteLine("[WorkItem::LoadAll] - " + e.ToString());

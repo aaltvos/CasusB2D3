@@ -93,8 +93,7 @@ namespace TechnoBackend.Controllers
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]string value)
         {
-            Debug.WriteLine("[VRC] - Put:[id=" + id + "data=" + value + "]");
-
+            Debug.WriteLine("put: " + value);
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 4*/)
