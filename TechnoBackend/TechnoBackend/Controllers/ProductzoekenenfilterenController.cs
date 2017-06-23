@@ -12,13 +12,9 @@ namespace TechnoBackend.Controllers
     public class ProductzoekenenfilterenController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
+        
         // GET api/<controller>/5
-        public HttpResponseMessage Get(int id)
+        public HttpResponseMessage Get()   // allemaal ophalen
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
@@ -26,7 +22,7 @@ namespace TechnoBackend.Controllers
             {
                 try
                 {
-                    var message = ShowHandelingsgebieden.GetHand_Geb(id);
+                    var message = ShowHandelingsgebieden.GetHand_Geb();
                     Request.Headers.Add("Token", newtoken.Item1);
                     var response = Request.CreateResponse(message);
                     return response;
