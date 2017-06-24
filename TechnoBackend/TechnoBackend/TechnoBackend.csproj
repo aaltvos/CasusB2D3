@@ -164,6 +164,7 @@
     <Compile Include="Business Logic\News\DeleteNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Business Logic\News\ShowNews.cs" />
+    <Compile Include="Business Logic\WorkitemOpvragen\WorkitemOpvragenController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
