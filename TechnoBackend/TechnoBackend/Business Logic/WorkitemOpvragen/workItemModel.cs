@@ -5,7 +5,10 @@ using System.Web;
 
 namespace TechnoBackend.Business_Logic.WorkitemOpvragen
 {
-    public class WorkitemOpvragenController
+    public partial class PRODs
     {
+        public int PRODs_ID { get;set }
+        public string PRODs_Name { get;set }
+        public string PRODs_Dat { get;set }
     }
 }
