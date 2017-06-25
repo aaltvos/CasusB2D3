@@ -10,23 +10,45 @@ namespace TechnoBackend.Business_Logic.WorkitemOpvragen
     {
         public static IList<PRODs>GetWorkItem()
         {
-            List<PRODs> prodList = new List<PRODs>();
+            List<PRODs> workItemList = new List<PRODs>();
             using (DBModelContainer dbModel = new DBModelContainer())
             {
-                foreach (var x in dbModel.PRODs)
+                
+                foreach(var row in dbModel.PRODs)
                 {
+                    // Iedere rij wordt een nieuwe instantie Product
                     PRODs y = new PRODs();
-                    y.PRODs_ID = x.Prod_ID;
-                    y.PRODs_Name = x.Prod_Name;
-                    y.PRODs_Dat = x.Prod_Dat.ToString();
+                    y.PRODs_ID = row.Prod_ID;
+                    y.PRODs_Name = row.Prod_Name;
+                    y.PRODs_Dat = row.Prod_Dat.ToString();
+                    y.PRODs_Spec = row.Prod_Spec;
 
-                    prodList.Add(y);
 
-                    
+                    //UC 3.1 Product Beoordeling, Als Product een beoordeling heeft -----> opslaan als workitem
+                    //
+                    // Heeft product een beoordeling check 
 
-                   
+                    if(y.PRODs_Spec != null)
+                    {
+                        workItemList.Add(y);
+                        // Eventueel product op status "Wacht op validatie"
+                    }
+
+
+                    //UC 3.2 Check Date, Als DATUM > HUIDIGE_DATUM  ------> opslaan als workitem
+                    //
+                    // Datum converteren naar DateTime en vergelijken met huidige datum
+
+                    DateTime datumVanRij = Convert.ToDateTime(row.Prod_Dat);
+                    if(datumVanRij > DateTime.Now)
+                    {
+                        workItemList.Add(y);
+                        // Eventueel product op status "Wacht op validatie"
+                     }
+
+
                 }
-                return prodList;
+                return workItemList;
             }
 
         }
