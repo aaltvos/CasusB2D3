@@ -22,7 +22,6 @@ namespace TechnoBackend.Business_Logic.News
             var articleList = new List<JsonNews>();
             DBModelContainer db = new DBModelContainer();
             //getting highest article # from DB and getting # of articles from db
-<<<<<<< HEAD
             try
             {
                 newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
@@ -32,12 +31,10 @@ namespace TechnoBackend.Business_Logic.News
             {
                 throw new Exception(e.Message);
             }
-=======
 
             newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
             newscount = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Count();
 
->>>>>>> refs/remotes/origin/master
             //check if the # of requested articles isent more then the ammount of articles in the db
             if (numberOfArticles > newscount)
             {
@@ -69,15 +66,11 @@ namespace TechnoBackend.Business_Logic.News
                 {
                     Console.WriteLine(e);
                 }
-
             }
             //TODO: Fix string formatting and object messup
 //            var jsonstring = JsonConvert.SerializeObject(articleList,Formatting.Indented);
 //            return jsonstring;
             return articleList;
-
         }    
-
-        
     }
 }

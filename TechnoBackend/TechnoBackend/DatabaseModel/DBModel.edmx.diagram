@@ -36,6 +36,7 @@
         <AssociationConnector Association="DBModel.EVENTUSERs" />
         <AssociationConnector Association="DBModel.USERsPRODs" />
       </Diagram>
-    </edmx:Diagrams>
+    
+      </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

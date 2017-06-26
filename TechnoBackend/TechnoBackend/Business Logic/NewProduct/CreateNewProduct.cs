@@ -15,9 +15,7 @@ namespace TechnoBackend.Business_Logic.NewProduct
         public static HttpStatusCode addProduct(HttpActionContext actionContext)
         {
             DBModelContainer db = new DBModelContainer();
-            var json = actionContext.Request.Content.ReadAsStringAsync().Result;
-            JsonProduct jsonProduct = JsonConvert.DeserializeObject<JsonProduct>(json);
-
+            JsonProduct json = JsonConvert.DeserializeObject<JsonProduct>(actionContext.Request.Content.ReadAsStringAsync().Result);
             //string Token = actionContext.Request.Headers.GetValues("Token").First();
             //var UserID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == Token select sessions.USER_Id.USER_Id).First();
             //var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
@@ -25,21 +23,20 @@ namespace TechnoBackend.Business_Logic.NewProduct
 
             PRODs product = new PRODs()
             {
-                Prod_ID = jsonProduct.id,
-                Prod_Name = jsonProduct.name,
-                Prod_Dat = DateTime.Parse(jsonProduct.date),
-                Prod_Size = jsonProduct.size,
-                Prod_Weight = jsonProduct.weight,
-                Prod_Cost = jsonProduct.cost,
-                Prod_Covered = jsonProduct.covered,
-                Prod_Avail = jsonProduct.avail,
-                Prod_Desc = jsonProduct.description,
-                Prod_Spec = jsonProduct.spec,
-                Prod_Req = jsonProduct.req,
-                Prod_Mov = jsonProduct.movieurl,
-                Prod_Views = jsonProduct.views,
-                Prod_Validator = jsonProduct.validator,
-                Prod_Val_Dat = DateTime.Parse(jsonProduct.valdate)
+                Prod_ID = json.id,
+                Prod_Name = json.name,
+                Prod_Dat = DateTime.Parse(json.date),
+                Prod_Size = json.size,
+                Prod_Weight = json.weight,
+                Prod_Cost = json.cost,
+                Prod_Covered = json.covered,
+                Prod_Avail = json.avail,
+                Prod_Desc = json.description,
+                Prod_Spec = json.spec,
+                Prod_Req = json.req,
+                Prod_Mov = json.movieurl,
+                Prod_Views = json.views,
+                Prod_Val_Dat = DateTime.Parse(json.valdate)
             };
             try
             {

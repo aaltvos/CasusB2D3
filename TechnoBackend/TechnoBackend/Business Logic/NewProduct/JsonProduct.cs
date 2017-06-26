@@ -44,9 +44,6 @@ namespace TechnoBackend.Business_Logic.NewProduct
         [JsonProperty(PropertyName = "views")]
         public int views { get; set; }
 
-        [JsonProperty(PropertyName = "validator")]
-        public string validator { get; set; }
-
         [JsonProperty(PropertyName = "valdate")]
         public string valdate { get; set; }
     }
