@@ -13,16 +13,16 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 {
     public class WerkoverzichtStart
     {
-        public static List<Object> WorkItemsFetchen(int id)
+        public static Workitems WorkItemsFetchen(int id)
         {
             switch (id)
             {
                 case 1:
                     // 1: alleen ongevalideerde Workitems ophalen
                     return FetchValidators();
-                case 2:
-                    // 2: Haal verlopen items op
-                    return FetchExpiredDates();
+                //case 2:
+                //    // 2: Haal verlopen items op
+                //    return FetchExpiredDates();
                 default:
                     // Als er een ander getal of woord ingegeven is dan 1 of 2 dan komt het programma hierop uit
                     return null;
@@ -30,47 +30,94 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
 
-        private static List<Object> FetchValidators()
+        private static Workitems FetchValidators()
         {
-            // In database staat 0 voor ongevalideerd
-            string ongevalideerd = "0";
-            List<Object> Lijstje = new List<Object>();
+            IQueryable WorkitemsIQueryable;
+            IQueryable StudentIdsIQueryable;
+            List<Object> WorkitemList = new List<Object>();
 
             // Geef aan met welke database de linq querry wordt uitgevoerd
             using (DBModelContainer db = new DBModelContainer())
             {
-                // initaliseren van de lijst voor ongevalideerde workitems en een linq query on
-                // deze workitems uit de database te halen
-                IQueryable Workitems;
-                Workitems = (from item in db.PRODs where item.Prod_Validator == ongevalideerd select item.Prod_Name);
+                // Querry database for all student ids
+                StudentIdsIQueryable = (from id in db.USERs where id.USER_Sec == 3 select id.USER_Id);
 
-                // parser om linq querryable om te zetten naar lijst met PRODs
-                foreach (var item in Workitems)
+                //Ga door iedere naam om correspondeerende workitems eruit te halen
+                foreach (var id in StudentIdsIQueryable)
                 {
-                    Lijstje.Add(item);
+
+                    // Selected id in the foreach gets querried trough the database
+                    WorkitemsIQueryable = (from item in db.PRODs where item.Prod_Val_User == id select item.Prod_Name);
+
+                    try
+                    {
+                        foreach (var item in WorkitemsIQueryable)
+                        {
+                            try
+                            {
+                                JsonWorkitem workitem = new JsonWorkitem(id, item);
+                                WorkitemList.Add(workitem);
+                            }
+                            catch (Exception ex)
+                            {
+                                continue;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
+
                 }
+                // create workitems object with workitemList
+                Workitems Workitems = new Workitems(WorkitemList);
 
                 // return Lijst met ongevalideerde workitems
-                return Lijstje;
+                return Workitems;
             }
         }
 
 
-        private static List<PRODs> FetchExpiredDates()
-        {
-            using (DBModelContainer db = new DBModelContainer())
-            {
-                List<PRODs> FetchedItems = new List<PRODs>();
-                var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Val_Dat == "Waarom is dit geen datetime object :C");
+        //private static List<PRODs> FetchExpiredDates()
+        //{
+        //    using (DBModelContainer db = new DBModelContainer())
+        //    {
+        //        List<PRODs> FetchedItems = new List<PRODs>();
+        //        var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Val_Dat == DateTime.Today);
 
-                foreach (var item in FetchedItemsQuery)
-                {
-                    FetchedItems.Add(item);
-                }
+        //        foreach (var item in FetchedItemsQuery)
+        //        {
+        //            FetchedItems.Add(item);
+        //        }
 
-                return FetchedItems;
-            }
-        }
+        //        return FetchedItems;
+        //    }
+        //}
+
+
+
+        //// This function fetches all Student IDs
+        //private static IQueryable fetchStudentIds()
+        //{
+        //    IQueryable StudentIdsIQueryable;
+        //    List<Object> StudentIds = new List<object>();
+
+        //    // Ongevalideerd voor de supervisor is als Prod_Validator == aan een naam van een student
+        //    using (DBModelContainer db = new DBModelContainer())
+        //    {
+        //        // Querry database for all student ids
+        //        StudentIdsIQueryable = (from id in db.USERs where id.USER_Sec == 3 select id.USER_Id);
+
+        //        // Cast from IQueryable to an Object List
+        //        foreach (var id in StudentIdsIQueryable)
+        //        {
+        //            StudentIds.Add(id);
+        //        }
+        //    }
+
+        //    return StudentIdsIQueryable;
+        //}
     }
 }
 

@@ -8,13 +8,16 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 {
     public class JsonWorkitem
     {
-        [JsonProperty(PropertyName = "Itemname")]
-        public string Itemname { get; set; }
+        [JsonProperty(PropertyName = "id")]
+        private object id;
 
-        [JsonProperty(PropertyName = "Validation")]
-        public string Validation { get; set; }
+        [JsonProperty(PropertyName = "item")]
+        private object item;
 
-        [JsonProperty(PropertyName = "ValidationDate")]
-        public string ValidationDate { get; set; }
+        public JsonWorkitem(object id, object item)
+        {
+            this.id = id;
+            this.item = item;
+        }
     }
 }
