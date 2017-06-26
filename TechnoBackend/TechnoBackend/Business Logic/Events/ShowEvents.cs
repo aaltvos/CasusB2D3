@@ -8,46 +8,22 @@ namespace TechnoBackend.Business_Logic.Events
 {
     public class ShowEvents
     {
-        public static IList<EVENT> GetEvents(int Events_Amounts)
+        public static IList<JsonEvents> GetEvents()
         {
-            var events_max_amount = 0;
-            var events_counter = 0;
-
-            var Event_List = new List<EVENT>();
+            List<JsonEvents> event_list = new List<JsonEvents>();
             using (DBModelContainer db = new DBModelContainer())
             {
-                events_max_amount = (from events in db.EVENTs where events.Event_Id >= 1 select events.Event_Id).Max();
-                events_counter = (from events in db.EVENTs where events.Event_Id >= 1 select events.Event_Id).Count();
-
-                if (Events_Amounts > events_counter)
+                foreach(var i in db.EVENTs)
                 {
-                    Events_Amounts = events_counter;
+                    JsonEvents grab_event = new JsonEvents();
+                    grab_event.Event_ID = i.Event_Id;
+                    grab_event.Event_Name = i.Event_Name;
+                    grab_event.Event_Body = i.Event_Body;
+                    grab_event.Event_Address = i.Event_Address;
+                    grab_event.Event_Link = i.Event_Link;
+                    event_list.Add(grab_event);
                 }
-
-                while (Events_Amounts > Event_List.Count)
-                {
-                    try
-                    {
-                        var current_Event_Query = db.EVENTs.Where(event_db => event_db.Event_Id == events_max_amount);
-                        var current_Event = current_Event_Query.FirstOrDefault();
-                        if (current_Event != null)
-                        {
-                            var grab_event = new JsonEvents();
-                            grab_event.ID = current_Event.Event_Id.ToString();
-                            grab_event.Name = current_Event.Event_Name;
-                            grab_event.Body = current_Event.Event_Body;
-                            grab_event.Address = current_Event.Event_Address;
-                            grab_event.Link = current_Event.Event_Link;
-                            Event_List.Add(current_Event);
-                        }
-                        events_max_amount -= 1;
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
-                }
-                return Event_List;
+                return event_list;
             }
         }
     }

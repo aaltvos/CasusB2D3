@@ -10,15 +10,15 @@ using TechnoBackend.Business_Logic.Events;
 namespace TechnoBackend.Controllers
 {
     public class EventsController : ApiController
-    { 
-        // GET api/<controller>/5
-        public HttpResponseMessage Get(int id)
+    {
+        // GET api/<controller>/
+        public HttpResponseMessage Get()
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 1)
             {
-                var message = ShowEvents.GetEvents(id);
+                var message = ShowEvents.GetEvents();
                 Request.Headers.Add("Token", newtoken.Item1);
                 var response = Request.CreateResponse(message);
                 return response;

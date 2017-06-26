@@ -9,18 +9,18 @@ namespace TechnoBackend.Business_Logic.Events
     public class JsonEvents
     {
         [JsonProperty(PropertyName = "Event_ID")]
-        public string ID { get; set; }
+        public int Event_ID { get; set; }
 
         [JsonProperty(PropertyName = "Event_Name")]
-        public string Name { get; set; }
+        public string Event_Name { get; set; }
 
         [JsonProperty(PropertyName = "Event_Body")]
-        public string Body { get; set; }
+        public string Event_Body { get; set; }
 
         [JsonProperty(PropertyName = "Event_Address")]
-        public string Address { get; set; }
+        public string Event_Address { get; set; }
 
         [JsonProperty(PropertyName = "Event_Link")]
-        public string Link { get; set; }
+        public string Event_Link { get; set; }
     }
 }
