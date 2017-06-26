@@ -162,6 +162,7 @@
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
     <Compile Include="Business Logic\NewProduct\CreateNewProduct.cs" />
     <Compile Include="Business Logic\NewProduct\JsonProduct.cs" />
+    <Compile Include="Business Logic\NewProduct\SendEmail.cs" />
     <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\DeleteNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Business Logic\NewProduct\testquery.sql" />
     <Content Include="DatabaseModel\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBModel.Context1.cs</LastGenOutput>

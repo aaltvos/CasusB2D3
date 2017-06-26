@@ -12,7 +12,7 @@ namespace TechnoBackend.Business_Logic.NewProduct
         public string name { get; set; }
 
         [JsonProperty(PropertyName = "date")]
-        public DateTime date { get; set; }
+        public string date { get; set; }
 
         [JsonProperty(PropertyName = "size")]
         public string size { get; set; }
@@ -40,6 +40,15 @@ namespace TechnoBackend.Business_Logic.NewProduct
 
         [JsonProperty(PropertyName = "mov")]
         public string movieurl { get; set; }
+
+        [JsonProperty(PropertyName = "views")]
+        public int views { get; set; }
+
+        [JsonProperty(PropertyName = "validator")]
+        public string validator { get; set; }
+
+        [JsonProperty(PropertyName = "valdate")]
+        public string valdate { get; set; }
     }
 }
     

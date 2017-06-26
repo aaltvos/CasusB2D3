@@ -15,16 +15,16 @@ namespace TechnoBackend.Controllers
         // POST api/<controller>
         public HttpResponseMessage Post()
         {
-            //var token = ActionContext.Request.Headers.GetValues("Token").First();
-            //var newtoken = SessionCheck.Check(token);
-            //if (newtoken.Item1 != "no session" && newtoken.Item2 >= 2)
-            //{
+            var token = ActionContext.Request.Headers.GetValues("Token").First();
+            var newtoken = SessionCheck.Check(token);
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 2)
+            {
                 var message = CreateNewProduct.addProduct(ActionContext);
-                //Request.Headers.Add("Token", newtoken.Item1);
+                Request.Headers.Add("Token", newtoken.Item1);
                 var response = Request.CreateResponse(message);
                 return response;
-            //}
-            //return Request.CreateResponse(HttpStatusCode.Unauthorized);
+            }
+            return Request.CreateResponse(HttpStatusCode.Unauthorized);
         }
     }
 }

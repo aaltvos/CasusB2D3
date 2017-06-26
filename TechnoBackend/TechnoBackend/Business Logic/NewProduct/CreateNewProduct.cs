@@ -19,8 +19,6 @@ namespace TechnoBackend.Business_Logic.NewProduct
             JsonProduct jsonProduct = JsonConvert.DeserializeObject<JsonProduct>(json);
 
             //string Token = actionContext.Request.Headers.GetValues("Token").First();
-
-            
             //var UserID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == Token select sessions.USER_Id.USER_Id).First();
             //var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
             //var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
@@ -29,7 +27,7 @@ namespace TechnoBackend.Business_Logic.NewProduct
             {
                 Prod_ID = jsonProduct.id,
                 Prod_Name = jsonProduct.name,
-                Prod_Dat = jsonProduct.date,
+                Prod_Dat = DateTime.Parse(jsonProduct.date),
                 Prod_Size = jsonProduct.size,
                 Prod_Weight = jsonProduct.weight,
                 Prod_Cost = jsonProduct.cost,
@@ -39,9 +37,9 @@ namespace TechnoBackend.Business_Logic.NewProduct
                 Prod_Spec = jsonProduct.spec,
                 Prod_Req = jsonProduct.req,
                 Prod_Mov = jsonProduct.movieurl,
-                Prod_Views = 0,
-                Prod_Validator = "False",
-                Prod_Val_Dat = DateTime.Now
+                Prod_Views = jsonProduct.views,
+                Prod_Validator = jsonProduct.validator,
+                Prod_Val_Dat = DateTime.Parse(jsonProduct.valdate)
             };
             try
             {
@@ -52,9 +50,7 @@ namespace TechnoBackend.Business_Logic.NewProduct
             catch
             {
                 return HttpStatusCode.InternalServerError;
-                
             }
-
         }
     }
 }
