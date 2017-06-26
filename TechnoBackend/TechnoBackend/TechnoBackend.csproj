@@ -234,6 +234,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Business Logic\WorkitemOpvragen\sqlquerytest.sql" />
     <Content Include="DatabaseModel\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBModel.Context1.cs</LastGenOutput>
