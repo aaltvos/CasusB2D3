@@ -22,34 +22,36 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                     //    an unvalidated workitem for a supervisor is a
                     //    product that has been validated by a student
                     return FetchValidators();
+
                 case 2:
                     // 2: Fetch expired workitems, workitems are expired
                     //    when their validation date is more then 3 years ago
                     return FetchExpiredDates();
+
                 default:
                     // Als er een ander getal of woord ingegeven is dan 1 of 2 dan komt het programma hierop uit
                     return null;
             }
         }
 
-
-        private static object FetchValidators()
+        // Fetch unvalidated products
+        private static List<JsonWorkitem> FetchValidators()
         {
-            List<JsonWorkitem> WorkitemList = new List<Object>();
+            List<JsonWorkitem> WorkitemList = new List<JsonWorkitem>();
 
-            // Geef aan met welke database de linq querry wordt uitgevoerd
+            // Single database usage
             using (DBModelContainer db = new DBModelContainer())
             {
-                // get user object which have the product information
-                var Students = db.USERs.Where(s => s.USER_Sec == 3);
+                // Get user(s) object which have the product information needed with correct security level
+                IQueryable<USERs> Students = db.USERs.Where(s => s.USER_Sec == 3);
                
-                //Ga door iedere naam om correspondeerende workitems eruit te halen
-                foreach (var student in Students)
+                // Cycle trough each student and every product they have and add it to the list
+                foreach (USERs student in Students)
                 {
-                    foreach (var prod in student.PRODs)
+                    foreach (PRODs unvalidatedProduct in student.PRODs)
                     {
-                        var wantedItem = new JsonWorkitem(prod.Prod_ID, prod.Prod_Name);
-                        WorkitemList.Add(wantedItem);
+                        JsonWorkitem workitem = new JsonWorkitem(unvalidatedProduct.Prod_ID, unvalidatedProduct.Prod_Name);
+                        WorkitemList.Add(workitem);
                     }
                 }
 
@@ -59,18 +61,25 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
 
-        private static List<PRODs> FetchExpiredDates()
+        private static List<JsonWorkitem> FetchExpiredDates()
         {
+            // Initialise workitem list
+            List<JsonWorkitem> FetchedItems = new List<JsonWorkitem>();
+
+            // Single database usage
             using (DBModelContainer db = new DBModelContainer())
             {
-                List<PRODs> FetchedItems = new List<PRODs>();
-                var FetchedItemsQuery = db.PRODs.Where(s => s.Prod_Val_Dat == DateTime.Today);
+                // Get product object(s) which have the needed information with the correct datetime condition
+                IQueryable<PRODs> ExpiredProducts = db.PRODs.Where(s => s.Prod_Val_Dat == DateTime.Today);
 
-                foreach (var item in FetchedItemsQuery)
+                // Cycle through each product and add needed data as an object to the FetchedItems list
+                foreach (PRODs product in ExpiredProducts)
                 {
-                    FetchedItems.Add(item);
+                    JsonWorkitem workitem = new JsonWorkitem(product.Prod_ID, product.Prod_Name);
+                    FetchedItems.Add(workitem);
                 }
 
+                // return the fetched expired products
                 return FetchedItems;
             }
         }

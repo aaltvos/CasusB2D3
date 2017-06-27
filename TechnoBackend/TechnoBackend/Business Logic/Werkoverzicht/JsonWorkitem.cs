@@ -8,16 +8,16 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 {
     public class JsonWorkitem
     {
-        [JsonProperty(PropertyName = "id")]
-        private int id;
+        [JsonProperty(PropertyName = "product_id")]
+        private int product_id;
 
-        [JsonProperty(PropertyName = "item")]
-        private string item;
+        [JsonProperty(PropertyName = "product_name")]
+        private string product_name;
 
-        public JsonWorkitem(int id, string item)
+        public JsonWorkitem(int product_id, string product_name)
         {
-            this.id = id;
-            this.item = item;
+            this.product_id = product_id;
+            this.product_name = product_name;
         }
     }
 }
