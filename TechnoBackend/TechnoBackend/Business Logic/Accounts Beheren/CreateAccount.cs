@@ -61,19 +61,25 @@ namespace TechnoBackend.Business_Logic.Accounts_Beheren
         }
 
         // account wordt weggeschreven in de DB
-        USERs NewUser = new USERs()
+        public void test()
         {
-            // USER_Id
-            USER_Name = account.USER_Name,
-            USER_PW = account.USER_PW,
-            USER_Sec = account.USER_Sec,
-            USER_Val_dat = account.USER_Val_dat
-        };
-        try
-        {
-            db.USERs.add(NewUser);
-            db.savechanges();
+            USERs NewUser = new USERs()
+            {
+                // USER_Id
+                USER_Name = account.USER_Name,
+                USER_PW = account.USER_PW,
+                USER_Sec = account.USER_Sec,
+                USER_Val_dat = account.USER_Val_dat
+            };
+            try
+            {
+                db.USERs.Add(NewUser);
+                db.SaveChanges();
+            }
+
+
         }
+       
 
     }
 
