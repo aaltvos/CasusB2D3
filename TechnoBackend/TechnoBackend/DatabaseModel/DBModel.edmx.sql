@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/23/2017 13:55:50
+-- Date Created: 06/27/2017 10:42:27
 -- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
@@ -52,6 +52,9 @@ IF OBJECT_ID(N'[dbo].[FK_NewsUSERs]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_EVENTUSERs]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[EVENTs] DROP CONSTRAINT [FK_EVENTUSERs];
+GO
+IF OBJECT_ID(N'[dbo].[FK_USERsPRODs]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PRODs] DROP CONSTRAINT [FK_USERsPRODs];
 GO
 
 -- --------------------------------------------------
@@ -165,7 +168,8 @@ CREATE TABLE [dbo].[USERs] (
     [USER_PW] nvarchar(max)  NOT NULL,
     [USER_Sec] int  NOT NULL,
     [USER_Val_dat] datetime  NOT NULL,
-    [USER_Made_Work] nvarchar(max)  NOT NULL
+    [USER_Made_Work] nvarchar(max)  NOT NULL,
+    [USER_Email] nvarchar(max)  NOT NULL
 );
 GO
 
