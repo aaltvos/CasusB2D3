@@ -55,12 +55,12 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                     }
                 }
 
-                // return Lijst met ongevalideerde workitems
+                // return list with unvalidated products
                 return WorkitemList;
             }
         }
 
-
+        // Fetch expired products
         private static List<JsonWorkitem> FetchExpiredDates()
         {
             // Initialise workitem list
@@ -70,7 +70,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
             using (DBModelContainer db = new DBModelContainer())
             {
                 // Get product object(s) which have the needed information with the correct datetime condition
-                IQueryable<PRODs> ExpiredProducts = db.PRODs.Where(s => s.Prod_Val_Dat == DateTime.Today);
+                IQueryable<PRODs> ExpiredProducts = db.PRODs.Where(s => s.Prod_Val_Dat.AddYears(3) < DateTime.Today);
 
                 // Cycle through each product and add needed data as an object to the FetchedItems list
                 foreach (PRODs product in ExpiredProducts)
@@ -85,4 +85,3 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
     }
 }
-
