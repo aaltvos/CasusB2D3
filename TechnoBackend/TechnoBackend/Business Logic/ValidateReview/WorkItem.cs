@@ -77,6 +77,13 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             return result;
         }
 
+        public static WorkItem ForId(int id)
+        {
+            DBModelContainer database = new DBModelContainer();
+            PRODs product = database.PRODs.Where(p => p.Prod_ID == id).First();
+            return product != null ? new WorkItem(product) : null;
+        }
+
         public static List<WorkItem> LoadAll()
         {
             List<WorkItem> result = new List<WorkItem>();

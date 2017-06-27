@@ -12,37 +12,28 @@ namespace TechnoBackend.Controllers
 {
     public class ValidateReviewController : ApiController
     {
-        private readonly List<WorkItem> _cache;
-
-        private WorkItem _selected;
-
-        public ValidateReviewController()
-        {
-            _cache = new List<WorkItem>();
-        }
-        
+    
         // GET api/<controller>
         public HttpResponseMessage Get()
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
 
-            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 1*/)
+            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 4*/)
             {
-                _cache.Clear();
-                _cache.AddRange(WorkItem.LoadAll());
-                
+                List<WorkItem> all = WorkItem.LoadAll();
+
                 string message = "";
-                if (_cache.Count == 0)
+                if (all.Count == 0)
                     message = "{\"status\":\"Error\", \"message\":\"No WorkItems could be loaded\"}";
                 else
                 {
                     message = "{\"status\":\"Success\", \"items\":[";
-                    for (int i = 0; i < _cache.Count; i++)
+                    for (int i = 0; i < all.Count; i++)
                     {
-                        message += _cache[i].ToJson();
+                        message += all[i].ToJson();
 
-                        if (i < _cache.Count - 1)
+                        if (i < all.Count - 1)
                             message += ",";
                     }
                     message += "]}";
@@ -61,20 +52,18 @@ namespace TechnoBackend.Controllers
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             
-            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 2*/)
+            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 4*/)
             {
                 string message = "";
-                if (_cache.Count == 0)
-                    message = "{\"status\":\"Error\", \"message\":\"Cache is empty, please call Get() before sending an index\"}";
+                if (id < 0)
+                    message = "{\"status\":\"Error\", \"message\":\"Invalid id\"}";
                 else
                 {
-                    if (id < 0 || id >= _cache.Count)
-                        message = "{\"status\":\"Error\", \"message\":\"Invalid id\"}";
+                    WorkItem selected = WorkItem.ForId(id);
+                    if (selected != null)
+                        message = "{\"status\":\"Succes\", \"item\":" + selected.ToJson() + "}";
                     else
-                    {
-                        _selected = _cache[id];
-                        message = "{\"status\":\"Succes\", \"item\":" + _selected.ToJson() + "}";
-                    }
+                        message = "{\"status\":\"Error\", \"message\":\"No WorkItem found with id\"}";
                 }
 
                 Request.Headers.Add("Token", newtoken.Item1);
@@ -99,21 +88,22 @@ namespace TechnoBackend.Controllers
             if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 4*/)
             {
                 string message = "";
-                if (_selected == null)
-                    message = "{\"status\":\"Error\", \"message\":\"No WorkItem selected\"}";
-                else
+                dynamic json = JsonConvert.DeserializeObject(value);
+                if (json != null)
                 {
-                    dynamic json = JsonConvert.DeserializeObject(value);
-                    if (json != null)
+                    WorkItem selected = WorkItem.ForId(id);
+                    if (selected != null)
                     {
                         string action = json.action;
                         if (action.Equals("Accept"))
-                            message = _selected.Accept(token);
+                            message = selected.Accept(token);
                         else
-                            message = _selected.Deny();
+                            message = selected.Deny();
                     } else
-                        message = "{\"status\":\"Error\", \"message\":\"Invalid json parsed\"}";
+                        message = "{\"status\":\"Error\", \"message\":\"No WorkItem found with id\"}";
                 }
+                else
+                    message = "{\"status\":\"Error\", \"message\":\"Invalid json parsed\"}";
 
                 Request.Headers.Add("Token", newtoken.Item1);
                 return Request.CreateResponse(message);
