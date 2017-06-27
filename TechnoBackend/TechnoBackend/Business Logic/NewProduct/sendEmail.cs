@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
-using System.Web.Http.Controllers;
 using TechnoBackend.DatabaseModel;
 
 namespace TechnoBackend.Business_Logic.NewProduct
 {
-    public class SendEmail
-    {
-        public HttpStatusCode SendNewEmail(HttpActionContext actionContext)
+	public class sendEmail
+	{
+        DBModelContainer db;
+        public string sendAll(int securityLevel)
         {
-            using (DBModelContainer db = new DBModelContainer())
+            db = new DBModelContainer();
+            var emailList = (from user in db.USERs where user.USER_Sec == securityLevel select user.USER_Email).AsEnumerable();
+            string recipients;
+            foreach (var email in emailList)
             {
-                return HttpStatusCode.OK;
+                //build and send email!
+                recipients = "example@example.com";
+                return recipients;
             }
+            return null;
         }
-    }
+	}
 }

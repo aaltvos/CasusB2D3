@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Unittest\newProduct.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechnoBackend\TechnoBackend.csproj">

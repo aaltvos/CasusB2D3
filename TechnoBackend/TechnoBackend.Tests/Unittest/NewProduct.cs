@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.IO;
 
 namespace TechnoBackend.Tests.Unittest
 {
@@ -12,24 +13,23 @@ namespace TechnoBackend.Tests.Unittest
     public class NewProduct
     {
         [TestMethod]
-        public void TestMethodNewProduct()
+        public void ProductNew()
         {
-            string productData = "{'productid':'1','name':'testname','date':'24-06-2017','size':'0x0x0','weight':'0kg','cost':'0Eur','covered':'false','avail':'test','desc':'test','spec':'test','req':'test','mov':'test'}";
+            string jsondir = "F:/Development/Github/CasusB2D3/TechnoBackend/TechnoBackend.Tests/Unittest/newProduct.json";
+            StreamReader openfile = new StreamReader(jsondir);
+            string json = openfile.ReadToEnd();
+            var jsonasbyte = Encoding.UTF8.GetBytes(json);
+            var request = WebRequest.CreateHttp("http://localhost:51516/api/NewProduct");
+            request.Method = "POST";
+            var stream = request.GetRequestStream();
+            stream.Write(jsonasbyte, 0, json.Length);
 
-            var checkreturn = SessionCheck.GetToken("Henk");
-            var token = checkreturn.Item1;
 
-            var body = UTF8Encoding.UTF8.GetBytes(productData);
-            var testCreateNewProduct = WebRequest.CreateHttp("http://localhost:51516/api/NewProduct");
-            testCreateNewProduct.Method = "POST";
-            testCreateNewProduct.Headers.Add("Token", token);
-            var stream = testCreateNewProduct.GetRequestStream();
-            stream.Write(body, 0, body.Length);
-            var response = testCreateNewProduct.GetResponse();
-
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseCode = response.StatusCode;
             var expected = HttpStatusCode.OK;
-
-            Assert.AreEqual(response, expected);
+            Assert.AreEqual(responseCode, expected);
         }
     }
 }
+// getest op 27-06-17

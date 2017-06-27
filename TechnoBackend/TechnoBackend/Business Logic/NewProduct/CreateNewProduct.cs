@@ -16,32 +16,21 @@ namespace TechnoBackend.Business_Logic.NewProduct
         {
             DBModelContainer db = new DBModelContainer();
             JsonProduct json = JsonConvert.DeserializeObject<JsonProduct>(actionContext.Request.Content.ReadAsStringAsync().Result);
-            string Token = actionContext.Request.Headers.GetValues("Token").First();
-            var UserID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == Token select sessions.USER_Id.USER_Id).First();
-            var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
-            var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
-
-            HAND_SUB_GEB_PROD handGebProd = new HAND_SUB_GEB_PROD()
+            //string Token = actionContext.Request.Headers.GetValues("Token").First();
+            //var UserID = (from sessions in db.SESSIONS select sessions.USER_Id.USER_Id).First(); //where sessions.SESSIONS_Token == Token 
+            //var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
+            //var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
+            /*USERs user = new USERs()
             {
-                Couple_ID = json.id
-            };
-            REVs review = new REVs()
-            {
-            };
-            CAT_PROD catProd = new CAT_PROD()
-            {
-                COUPLE_ID = json.id,
-                CAT = json.cat, 
-                PROD = ,
-            };
-            PRODTAGS prodTags = new PRODTAGS()
-            {
-                PROD =,
-                PROD_Id = json.id,
-                TAG = json.prodtags,
-                TAGS_id = ,
-            };
-
+                USER_PW = "somepassword",
+                USER_Name = "Kay",
+                USER_Id = 1,
+                USER_Email = "example@example.com",
+                USER_Sec = 3,
+                USER_Val_dat = DateTime.Now,
+                USER_Made_Work = "string"
+            };*/
+            USERs user = (from x in db.USERs where x.USER_Name == "Kay" select x).First();
             PRODs product = new PRODs()
             {
                 Prod_ID = json.id,
@@ -58,18 +47,20 @@ namespace TechnoBackend.Business_Logic.NewProduct
                 Prod_Mov = json.movieurl,
                 Prod_Views = json.views,
                 Prod_Val_Dat = DateTime.Parse(json.valdate),
-                Prod_Val_User = currentUser
+                Prod_Val_User = user
             };
             try
             {
                 db.PRODs.Add(product);
                 db.SaveChanges();
-                return HttpStatusCode.OK;
             }
             catch
             {
                 return HttpStatusCode.InternalServerError;
             }
+            sendEmail newEmail = new sendEmail();
+            newEmail.sendAll(3);
+            return HttpStatusCode.OK;
         }
     }
 }
