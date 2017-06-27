@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using TechnoBackend.Business_Logic.ValidateReview;
 using TechnoBackend.Login;
@@ -19,7 +20,7 @@ namespace TechnoBackend.Controllers
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
 
-            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 4*/)
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
             {
                 List<WorkItem> all = WorkItem.LoadAll();
 
@@ -52,7 +53,7 @@ namespace TechnoBackend.Controllers
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             
-            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 4*/)
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
             {
                 string message = "";
                 if (id < 0)
@@ -82,28 +83,30 @@ namespace TechnoBackend.Controllers
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]string value)
         {
-            Debug.WriteLine("put: " + value);
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
-            if (true/*newtoken.Item1 != "no session" && newtoken.Item2 >= 4*/)
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
             {
                 string message = "";
-                dynamic json = JsonConvert.DeserializeObject(value);
-                if (json != null)
+
+                WorkItem selected = WorkItem.ForId(id);
+                if (selected != null)
                 {
-                    WorkItem selected = WorkItem.ForId(id);
-                    if (selected != null)
+                    IEnumerable<string> action = ActionContext.Request.Headers.GetValues("Action");
+                    if (action != null)
                     {
-                        string action = json.action;
                         if (action.Equals("Accept"))
                             message = selected.Accept(token);
-                        else
+                        else if (action.Equals("Deny"))
                             message = selected.Deny();
-                    } else
-                        message = "{\"status\":\"Error\", \"message\":\"No WorkItem found with id\"}";
+                        else
+                            message = "{\"status\":\"Error\", \"message\":\"Invalid Action\"}";
+                    }
+                    else
+                        message = "{\"status\":\"Error\", \"message\":\"No Action found in headers\"}"; ;
                 }
                 else
-                    message = "{\"status\":\"Error\", \"message\":\"Invalid json parsed\"}";
+                    message = "{\"status\":\"Error\", \"message\":\"No WorkItem found with id\"}";
 
                 Request.Headers.Add("Token", newtoken.Item1);
                 return Request.CreateResponse(message);

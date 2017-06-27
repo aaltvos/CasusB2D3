@@ -20,22 +20,19 @@ namespace TechnoBackend.Business_Logic.ValidateReview
         {
             DBModelContainer database = new DBModelContainer();
             PRODs current = database.PRODs.Where(p => p.Prod_ID == _product.Prod_ID).First();
-            if (current != null)
-            {
-                SESSIONS session = database.SESSIONS.Where(s => s.SESSIONS_Token == token).First();
-                if (session == null) return "{\"status\":\"Error\", \"message\":\"No session found\"}";
+            if (current == null) return "{\"status\":\"Error\", \"message\":\"No WorkItem found\"}";
 
-                USERs user = database.USERs.Where(s => s.USER_Id == session.USER_Id.USER_Id).First();
-                if (user == null) return "{\"status\":\"Error\", \"message\":\"No user found\"}";
+            SESSIONS session = database.SESSIONS.Where(s => s.SESSIONS_Token == token).First();
+            if (session == null) return "{\"status\":\"Error\", \"message\":\"No Session found\"}";
 
-                current.Prod_Validator = user.USER_Name;
-                current.Prod_Val_Dat = DateTime.Now;
+            USERs user = database.USERs.Where(s => s.USER_Id == session.USER_Id.USER_Id).First();
+            if (user == null) return "{\"status\":\"Error\", \"message\":\"No User found\"}";
 
-                database.SaveChanges();
-                return "{\"status\":\"Success\"}";
-            }
+            current.Prod_Val_User = user;
+            current.Prod_Val_Dat = DateTime.Now;
 
-            return "{\"status\":\"Error\", \"message\":\"WorkItem not found\"}";
+            database.SaveChanges();
+            return "{\"status\":\"Success\"}";
         }
 
         public string Deny()
@@ -71,7 +68,7 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             result += "\"req\":\"" + _product.Prod_Req + "\",";
             result += "\"mov\":\"" + _product.Prod_Mov + "\",";
             result += "\"views\":\"" + _product.Prod_Views + "\",";
-            result += "\"validator\":\"" + _product.Prod_Validator + "\",";
+            result += "\"val_user\":\"" + _product.Prod_Val_User + "\",";
             result += "\"val_dat\":\"" + _product.Prod_Val_Dat + "\"";
             result += "}";
             return result;
@@ -82,6 +79,12 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             DBModelContainer database = new DBModelContainer();
             PRODs product = database.PRODs.Where(p => p.Prod_ID == id).First();
             return product != null ? new WorkItem(product) : null;
+        }
+
+        private static bool IsUserStudent(USERs user)
+        {
+            if (user == null) return false;
+            return user.USER_Sec == 3;
         }
 
         public static List<WorkItem> LoadAll()
@@ -95,7 +98,7 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             try
             {
                 products = database.PRODs.Where(p => 
-                    String.IsNullOrEmpty(p.Prod_Validator) 
+                    IsUserStudent(p.Prod_Val_User)
                     || now.Year - p.Prod_Val_Dat.Year >= 3
                 );
             } catch (Exception e)
