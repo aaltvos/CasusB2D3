@@ -28,6 +28,7 @@ namespace TechnoBackend.DatabaseModel
         public int USER_Sec { get; set; }
         public System.DateTime USER_Val_dat { get; set; }
         public string USER_Made_Work { get; set; }
+        public string USER_Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REVs> REVs { get; set; }
