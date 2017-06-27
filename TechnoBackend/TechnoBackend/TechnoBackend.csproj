@@ -187,6 +187,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\EVENT.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\HAND_GEB.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

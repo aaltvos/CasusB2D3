@@ -7,6 +7,7 @@ using System.Reflection.Emit;
 using System.Web.Http;
 using System.Web.WebPages;
 using TechnoBackend.Business_Logic.News;
+using TechnoBackend.DatabaseModel;
 using TechnoBackend.Login;
 
 
@@ -15,9 +16,12 @@ namespace TechnoBackend.Controllers
     public class NewsController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        public HttpResponseMessage Get()
+        {   
+            DBModelContainer db = new DBModelContainer();
+            var newsmax = (from news in db.NEWS where news.News_Title != null select news.News_Id).Max();
+            var response = Request.CreateResponse(newsmax);
+            return response;
         }
 
         // GET api/<controller>/5
@@ -25,14 +29,21 @@ namespace TechnoBackend.Controllers
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
-            if (newtoken.Item1 != "no session" && newtoken.Item2>=1)
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 1)
             {
-                var message = ShowNews.GetNews(id);
-                Request.Headers.Add("Token",newtoken.Item1);
-                var response = Request.CreateResponse(message);
-                return response;
+                try
+                 {
+                    var message = ShowNews.GetNews(id);
+                    Request.Headers.Add("Token", newtoken.Item1);
+                    var response = Request.CreateResponse(message);
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+                }
             }
-            return Request.CreateResponse("Invalid action");
+            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized,"Session not found");
         }
 
         // POST api/<controller>
@@ -49,11 +60,6 @@ namespace TechnoBackend.Controllers
                 return response;
             }
             return Request.CreateResponse("Invalid action");
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
         }
 
         // DELETE api/<controller>/5
