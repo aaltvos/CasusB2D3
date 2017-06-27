@@ -159,11 +159,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business Logic\Accounts Beheren\CreateAccount.cs" />
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
     <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\DeleteNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Business Logic\News\ShowNews.cs" />
+    <Compile Include="Controllers\AccountsBeherenController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
@@ -237,6 +239,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="DatabaseModel\USERs_Script.sql" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
