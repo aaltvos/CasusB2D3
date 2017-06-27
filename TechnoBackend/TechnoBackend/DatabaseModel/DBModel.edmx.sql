@@ -4,7 +4,8 @@
 -- --------------------------------------------------
 -- Date Created: 06/20/2017 10:56:01
 -- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
--- --------------------------------------------------
+CREATE DATABASE Ergo;
+
 
 SET QUOTED_IDENTIFIER OFF;
 GO
