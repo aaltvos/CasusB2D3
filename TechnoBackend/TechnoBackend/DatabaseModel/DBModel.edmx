@@ -18,6 +18,7 @@
     <EntitySet Name="TAGS" EntityType="DBModel.Store.TAGS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PRODTAGS" EntityType="DBModel.Store.PRODTAGS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NEWS" EntityType="DBModel.Store.NEWS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EVENTs" EntityType="DBModel.Store.EVENTs" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="HAND_GEBHAND_SUB_GEB_PROD" Association="DBModel.Store.HAND_GEBHAND_SUB_GEB_PROD">
       <End Role="HAND_GEB" EntitySet="HAND_GEB" />
       <End Role="HAND_SUB_GEB_PROD" EntitySet="HAND_SUB_GEB_PROD" />
@@ -60,6 +61,10 @@
     </AssociationSet>
     <AssociationSet Name="NewsUSERs" Association="DBModel.Store.NewsUSERs">
       <End Role="News" EntitySet="NEWS" />
+      <End Role="USERs" EntitySet="USERs" />
+    </AssociationSet>
+    <AssociationSet Name="EVENTUSERs" Association="DBModel.Store.EVENTUSERs">
+      <End Role="EVENT" EntitySet="EVENTs" />
       <End Role="USERs" EntitySet="USERs" />
     </AssociationSet>
   </EntityContainer>
@@ -179,6 +184,17 @@
     <Property Name="News_Body" Type="nvarchar(max)" Nullable="false" />
     <Property Name="News_IMG" Type="nvarchar(max)" Nullable="false" />
     <Property Name="News_Link" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="USERs_USER_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EVENTs">
+    <Key>
+      <PropertyRef Name="Event_Id" />
+    </Key>
+    <Property Name="Event_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Event_Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Event_Link" Type="nvarchar(max)" Nullable="false" />
     <Property Name="USERs_USER_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="HAND_GEBHAND_SUB_GEB_PROD">
@@ -313,6 +329,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="EVENTUSERs">
+    <End Role="EVENT" Type="DBModel.Store.EVENTs" Multiplicity="*" />
+    <End Role="USERs" Type="DBModel.Store.USERs" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="USERs">
+        <PropertyRef Name="USER_Id" />
+      </Principal>
+      <Dependent Role="EVENT">
+        <PropertyRef Name="USERs_USER_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -372,6 +400,11 @@
           <EntitySet Name="NEWS" EntityType="DBModel.NEWS" />
           <AssociationSet Name="NewsUSERs" Association="DBModel.NewsUSERs">
             <End Role="News" EntitySet="NEWS" />
+            <End Role="USERs" EntitySet="USERs" />
+          </AssociationSet>
+          <EntitySet Name="EVENTs" EntityType="DBModel.EVENT" />
+          <AssociationSet Name="EVENTUSERs" Association="DBModel.EVENTUSERs">
+            <End Role="EVENT" EntitySet="EVENTs" />
             <End Role="USERs" EntitySet="USERs" />
           </AssociationSet>
         </EntityContainer>
@@ -449,6 +482,7 @@
           <NavigationProperty Name="REVs" Relationship="DBModel.USERREV" FromRole="USER" ToRole="REV" />
           <NavigationProperty Name="SESSIONS" Relationship="DBModel.USERSESSIONS" FromRole="USER" ToRole="SESSIONS" />
           <NavigationProperty Name="News" Relationship="DBModel.NewsUSERs" FromRole="USERs" ToRole="News" />
+          <NavigationProperty Name="EVENT" Relationship="DBModel.EVENTUSERs" FromRole="USERs" ToRole="EVENT" />
         </EntityType>
         <EntityType Name="CAT">
           <Key>
@@ -546,6 +580,21 @@
         </EntityType>
         <Association Name="NewsUSERs">
           <End Type="DBModel.NEWS" Role="News" Multiplicity="*" />
+          <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
+        </Association>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="Event_Id" />
+          </Key>
+          <Property Name="Event_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_Name" Type="String" Nullable="false" />
+          <Property Name="Event_Body" Type="String" Nullable="false" />
+          <Property Name="Event_Address" Type="String" Nullable="false" />
+          <Property Name="Event_Link" Type="String" Nullable="false" />
+          <NavigationProperty Name="USERs" Relationship="DBModel.EVENTUSERs" FromRole="EVENT" ToRole="USERs" />
+        </EntityType>
+        <Association Name="EVENTUSERs">
+          <End Type="DBModel.EVENT" Role="EVENT" Multiplicity="0..1" />
           <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
         </Association>
       </Schema>
@@ -673,6 +722,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EVENTs">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.EVENT)">
+        <MappingFragment StoreEntitySet="EVENTs">
+          <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+          <ScalarProperty Name="Event_Name" ColumnName="Event_Name" />
+          <ScalarProperty Name="Event_Body" ColumnName="Event_Body" />
+          <ScalarProperty Name="Event_Address" ColumnName="Event_Address" />
+          <ScalarProperty Name="Event_Link" ColumnName="Event_Link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="HAND_GEBHAND_SUB_GEB_PROD" TypeName="DBModel.HAND_GEBHAND_SUB_GEB_PROD" StoreEntitySet="HAND_SUB_GEB_PROD">
       <EndProperty Name="HAND_GEB">
         <ScalarProperty Name="Hand_ID" ColumnName="HAND_GEB_Hand_ID" />
@@ -759,6 +819,14 @@
       </EndProperty>
       <EndProperty Name="News">
         <ScalarProperty Name="News_Id" ColumnName="News_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EVENTUSERs" TypeName="DBModel.EVENTUSERs" StoreEntitySet="EVENTs">
+      <EndProperty Name="USERs">
+        <ScalarProperty Name="USER_Id" ColumnName="USERs_USER_Id" />
+      </EndProperty>
+      <EndProperty Name="EVENT">
+        <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
