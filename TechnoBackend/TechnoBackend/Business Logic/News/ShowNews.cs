@@ -14,29 +14,24 @@ namespace TechnoBackend.Business_Logic.News
 {
     public class ShowNews
     {
-        public static IList<NEWS> GetNews(int numberOfArticles)
+        public static IList<JsonNews> GetNews(int numberOfArticles)
         {
             var newsmax = 0;
             var newscount = 0;
             
-            var articleList = new List<NEWS>();
+            var articleList = new List<JsonNews>();
             DBModelContainer db = new DBModelContainer();
             //getting highest article # from DB and getting # of articles from db
-            try
-            {
-                newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
-                newscount = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Count();
-            }
-            catch (Exception e)
-            {
-                return null; //(e.ToString());
-            }
+
+            newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
+            newscount = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Count();
+
             //check if the # of requested articles isent more then the ammount of articles in the db
             if (numberOfArticles > newscount)
             {
                 numberOfArticles = newscount;
             }
-
+            
             //Retrieving numberOfArticles and put them as object in a list
             while (numberOfArticles > articleList.Count)
             {
@@ -53,7 +48,7 @@ namespace TechnoBackend.Business_Logic.News
                         wantedarticle.Link = currentArticle.News_Link;
                         wantedarticle.Title = currentArticle.News_Title;
 
-                        articleList.Add(currentArticle);
+                        articleList.Add(wantedarticle);
                     }
                     newsmax -= 1;
 

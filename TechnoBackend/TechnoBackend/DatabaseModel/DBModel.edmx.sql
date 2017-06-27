@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/31/2017 09:59:20
+-- Date Created: 06/27/2017 10:42:27
 -- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
@@ -50,6 +50,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_NewsUSERs]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[NEWS] DROP CONSTRAINT [FK_NewsUSERs];
 GO
+IF OBJECT_ID(N'[dbo].[FK_EVENTUSERs]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EVENTs] DROP CONSTRAINT [FK_EVENTUSERs];
+GO
+IF OBJECT_ID(N'[dbo].[FK_USERsPRODs]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PRODs] DROP CONSTRAINT [FK_USERsPRODs];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -73,8 +79,8 @@ GO
 IF OBJECT_ID(N'[dbo].[USERs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[USERs];
 GO
-IF OBJECT_ID(N'[dbo].[CATs1]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CATs1];
+IF OBJECT_ID(N'[dbo].[CATs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CATs];
 GO
 IF OBJECT_ID(N'[dbo].[CAT_PROD]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CAT_PROD];
@@ -90,6 +96,9 @@ IF OBJECT_ID(N'[dbo].[PRODTAGS]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[NEWS]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NEWS];
+GO
+IF OBJECT_ID(N'[dbo].[EVENTs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EVENTs];
 GO
 
 -- --------------------------------------------------
@@ -119,8 +128,8 @@ CREATE TABLE [dbo].[PRODs] (
     [Prod_Req] nvarchar(max)  NULL,
     [Prod_Mov] nvarchar(max)  NULL,
     [Prod_Views] bigint  NULL,
-    [Prod_Validator] nvarchar(max)  NOT NULL,
-    [Prod_Val_Dat] datetime  NOT NULL
+    [Prod_Val_Dat] datetime  NOT NULL,
+    [Prod_Val_User_USER_Id] int  NOT NULL
 );
 GO
 
@@ -158,12 +167,14 @@ CREATE TABLE [dbo].[USERs] (
     [USER_Name] nvarchar(max)  NOT NULL,
     [USER_PW] nvarchar(max)  NOT NULL,
     [USER_Sec] int  NOT NULL,
-    [USER_Val_dat] datetime  NOT NULL
+    [USER_Val_dat] datetime  NOT NULL,
+    [USER_Made_Work] nvarchar(max)  NOT NULL,
+    [USER_Email] nvarchar(max)  NOT NULL
 );
 GO
 
--- Creating table 'CATs1'
-CREATE TABLE [dbo].[CATs1] (
+-- Creating table 'CATs'
+CREATE TABLE [dbo].[CATs] (
     [CAT_Id] int IDENTITY(1,1) NOT NULL,
     [CAT_Name] nvarchar(max)  NOT NULL,
     [CAT_IMG] nvarchar(max)  NOT NULL
@@ -265,9 +276,9 @@ ADD CONSTRAINT [PK_USERs]
     PRIMARY KEY CLUSTERED ([USER_Id] ASC);
 GO
 
--- Creating primary key on [CAT_Id] in table 'CATs1'
-ALTER TABLE [dbo].[CATs1]
-ADD CONSTRAINT [PK_CATs1]
+-- Creating primary key on [CAT_Id] in table 'CATs'
+ALTER TABLE [dbo].[CATs]
+ADD CONSTRAINT [PK_CATs]
     PRIMARY KEY CLUSTERED ([CAT_Id] ASC);
 GO
 
@@ -435,7 +446,7 @@ GO
 ALTER TABLE [dbo].[CAT_PROD]
 ADD CONSTRAINT [FK_CATEntity1]
     FOREIGN KEY ([CAT_CAT_Id])
-    REFERENCES [dbo].[CATs1]
+    REFERENCES [dbo].[CATs]
         ([CAT_Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -489,6 +500,21 @@ GO
 CREATE INDEX [IX_FK_EVENTUSERs]
 ON [dbo].[EVENTs]
     ([USERs_USER_Id]);
+GO
+
+-- Creating foreign key on [Prod_Val_User_USER_Id] in table 'PRODs'
+ALTER TABLE [dbo].[PRODs]
+ADD CONSTRAINT [FK_USERsPRODs]
+    FOREIGN KEY ([Prod_Val_User_USER_Id])
+    REFERENCES [dbo].[USERs]
+        ([USER_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_USERsPRODs'
+CREATE INDEX [IX_FK_USERsPRODs]
+ON [dbo].[PRODs]
+    ([Prod_Val_User_USER_Id]);
 GO
 
 -- --------------------------------------------------

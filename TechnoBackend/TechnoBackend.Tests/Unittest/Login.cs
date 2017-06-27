@@ -9,7 +9,7 @@ namespace TechnoBackend.Tests
     public class UsecaseLogin
     {
         [TestMethod]
-        public void TestMethodLoginRight()
+        public static string TestMethodLogin()
         {
             string test = "{ 'Username':'Henk','Password':'Knabbel'}";
             var iets = Encoding.UTF8.GetBytes(test);
@@ -24,22 +24,7 @@ namespace TechnoBackend.Tests
 
 
             Assert.AreEqual(100, result.Length);
+            return result;
         }
-
-        [TestMethod]
-        public void TestMethodLoginWrongCred()
-        {
-            string test = "{ 'Username':'Henk','Password':'Knabbe'}";
-            var iets = Encoding.UTF8.GetBytes(test);
-            var request = (HttpWebRequest)HttpWebRequest.Create("http://localhost:51516/api/Authentication");
-            request.Method = "POST";
-            var stream = request.GetRequestStream();
-            stream.Write(iets, 0, iets.Length);
-            
-
-
-            Assert.ThrowsException<WebException>(request.GetResponse);
-        }
-
     }
 }
