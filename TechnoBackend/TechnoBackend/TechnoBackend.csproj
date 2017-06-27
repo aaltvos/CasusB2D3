@@ -187,11 +187,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\DBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="DatabaseModel\EVENT.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -248,13 +243,6 @@
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="DatabaseModel\DBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DatabaseModel\DBModel.edmx.diagram">
-      <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>

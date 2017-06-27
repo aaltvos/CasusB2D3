@@ -46,6 +46,12 @@ namespace TechnoBackend.Business_Logic.NewProduct
 
         [JsonProperty(PropertyName = "valdate")]
         public string valdate { get; set; }
+
+        [JsonProperty(PropertyName = "prodtags")]
+        public string prodtags { get; set; }
+
+        [JsonProperty(PropertyName = "cat")]
+        public string cat { get; set; }
     }
 }
     
