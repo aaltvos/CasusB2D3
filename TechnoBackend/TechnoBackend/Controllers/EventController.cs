@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TechnoBackend.Business_Logic.Event;
+using TechnoBackend.Business_Logic.ManageEvents;
 using TechnoBackend.Login;
 
 namespace TechnoBackend.Controllers
@@ -12,7 +12,7 @@ namespace TechnoBackend.Controllers
     public class EventController : ApiController
     {
         // GET api/<controller>/5
-        public string Get()
+        public HttpResponseMessage Get()
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
@@ -34,7 +34,7 @@ namespace TechnoBackend.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post()
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
@@ -55,8 +55,19 @@ namespace TechnoBackend.Controllers
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            var token = ActionContext.Request.Headers.GetValues("Token").First();
+            var newtoken = SessionCheck.Check(token);
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
+            {
+                var message = DeleteEvent._DeleteEvent(id);
+
+                Request.Headers.Add("Token", newtoken.Item1);
+                var response = Request.CreateResponse(message);
+                return response;
+            }
+            return Request.CreateResponse("Invalid action");
         }
     }
 }
