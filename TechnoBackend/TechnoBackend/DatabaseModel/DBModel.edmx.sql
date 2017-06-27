@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/20/2017 15:38:51
--- Generated from EDMX file: C:\Users\pat-j\Source\Repos\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
+-- Date Created: 05/31/2017 09:59:20
+-- Generated from EDMX file: C:\Users\woute\Source\Repos\d\CasusB2D3\TechnoBackend\TechnoBackend\DatabaseModel\DBModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -214,6 +214,17 @@ CREATE TABLE [dbo].[NEWS] (
 );
 GO
 
+-- Creating table 'EVENTs'
+CREATE TABLE [dbo].[EVENTs] (
+    [Event_Id] int IDENTITY(1,1) NOT NULL,
+    [Event_Name] nvarchar(max)  NOT NULL,
+    [Event_Body] nvarchar(max)  NOT NULL,
+    [Event_Address] nvarchar(max)  NOT NULL,
+    [Event_Link] nvarchar(max)  NOT NULL,
+    [USERs_USER_Id] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -288,6 +299,12 @@ GO
 ALTER TABLE [dbo].[NEWS]
 ADD CONSTRAINT [PK_NEWS]
     PRIMARY KEY CLUSTERED ([News_Id] ASC);
+GO
+
+-- Creating primary key on [Event_Id] in table 'EVENTs'
+ALTER TABLE [dbo].[EVENTs]
+ADD CONSTRAINT [PK_EVENTs]
+    PRIMARY KEY CLUSTERED ([Event_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -456,6 +473,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_NewsUSERs'
 CREATE INDEX [IX_FK_NewsUSERs]
 ON [dbo].[NEWS]
+    ([USERs_USER_Id]);
+GO
+
+-- Creating foreign key on [USERs_USER_Id] in table 'EVENTs'
+ALTER TABLE [dbo].[EVENTs]
+ADD CONSTRAINT [FK_EVENTUSERs]
+    FOREIGN KEY ([USERs_USER_Id])
+    REFERENCES [dbo].[USERs]
+        ([USER_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EVENTUSERs'
+CREATE INDEX [IX_FK_EVENTUSERs]
+ON [dbo].[EVENTs]
     ([USERs_USER_Id]);
 GO
 
