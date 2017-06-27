@@ -9,12 +9,12 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
     public class JsonWorkitem
     {
         [JsonProperty(PropertyName = "id")]
-        private object id;
+        private int id;
 
         [JsonProperty(PropertyName = "item")]
-        private object item;
+        private string item;
 
-        public JsonWorkitem(object id, object item)
+        public JsonWorkitem(int id, string item)
         {
             this.id = id;
             this.item = item;
