@@ -98,7 +98,7 @@
     <Property Name="Prod_Mov" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Prod_Views" Type="bigint" Nullable="true" />
     <Property Name="Prod_Val_Dat" Type="datetime" Nullable="false" />
-    <Property Name="Prod_Val_User_USER_Id" Type="int" Nullable="false" />
+    <Property Name="Prod_Val_User_USER_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="HAND_SUB_GEB_PROD">
     <Key>
@@ -138,6 +138,7 @@
     <Property Name="USER_Sec" Type="int" Nullable="false" />
     <Property Name="USER_Val_dat" Type="datetime" Nullable="false" />
     <Property Name="USER_Made_Work" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="USER_Email" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="CATs">
     <Key>
@@ -347,7 +348,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="USERsPRODs">
-    <End Role="USERs" Type="DBModel.Store.USERs" Multiplicity="1" />
+    <End Role="USERs" Type="DBModel.Store.USERs" Multiplicity="0..1" />
     <End Role="PRODs" Type="DBModel.Store.PRODs" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="USERs">
@@ -506,6 +507,7 @@
           <NavigationProperty Name="EVENT" Relationship="DBModel.EVENTUSERs" FromRole="USERs" ToRole="EVENT" />
           <NavigationProperty Name="PRODs" Relationship="DBModel.USERsPRODs" FromRole="USERs" ToRole="PRODs" />
           <Property Name="USER_Made_Work" Type="String" Nullable="false" />
+          <Property Name="USER_Email" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="CAT">
           <Key>
@@ -621,7 +623,7 @@
           <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
         </Association>
         <Association Name="USERsPRODs">
-          <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
+          <End Type="DBModel.USERs" Role="USERs" Multiplicity="0..1" />
           <End Type="DBModel.PRODs" Role="PRODs" Multiplicity="*" />
         </Association>
       </Schema>
@@ -694,6 +696,7 @@
           <ScalarProperty Name="USER_Sec" ColumnName="USER_Sec" />
           <ScalarProperty Name="USER_Val_dat" ColumnName="USER_Val_dat" />
           <ScalarProperty Name="USER_Made_Work" ColumnName="USER_Made_Work" />
+          <ScalarProperty Name="USER_Email" ColumnName="USER_Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -863,6 +866,7 @@
       <EndProperty Name="PRODs">
         <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
       </EndProperty>
+      <Condition ColumnName="Prod_Val_User_USER_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

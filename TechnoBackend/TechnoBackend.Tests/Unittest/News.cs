@@ -45,7 +45,7 @@ namespace TechnoBackend.Tests.Unittest
         }
 
         [TestMethod]
-        public JsonNews[] testShowNews(int skip = 0)
+        public JsonNews[] testShowNews(int skip = 1)
         {
             var token = UsecaseLogin.TestMethodLogin();
             if (skip == 0)
@@ -76,7 +76,7 @@ namespace TechnoBackend.Tests.Unittest
             var beforeMax = maxarticle();
             var token = UsecaseLogin.TestMethodLogin();
             //If running together with test show news set test show news to 1 otherwise to 0
-            var toBeDeleted = testShowNews(1);
+            var toBeDeleted = testShowNews(0);
             foreach (var article in toBeDeleted)
             {
                 var testCreateNews = WebRequest.CreateHttp("http://localhost:51516/api/News/" + article.ID);
@@ -92,7 +92,7 @@ namespace TechnoBackend.Tests.Unittest
                 Assert.AreEqual(expected, responseText);
             }
             var afterMax = maxarticle();
-            Assert.AreEqual(Convert.ToInt32(beforeMax)-3,Convert.ToInt32(afterMax));
+            Assert.AreEqual(Convert.ToInt32(beforeMax),Convert.ToInt32(afterMax));
         }
 
         public string maxarticle()
