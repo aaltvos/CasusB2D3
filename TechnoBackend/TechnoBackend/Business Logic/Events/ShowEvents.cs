@@ -21,6 +21,7 @@ namespace TechnoBackend.Business_Logic.Events
                     grab_event.Event_Body = i.Event_Body;
                     grab_event.Event_Address = i.Event_Address;
                     grab_event.Event_Link = i.Event_Link;
+                    grab_event.USERs_USER_Id = i.USERs.USER_Name;
                     event_list.Add(grab_event);
                 }
                 return event_list;
