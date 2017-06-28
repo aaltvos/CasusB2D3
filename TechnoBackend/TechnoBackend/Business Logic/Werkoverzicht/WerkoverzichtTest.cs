@@ -41,11 +41,6 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 
             using(DBModelContainer db = new DBModelContainer())
             {
-
-                IQueryable<USERs> Leveranciers = db.USERs.Where(s => s.USER_Sec == 2);
-                USERs leverancier = Leveranciers.First();
-                dummyproduct.Prod_Val_User = 
-
                 try
                 {
                     db.PRODs.Add(dummyproduct);

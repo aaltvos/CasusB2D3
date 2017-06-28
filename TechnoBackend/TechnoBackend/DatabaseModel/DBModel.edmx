@@ -98,7 +98,7 @@
     <Property Name="Prod_Mov" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Prod_Views" Type="bigint" Nullable="true" />
     <Property Name="Prod_Val_Dat" Type="datetime" Nullable="false" />
-    <Property Name="Prod_Val_User_USER_Id" Type="int" Nullable="false" />
+    <Property Name="Prod_Val_User_USER_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="HAND_SUB_GEB_PROD">
     <Key>
@@ -348,7 +348,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="USERsPRODs">
-    <End Role="USERs" Type="DBModel.Store.USERs" Multiplicity="1" />
+    <End Role="USERs" Type="DBModel.Store.USERs" Multiplicity="0..1" />
     <End Role="PRODs" Type="DBModel.Store.PRODs" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="USERs">
@@ -866,7 +866,7 @@
       <EndProperty Name="PRODs">
         <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
       </EndProperty>
-            <Condition ColumnName="Prod_Val_User_USER_Id" IsNull="false" />
+      <Condition ColumnName="Prod_Val_User_USER_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
