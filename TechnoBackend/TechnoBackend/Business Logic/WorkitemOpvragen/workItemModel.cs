@@ -12,5 +12,7 @@ namespace TechnoBackend.Business_Logic.WorkitemOpvragen
         public string PRODs_Dat { get; set; }
         public string PRODs_Spec { get; set; }
         public string PRODs_Validator { get; set; }
+
+        public string PRODS_Sec { get; set; }
     }
 }

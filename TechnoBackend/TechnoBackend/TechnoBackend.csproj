@@ -164,14 +164,10 @@
     <Compile Include="Business Logic\News\DeleteNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Business Logic\News\ShowNews.cs" />
-<<<<<<< HEAD
+    <Compile Include="Business Logic\WorkitemOpvragen\USERs.cs" />
     <Compile Include="Business Logic\WorkitemOpvragen\workItemModel.cs" />
     <Compile Include="Business Logic\WorkitemOpvragen\WorkitemOpvragen.cs" />
-    <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\SessionCheckController.cs" />
     <Compile Include="Controllers\WorkItemOpvragenController.cs" />
-=======
     <Compile Include="Business Logic\Werkoverzicht\JsonWorkitem.cs" />
     <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtTest.cs" />
     <Compile Include="Business Logic\Werkoverzicht\Workitem.cs" />
@@ -180,7 +176,6 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
     <Compile Include="Controllers\WerkoverzichtTonenController.cs" />
->>>>>>> refs/remotes/origin/master
     <Compile Include="DatabaseModel\CAT.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -255,6 +250,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="DatabaseModel\PRODs_Script.sql" />
+    <Content Include="DatabaseModel\USERs_Script.sql" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

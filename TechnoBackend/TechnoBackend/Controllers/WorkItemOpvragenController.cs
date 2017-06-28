@@ -14,22 +14,17 @@ namespace TechnoBackend.Controllers
 {
     public class WorkItemOpvragenController : ApiController
     {
-        public HttpResponseMessage Get()   // allemaal ophalen
+        public HttpStatusCode Get()   // allemaal ophalen
         {
-            //var token = ActionContext.Request.Headers.GetValues("Token").First();
-            //var newtoken = SessionCheck.Check(token);
-            //if (newtoken.Item1 != "no session" && newtoken.Item2 >= 1)
             {
                 try
                 {
                     var message = WorkitemOpvragen.GetWorkItem();             
-                    //Request.Headers.Add("Token", newtoken.Item1);
-                    var response = Request.CreateResponse(message);
-                    return response;
+                    return HttpStatusCode.OK;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+                    return HttpStatusCode.InternalServerError;
                 }
             }
         }
