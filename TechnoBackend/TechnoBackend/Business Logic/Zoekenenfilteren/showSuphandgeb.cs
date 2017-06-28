@@ -31,16 +31,14 @@ namespace TechnoBackend.Business_Logic.Zoekenenfilteren
 
                 
                 foreach(var a in query)
-                {
-                    SupHandGebModel b = new SupHandGebModel();
-                    b.Sub_ID = a.Sub_ID;
-                    b.Sub_Name = a.Sub_Name;
-                    b.Sub_IMG = a.Sub_IMG;
+                    {
+                        SupHandGebModel b = new SupHandGebModel();
+                        b.Sub_ID = a.Sub_ID;
+                        b.Sub_Name = a.Sub_Name;
+                        b.Sub_IMG = a.Sub_IMG;
 
-                    subhandgeblist.Add(b);
-                   
-                    Console.WriteLine(subhandgeblist);
-                }
+                        subhandgeblist.Add(b);                  
+                    }
                 return subhandgeblist;
             }
         }
