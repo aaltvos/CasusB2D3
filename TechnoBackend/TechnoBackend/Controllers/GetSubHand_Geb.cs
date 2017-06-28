@@ -4,15 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TechnoBackend.Business_Logic.Zoekenenfilteren;
 using TechnoBackend.Login;
+using TechnoBackend.Business_Logic.Zoekenenfilteren;
 
 namespace TechnoBackend.Controllers
 {
-    public class ProductzoekenenfilterenController : ApiController
+    public class GetSubHand_Geb : ApiController
     {
-        // GET api/<controller>
-        
+
         // GET api/<controller>/5
         public HttpResponseMessage Get()   // allemaal ophalen
         {
@@ -23,7 +22,7 @@ namespace TechnoBackend.Controllers
             {
                 try
                 {
-                    var message = ShowHandelingsgebieden.GetHand_Geb();
+                    var message = getsubhand_Geb.GetSupHand_Geb();
                     Request.Headers.Add("Token", newtoken.Item1);
                     var response = Request.CreateResponse(message);
                     return response;
@@ -35,6 +34,7 @@ namespace TechnoBackend.Controllers
             }
             return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Session not found");
         }
+
         // POST api/<controller>
         public void Post([FromBody]string value)
         {

@@ -164,10 +164,13 @@
     <Compile Include="Business Logic\News\DeleteNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Business Logic\News\ShowNews.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\getsubhand_Geb.cs" />
     <Compile Include="Business Logic\Zoekenenfilteren\handGebModel.cs" />
     <Compile Include="Business Logic\Zoekenenfilteren\JsonZoekenenFilteren.cs" />
     <Compile Include="Business Logic\Zoekenenfilteren\ShowHandelingsgebieden.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\SubhandModel.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\GetSubHand_Geb.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductzoekenenfilterenController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />

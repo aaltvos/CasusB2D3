@@ -12,10 +12,10 @@ namespace TechnoBackend.Business_Logic.Zoekenenfilteren
         public static IList<handGebModel> GetHand_Geb()
         {
             List<handGebModel> handgeblist = new List<handGebModel>();
-            using (DBModelContainer dbModel = new DBModelContainer())
+            using (DBModelContainer dbModel = new DBModelContainer()) ;
             {
                 //dbModel.HAND_GEB.Select(x => new lcclsAccDueList { * }).ToList();
-                foreach(var a in dbModel.HAND_GEB)
+                foreach (var a in dbModel.HAND_GEB)
                 {
                     handGebModel b = new handGebModel();
                     b.Hand_ID = a.Hand_ID;
