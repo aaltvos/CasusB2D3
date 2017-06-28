@@ -255,6 +255,12 @@
     <Content Include="DatabaseModel\DBModel.edmx.diagram">
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Makescripts\CATs_Script.sql" />
+    <Content Include="Makescripts\EVENT_Script.sql" />
+    <Content Include="Makescripts\HAND_GEB_Script.sql" />
+    <Content Include="Makescripts\PRODs_Script.sql" />
+    <Content Include="Makescripts\SUB_GEB_Script.sql" />
+    <Content Include="Makescripts\USERs_Script.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
