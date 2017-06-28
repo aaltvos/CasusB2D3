@@ -35,9 +35,9 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // Fetch unvalidated products
-        private static List<JsonWorkitem> FetchUnvalidatedProducts()
+        private static List<Workitem> FetchUnvalidatedProducts()
         {
-            List<JsonWorkitem> WorkitemList = new List<JsonWorkitem>();
+            List<Workitem> WorkitemList = new List<Workitem>();
 
             // Single database usage
             using (DBModelContainer db = new DBModelContainer())
@@ -50,7 +50,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                 {
                     foreach (PRODs unvalidatedProduct in student.PRODs)
                     {
-                        JsonWorkitem workitem = new JsonWorkitem(
+                        Workitem workitem = new Workitem(
                             unvalidatedProduct.Prod_ID, 
                             unvalidatedProduct.Prod_Name,
                             unvalidatedProduct.Prod_Dat,
@@ -75,10 +75,10 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // Fetch expired products
-        private static List<JsonWorkitem> FetchExpiredProducts()
+        private static List<Workitem> FetchExpiredProducts()
         {
             // Initialise workitem list
-            List<JsonWorkitem> FetchedItems = new List<JsonWorkitem>();
+            List<Workitem> FetchedItems = new List<Workitem>();
 
             // Single database usage
             using (DBModelContainer db = new DBModelContainer())
@@ -89,7 +89,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                 // Cycle through each product and add needed data as an object to the FetchedItems list
                 foreach (PRODs expiredproduct in ExpiredProducts)
                 {
-                    JsonWorkitem workitem = new JsonWorkitem(
+                    Workitem workitem = new Workitem(
                         expiredproduct.Prod_ID,
                         expiredproduct.Prod_Name,
                         expiredproduct.Prod_Dat,

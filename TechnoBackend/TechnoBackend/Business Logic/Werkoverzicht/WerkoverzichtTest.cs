@@ -13,34 +13,39 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         public static string CreateDummyData(HttpActionContext actionContext)
         {
             // Decode json to a workable object
-            string jsonObject = actionContext.Request.Content.ReadAsStringAsync().Result;
-            JsonWorkitem deserializedDummyProduct = JsonConvert.DeserializeObject<JsonWorkitem>(jsonObject);
-
+            var jsonObject = actionContext.Request.Content.ReadAsStringAsync().Result;
+            var deserializedDummyProduct = JsonConvert.DeserializeObject<JsonWorkitem>(jsonObject);
+            
             // Get session token from http call headers
             string Token = actionContext.Request.Headers.GetValues("Token").First();
+
 
             // Create dummy product
             PRODs dummyproduct = new PRODs()
             {
                 //variabelen toevoegen
-                Prod_ID = deserializedDummyProduct.product_id,
-                Prod_Name = deserializedDummyProduct.product_name,
-                Prod_Dat = deserializedDummyProduct. product_date,
-                Prod_Size = deserializedDummyProduct.product_size,
-                Prod_Weight = deserializedDummyProduct.product_weight,
-                Prod_Cost = deserializedDummyProduct.product_cost,
-                Prod_Covered = deserializedDummyProduct.product_covered,
-                Prod_Avail = deserializedDummyProduct.product_availability,
-                Prod_Desc = deserializedDummyProduct.product_description,
-                Prod_Spec = deserializedDummyProduct.product_specification,
-                Prod_Req = deserializedDummyProduct.product_requirements,
-                Prod_Mov = deserializedDummyProduct.product_movie,
-                Prod_Views = deserializedDummyProduct.product_views,
-                Prod_Val_Dat = deserializedDummyProduct.product_validation_date
+                Prod_Name = deserializedDummyProduct.Name,
+                Prod_Dat = DateTime.Parse(deserializedDummyProduct.Dat),
+                Prod_Size = deserializedDummyProduct.Size,
+                Prod_Weight = deserializedDummyProduct.Weight,
+                Prod_Cost = deserializedDummyProduct.Cost,
+                Prod_Covered = deserializedDummyProduct.Covered,
+                Prod_Avail = deserializedDummyProduct.Avail,
+                Prod_Desc = deserializedDummyProduct.Desc,
+                Prod_Spec = deserializedDummyProduct.spec,
+                Prod_Req = deserializedDummyProduct.Req,
+                Prod_Mov = deserializedDummyProduct.Mov,
+                Prod_Views = deserializedDummyProduct.Views,
+                Prod_Val_Dat = DateTime.Parse(deserializedDummyProduct.Val_Dat)
             };
 
             using(DBModelContainer db = new DBModelContainer())
             {
+
+                IQueryable<USERs> Leveranciers = db.USERs.Where(s => s.USER_Sec == 2);
+                USERs leverancier = Leveranciers.First();
+                dummyproduct.Prod_Val_User = 
+
                 try
                 {
                     db.PRODs.Add(dummyproduct);

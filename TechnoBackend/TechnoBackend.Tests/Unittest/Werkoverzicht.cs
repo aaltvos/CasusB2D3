@@ -19,8 +19,7 @@ namespace TechnoBackend.Tests.Unittest
         {
             // add dummy product
             string testData = 
-                "'id':'9999'," +
-                "'name':'DummyProduct'," +
+                "{'name':'DummyProduct'," +
                 "'date':'"+DateTime.Today.ToString()+"'," +
                 "'size':'1234'," +
                 "'weight':'1234'," +
@@ -30,7 +29,7 @@ namespace TechnoBackend.Tests.Unittest
                 "'requirments':'root permission'," +
                 "'movie':'/content/movies/dummyproduct.mp4'," +
                 "'views':'1'," +
-                "'validation_date':'"+DateTime.Today.ToString()+"'";
+                "'validation_date':'"+DateTime.Today.ToString()+"'}";
 
             // Fetch token and encode testData
             string token = UsecaseLogin.TestMethodLogin();
