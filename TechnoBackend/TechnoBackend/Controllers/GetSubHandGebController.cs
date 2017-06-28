@@ -18,7 +18,7 @@ namespace TechnoBackend.Controllers
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
-            var handgeb = ActionContext.Request.Headers.GetValues("Handgeb").First();
+            //var handgeb = ActionContext.Request.Headers.GetValues("Handgeb").First();
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 1)
             {
                 try
