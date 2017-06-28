@@ -13,6 +13,7 @@ namespace TechnoBackend.Controllers
     public class EventController : ApiController
     {
         // GET api/<controller>/5
+        /*
         public HttpResponseMessage Get()
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
@@ -32,7 +33,7 @@ namespace TechnoBackend.Controllers
                 }
             }
             return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Session not found");
-        }
+        }*/
 
         // POST api/<controller>
         public HttpResponseMessage Post()

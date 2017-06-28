@@ -25,7 +25,7 @@ namespace TechnoBackend.Business_Logic.Event
                 var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
 
 
-                //Create new Article in DB with info from the object and the user id
+                //Create new Event in DB with info from the object and the user_id
                 EVENT event_ = new EVENT()
                 {
                     Event_Name = newEvent.Name,
