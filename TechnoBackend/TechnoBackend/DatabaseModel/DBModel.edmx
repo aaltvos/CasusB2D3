@@ -623,7 +623,7 @@
           <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
         </Association>
         <Association Name="USERsPRODs">
-          <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
+          <End Type="DBModel.USERs" Role="USERs" Multiplicity="0..1" />
           <End Type="DBModel.PRODs" Role="PRODs" Multiplicity="*" />
         </Association>
       </Schema>
@@ -866,6 +866,7 @@
       <EndProperty Name="PRODs">
         <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
       </EndProperty>
+            <Condition ColumnName="Prod_Val_User_USER_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
