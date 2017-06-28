@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace TechnoBackend.Business_Logic.ManageEvents
+namespace TechnoBackend.Business_Logic.Event
 {
     public class JsonEvent
     {

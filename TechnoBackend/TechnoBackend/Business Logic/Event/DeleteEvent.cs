@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using TechnoBackend.DatabaseModel;
 
-namespace TechnoBackend.Business_Logic.ManageEvents
+namespace TechnoBackend.Business_Logic.Event
 {
     public class DeleteEvent
     {

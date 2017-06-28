@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http.Controllers;
 using Newtonsoft.Json;
 using TechnoBackend.DatabaseModel;
 
-namespace TechnoBackend.Business_Logic.ManageEvents
+namespace TechnoBackend.Business_Logic.Event
 {
     public class CreateEvent
     {
