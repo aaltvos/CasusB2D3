@@ -13,7 +13,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 {
     public class WerkoverzichtStart
     {
-        public static object WorkItemsFetchen(int id)
+        public static object FetchWorkitems(int id)
         {
             switch (id)
             {
@@ -21,12 +21,12 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                     // 1: Fetch unvalidated workitems for supervisor
                     //    an unvalidated workitem for a supervisor is a
                     //    product that has been validated by a student
-                    return FetchValidators();
+                    return FetchUnvalidatedProducts();
 
                 case 2:
                     // 2: Fetch expired workitems, workitems are expired
                     //    when their validation date is more then 3 years ago
-                    return FetchExpiredDates();
+                    return FetchExpiredProducts();
 
                 default:
                     // Als er een ander getal of woord ingegeven is dan 1 of 2 dan komt het programma hierop uit
@@ -35,7 +35,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // Fetch unvalidated products
-        private static List<JsonWorkitem> FetchValidators()
+        private static List<JsonWorkitem> FetchUnvalidatedProducts()
         {
             List<JsonWorkitem> WorkitemList = new List<JsonWorkitem>();
 
@@ -50,7 +50,21 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                 {
                     foreach (PRODs unvalidatedProduct in student.PRODs)
                     {
-                        JsonWorkitem workitem = new JsonWorkitem(unvalidatedProduct.Prod_ID, unvalidatedProduct.Prod_Name);
+                        JsonWorkitem workitem = new JsonWorkitem(
+                            unvalidatedProduct.Prod_ID, 
+                            unvalidatedProduct.Prod_Name,
+                            unvalidatedProduct.Prod_Dat,
+                            unvalidatedProduct.Prod_Size,
+                            unvalidatedProduct.Prod_Weight,
+                            unvalidatedProduct.Prod_Cost,
+                            unvalidatedProduct.Prod_Covered,
+                            unvalidatedProduct.Prod_Avail,
+                            unvalidatedProduct.Prod_Desc,
+                            unvalidatedProduct.Prod_Spec,
+                            unvalidatedProduct.Prod_Req,
+                            unvalidatedProduct.Prod_Mov,
+                            unvalidatedProduct.Prod_Views,
+                            unvalidatedProduct.Prod_Val_Dat);
                         WorkitemList.Add(workitem);
                     }
                 }
@@ -61,7 +75,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // Fetch expired products
-        private static List<JsonWorkitem> FetchExpiredDates()
+        private static List<JsonWorkitem> FetchExpiredProducts()
         {
             // Initialise workitem list
             List<JsonWorkitem> FetchedItems = new List<JsonWorkitem>();
@@ -73,9 +87,23 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
                 IQueryable<PRODs> ExpiredProducts = db.PRODs.Where(s => s.Prod_Val_Dat.AddYears(3) < DateTime.Today);
 
                 // Cycle through each product and add needed data as an object to the FetchedItems list
-                foreach (PRODs product in ExpiredProducts)
+                foreach (PRODs expiredproduct in ExpiredProducts)
                 {
-                    JsonWorkitem workitem = new JsonWorkitem(product.Prod_ID, product.Prod_Name);
+                    JsonWorkitem workitem = new JsonWorkitem(
+                        expiredproduct.Prod_ID,
+                        expiredproduct.Prod_Name,
+                        expiredproduct.Prod_Dat,
+                        expiredproduct.Prod_Size,
+                        expiredproduct.Prod_Weight,
+                        expiredproduct.Prod_Cost,
+                        expiredproduct.Prod_Covered,
+                        expiredproduct.Prod_Avail,
+                        expiredproduct.Prod_Desc,
+                        expiredproduct.Prod_Spec,
+                        expiredproduct.Prod_Req,
+                        expiredproduct.Prod_Mov,
+                        expiredproduct.Prod_Views,
+                        expiredproduct.Prod_Val_Dat);
                     FetchedItems.Add(workitem);
                 }
 

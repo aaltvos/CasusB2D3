@@ -8,17 +8,46 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
 {
     public class JsonWorkitem
     {
+        
         // Must have information
-        public JsonWorkitem(int product_id,string product_name)
+        public JsonWorkitem(
+            int product_id,
+            string product_name,
+            DateTime product_date,
+            string product_size,
+            string product_weight,
+            string product_cost,
+            bool? product_covered,
+            string product_availability,
+            string product_description,
+            string product_specification,
+            string product_requirements,
+            string product_movie,
+            long? product_views,
+            DateTime product_validation_date
+            )
         {
             this.product_id = product_id;
             this.product_name = product_name;
+            this.product_date = product_date;
+            this.product_size = product_size;
+            this.product_weight = product_weight;
+            this.product_cost = _product_cost;
+            this.product_covered = product_covered;
+            this.product_availability = product_availability;
+            this.product_description = product_description;
+            this.product_specification = product_specification;
+            this.product_requirements = product_requirements;
+            this.product_movie = product_movie;
+            this.product_views = product_views;
+            this.product_validation_date = product_validation_date;
         }
 
         // List of properties with get and setters for data encapsulation
         // contains foreign key '_product_validation_user_id' to pass user_id to front-end
 
         // PROD_ID
+        [JsonProperty(PropertyName = "id")]
         private int _product_id;
 
         public int product_id
@@ -28,6 +57,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Name
+        [JsonProperty(PropertyName = "name")]
         private string _product_name;
 
         public string product_name
@@ -37,6 +67,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Dat
+        [JsonProperty(PropertyName = "date")]
         private DateTime _product_date;
 
         public DateTime product_date
@@ -46,6 +77,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Size
+        [JsonProperty(PropertyName = "size")]
         private string _product_size;
 
         public string product_size
@@ -55,6 +87,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Weight
+        [JsonProperty(PropertyName = "weight")]
         private string _product_weight;
 
         public string product_weight
@@ -64,6 +97,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Cost
+        [JsonProperty(PropertyName = "cost")]
         private string _product_cost;
 
         public string product_cost
@@ -73,15 +107,17 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Covered
-        private bool _product_covered;
+        [JsonProperty(PropertyName = "covered")]
+        private bool? _product_covered;
 
-        public bool product_covered
+        public bool? product_covered
         {
             get { return _product_covered; }
             set { _product_covered = value; }
         }
 
         // PROD_Avail
+        [JsonProperty(PropertyName = "availability")]
         private string _product_availability;
 
         public string product_availability
@@ -91,6 +127,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Desc
+        [JsonProperty(PropertyName = "description")]
         private string _product_description;
 
         public string product_description
@@ -100,6 +137,7 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Spec
+        [JsonProperty(PropertyName = "specification")]
         private string _product_specification;
             
         public string product_specification
@@ -108,7 +146,8 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
             set { _product_specification = value; }
         }
 
-        // PROD_reg
+        // PROD_req
+        [JsonProperty(PropertyName = "requirements")]
         private string _product_requirements;
 
         public string product_requirements
@@ -116,8 +155,9 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
             get { return _product_requirements; }
             set { _product_requirements = value; }
         }
-        
+
         // PROD_Mov
+        [JsonProperty(PropertyName = "movie")]
         private string _product_movie;
 
         public string product_movie
@@ -127,30 +167,23 @@ namespace TechnoBackend.Business_Logic.Werkoverzicht
         }
 
         // PROD_Views
-        private Int64 _product_views;
+        [JsonProperty(PropertyName = "views")]
+        private long? _product_views;
                 
-        public Int64 product_views
+        public long? product_views
         {
             get { return _product_views; }
             set { _product_views = value; }
         }
 
         // PROD_Val_Dat
+        [JsonProperty(PropertyName = "validation_date")]
         private DateTime _product_validation_date;
 
         public DateTime product_validation_date
         {
             get { return _product_validation_date; }
             set { _product_validation_date = value; }
-        }
-
-        // Foreign key: Prod_Val_User
-        private Int32 _product_validation_user_id;
-
-        public Int32 product_validation_user_id
-        {
-            get { return _product_validation_user_id; }
-            set { _product_validation_user_id = value; }
         }
     }
 }
