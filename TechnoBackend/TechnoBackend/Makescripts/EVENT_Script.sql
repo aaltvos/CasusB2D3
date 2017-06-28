@@ -1,5 +1,3 @@
-CREATE DATABASE Ergo;
-
 Delete EVENTs
 DBCC CHECKIDENT('Ergo.dbo.EVENTs', RESEED, 0)
 
