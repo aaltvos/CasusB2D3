@@ -15,7 +15,7 @@ namespace TechnoBackend.Business_Logic.ProductZoeken
             using (DBModelContainer dbModel = new DBModelContainer())
             {
                 //dbModel.HAND_GEB.Select(x => new lcclsAccDueList { * }).ToList();
-                foreach (var a in dbModel.HAND_GEB)
+                foreach (var a in dbModel.PRODs)
                 {
                     handGebModel b = new handGebModel();
                     b.Prod_ID = a.Prod_ID;
@@ -23,7 +23,7 @@ namespace TechnoBackend.Business_Logic.ProductZoeken
                     b.Prod_Cost = a.Prod_Cost;
 
 
-                    handgeblist.Add(b);
+                    Productenlijst.Add(b);
                 }
                 return handgeblist;
             }
