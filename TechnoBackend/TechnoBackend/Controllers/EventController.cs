@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using TechnoBackend.Business_Logic.Event;
-using TechnoBackend.Business_Logic.Login;
 using TechnoBackend.Login;
 
 namespace TechnoBackend.Controllers

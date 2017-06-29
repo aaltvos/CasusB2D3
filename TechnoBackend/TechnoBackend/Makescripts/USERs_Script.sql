@@ -8,7 +8,8 @@ Insert USERs
 		USER_PW,
 		USER_Sec,
 		USER_Val_dat,
-		USER_Made_Work
+		USER_Made_Work,
+		USER_email
 	)
 	VALUES
 	(
@@ -16,7 +17,8 @@ Insert USERs
 		'Beheerder12',
 		4,
 		DATEADD(day,500,CONVERT(date, GETDATE())),
-		'1'
+		'1',
+		''
 	)
 
 Insert USERs
@@ -25,7 +27,8 @@ Insert USERs
 		USER_PW,
 		USER_Sec,
 		USER_Val_dat,
-		USER_Made_Work
+		USER_Made_Work,
+		USER_email
 	)
 	VALUES
 	(
@@ -33,7 +36,8 @@ Insert USERs
 		'Knabbel',
 		4,
 		DATEADD(day,500,CONVERT(date, GETDATE())),
-		'1'
+		'1',
+		''
 	)
 
 --Security level: 3    Student
@@ -43,7 +47,8 @@ Insert USERs
 		USER_PW,
 		USER_Sec,
 		USER_Val_dat,
-		USER_Made_Work
+		USER_Made_Work,
+		USER_email
 	)
 	VALUES
 	(
@@ -51,7 +56,8 @@ Insert USERs
 		'Student12',
 		3,
 		DATEADD(day,500,CONVERT(date, GETDATE())),
-		'1'
+		'1',
+		''
 	)
 
 --Security level: 2   leverancier / ergotherapeuten / externen
@@ -61,7 +67,8 @@ Insert USERs
 		USER_PW,
 		USER_Sec,
 		USER_Val_dat,
-		USER_Made_Work
+		USER_Made_Work,
+		USER_email
 	)
 	VALUES
 	(
@@ -69,7 +76,8 @@ Insert USERs
 		'Henk12',
 		2,
 		DATEADD(day,500,CONVERT(date, GETDATE())),
-		'1'
+		'1',
+		''
 	)
 
 --Security level: 1
@@ -79,7 +87,8 @@ Insert USERs
 		USER_PW,
 		USER_Sec,
 		USER_Val_dat,
-		USER_Made_Work
+		USER_Made_Work,
+		USER_email
 	)
 	VALUES
 	(
@@ -87,7 +96,8 @@ Insert USERs
 		'Sjors12',
 		1,
 		DATEADD(day,500,CONVERT(date, GETDATE())),
-		'1'
+		'1',
+		''
 	)
 
 Select * from USERs
