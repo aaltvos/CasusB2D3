@@ -25,7 +25,7 @@ namespace TechnoBackend.Business_Logic.ProductZoeken
 
                     Productenlijst.Add(b);
                 }
-                return handgeblist;
+                return Productenlijst;
             }
 
 
