@@ -9,9 +9,9 @@ namespace TechnoBackend.Business_Logic.ProductZoeken
 {
     public class ProductZoeken
     {
-        public static IList<handGebModel> GetHand_Geb()
+        public static IList<ProductZoekenModel> GetProds()
         {
-            List<handGebModel> Productenlijst = new List<handGebModel>();
+            List<ProductZoekenModel> Productenlijst = new List<ProductZoekenModel>();
             using (DBModelContainer dbModel = new DBModelContainer())
             {
                 //dbModel.HAND_GEB.Select(x => new lcclsAccDueList { * }).ToList();
