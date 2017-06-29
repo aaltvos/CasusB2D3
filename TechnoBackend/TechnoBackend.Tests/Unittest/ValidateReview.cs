@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Text;
 
@@ -10,16 +12,17 @@ namespace TechnoBackend.Tests.Unittest
         [TestMethod]
         public void LoadAll()
         {
-            string data = "{}";
+            var call = WebRequest.CreateHttp("http://localhost:51516/api/ValidateReview");
+            call.Method = "GET";
+            call.Headers.Add("Token", UsecaseLogin.TestMethodLogin());
             
-            var body = UTF8Encoding.UTF8.GetBytes(data);
-            var testCreateNews = WebRequest.CreateHttp("http://localhost:51516/api/ValidateReview");
-            testCreateNews.Method = "GET";
-            testCreateNews.Headers.Add("Token", "TOKENNN");
+            var response = call.GetResponse();
 
-            var stream = testCreateNews.GetRequestStream();
-            stream.Write(body, 0, body.Length);
-            var response = testCreateNews.GetResponse();
+            string responseText = "";
+            using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                responseText = reader.ReadToEnd();
+
+            Debug.WriteLine(responseText);
         }
 
     }
