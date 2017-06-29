@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TechnoBackend.Login;
-using TechnoBackend.Business_Logic.GebruikersreviewPlaatsen;
 using TechnoBackend.DatabaseModel;
-using System.Web.Security;
+using TechnoBackend.Business_Logic.GebruikersreviewPlaatsen;
+using TechnoBackend.Login;
 
 namespace TechnoBackend.Controllers
 {
@@ -27,19 +25,16 @@ namespace TechnoBackend.Controllers
         }
 
         // POST api/<controller>
-        public HttpResponseMessage Post()
+        [HttpPost]
+        public IHttpActionResult PostReview(string ReviewContent, Int32 UserID)
         {
-            DBModelContainer database = new DBModelContainer();
+            var token = ActionContext.Request.Headers.GetValues("Token").First();
+            var newtoken = SessionCheck.Check(token);
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
             {
-                PRODs current = database.PRODs.Where(p => p.Prod_ID == _product.Prod_ID).First();
-                if (current == null) return "{\"status\":\"Error\", \"message\":\"No WorkItem found\"}";
-
-                USERs user = database.USERs.Where(s => s.USER_Id == session.USER_Id.USER_Id).First();
-                if (user == null) return "{\"status\":\"Error\", \"message\":\"No User found\"}";
-
-                throw new NotImplementedException();
-
+                GebruikersreviewPlaatsen;
             }
+            throw new NotImplementedException();
         }
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)
