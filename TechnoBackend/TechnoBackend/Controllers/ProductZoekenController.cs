@@ -13,16 +13,15 @@ namespace TechnoBackend.Controllers
     {
 
         // GET api/<controller>/5
-        public HttpResponseMessage Get()   // allemaal ophalen
+        public HttpResponseMessage Get()   // gegevens ophalen
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
-            //var handgeb = ActionContext.Request.Headers.GetValues("Handgeb").First();
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 1)
             {
                 try
                 {
-                    var message = showSuphandgeb.GetSupHand_Geb(ActionContext);
+                    var message = showProds.GetProds(ActionContext);
                     Request.Headers.Add("Token", newtoken.Item1);
                     var response = Request.CreateResponse(message);
                     return response;
