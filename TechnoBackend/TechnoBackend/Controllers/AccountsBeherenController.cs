@@ -8,40 +8,32 @@ using System.Web.Mvc;
 using TechnoBackend.Business_Logic.Accounts_Beheren;
 using TechnoBackend.DatabaseModel;
 
+
 namespace TechnoBackend.Controllers
 {
     public class AccountsBeherenController : ApiController
     {
-        DBModelContainer db = new DBModelContainer();
-        USERs account = new USERs();
-
-
-
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        // POST 
+        public HttpResponseMessage Post()
         {
-            return new string[] { "value1", "value2" };
+                    try
+                    {
+                        var message = NewAccount.CreateAccount();
+                        var response = Request.CreateResponse(message);
+                        return response;
+                    }
+                    catch (Exception ex)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+                    }
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        //Delete
+        public HttpResponseMessage Delete(int id)
         {
-            return "value";
+            var message = OldAccount.DeleteAccount(id);
+            var response = Request.CreateResponse(message);
+            return response;
         }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-
-
-
     }
 }
