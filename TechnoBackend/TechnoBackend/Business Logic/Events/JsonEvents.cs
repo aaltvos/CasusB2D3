@@ -23,7 +23,7 @@ namespace TechnoBackend.Business_Logic.Events
         [JsonProperty(PropertyName = "Event_Link")]
         public string Event_Link { get; set; }
 
-        [JsonProperty(PropertyName = "USERs_USER_Id")]
-        public int USERs_USER_Id { get; set; }
+        [JsonProperty(PropertyName = "USERs_USER_Name")]
+        public string USERs_USER_Name { get; set; }
     }
 }
