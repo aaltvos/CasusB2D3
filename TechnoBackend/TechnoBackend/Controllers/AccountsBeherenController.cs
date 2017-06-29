@@ -40,28 +40,8 @@ namespace TechnoBackend.Controllers
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
 
-        
-        public ActionResult PostCreateAccount([FromBody] CreateAccount account)
-        {
-            if (ModelState.IsValid)
-            {
 
-                db.USERs.Add(account);
-                db.SaveChanges();
-                return "account added";
-            }
-
-            return 
-        }
-
-        public string CreateAccount()
-        {
-            
-        }
 
     }
 }
