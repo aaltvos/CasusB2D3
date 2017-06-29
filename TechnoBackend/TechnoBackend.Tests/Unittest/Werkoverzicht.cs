@@ -17,6 +17,7 @@ namespace TechnoBackend.Tests.Unittest
         [TestMethod]
         public void CreateDummyProduct()
         {
+
             // add dummy product
             string testData = 
                 "{'name':'DummyProduct'," +
@@ -45,7 +46,7 @@ namespace TechnoBackend.Tests.Unittest
             connectionStream.Write(body, 0, body.Length);
 
             // get response
-            var connectionResponse = connectionRequest.GetResponse();
+            WebResponse connectionResponse = connectionRequest.GetResponse();
 
             // create reader and read stream
             var connectionReader = new StreamReader(connectionResponse.GetResponseStream(), Encoding.UTF8);
@@ -55,26 +56,65 @@ namespace TechnoBackend.Tests.Unittest
             Assert.AreEqual(expected, connectionReader.ReadToEnd());
         }
 
-        //public static string TestDummyProduct()
-        //{
-        //    // load and establish connection
 
-        //    // assert data
 
-        //    // compare fetched data with test data
-        //    return "placeholder";        
-        //}
+        [TestMethod]
+        public void TestDummyProduct()
+        {
 
-        //public void DeleteDummyProduct()
-        //{
-        //    // load and establish connection
+            // Fetch token
+            string token = UsecaseLogin.TestMethodLogin();
+            string productName = "DummyProduct";
 
-        //    // assert data
+            // load and establish connection
+            var connectionRequest = WebRequest.CreateHttp("http://localhost:51516/api/WerkoverzichtTonen");
+            connectionRequest.Method = "GET";
+            connectionRequest.Headers.Add("Token", token);
+            connectionRequest.Headers.Add("ProductName", productName);
 
-        //    // delete dummy product
-        //}
+            // get response
+            var connectionResponse = connectionRequest.GetResponse();
 
+            // create reader and read stream
+            var connectionReader = new StreamReader(connectionResponse.GetResponseStream(), Encoding.UTF8);
+            string response = connectionReader.ReadToEnd();
+            var responseList = JsonConvert.DeserializeObject<Workitem[]>(response);
+
+            // expected result
+            var responseItem = responseList.First();
+            string expected = responseItem.product_name;
+            
+            // compare fetched data with test data
+            Assert.AreEqual(expected, productName);
+        }
+
+
+
+        [TestMethod]
+        public void DeleteDummyProduct()
+        {
+
+            // Fetch token and encode testData
+            string token = UsecaseLogin.TestMethodLogin();
+            string productName = "DummyProduct";
+
+            // load and establish connection
+            HttpWebRequest connectionRequest = WebRequest.CreateHttp("http://localhost:51516/api/WerkoverzichtTonen");
+            connectionRequest.Method = "DELETE";
+            connectionRequest.Headers.Add("Token", token);
+            connectionRequest.Headers.Add("ProductName", productName);
+
+            // get response
+            WebResponse connectionResponse = connectionRequest.GetResponse();
+
+            // create reader and read stream
+            StreamReader connectionReader = new StreamReader(connectionResponse.GetResponseStream(), Encoding.UTF8);
+
+            // expected result
+            string expected = "\"Dummyproduct deleted succesfully\"";
+
+            // Assert expected wtih received data
+            Assert.AreEqual(expected, connectionReader.ReadToEnd());
+        }
     }
-
-
 }
