@@ -7,12 +7,10 @@ namespace TechnoBackend.Business_Logic.GebruikersreviewPlaatsen
 { 
     public class GebruikersreviewPlaatsen
     {
-        string DummyReview = "dit is een dummy review";
-        string var1;
-
-        internal static object GetReview()
+        public class GetReview
         {
-            throw new NotImplementedException();
+            string review = "this is a dumy review thats really pretty short and not really useful";
+
         }
     }
 }
