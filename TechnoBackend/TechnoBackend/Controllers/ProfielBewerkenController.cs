@@ -13,13 +13,13 @@ namespace TechnoBackend.Controllers
     {
        
         // GET api/<controller>/5
-        public string Get(int id)
+        public HttpResponseMessage Get(int id)
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 1)
             {
-                var message = ProfielBewerken.UserDetails();
+                var message = ProfielBewerken.EditProfile(ActionContext);
                 Request.Headers.Add("Token", newtoken.Item1);
                 var response = Request.CreateResponse(message);
                 return response;
@@ -28,19 +28,21 @@ namespace TechnoBackend.Controllers
 
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, [FromBody]string value)
         {
-        }
+            var token = ActionContext.Request.Headers.GetValues("Token").First();
+            var newtoken = SessionCheck.Check(token);
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 2)
+            {
+                var message = ProfielBewerken.EditProfile(ActionContext);
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+                Request.Headers.Add("Token", newtoken.Item1);
+                var response = Request.CreateResponse(message);
+                return response;
+            }
+            return Request.CreateResponse("Invalid action");
+
         }
     }
 }

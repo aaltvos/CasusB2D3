@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="DBModel.HAND_SUB_GEB_PROD" Width="1.5" PointX="4.25" PointY="6.25" />
         <EntityTypeShape EntityType="DBModel.SUB_BEG" Width="1.5" PointX="1.125" PointY="5" />
         <EntityTypeShape EntityType="DBModel.REVs" Width="1.5" PointX="8.875" PointY="4.375" />
-        <EntityTypeShape EntityType="DBModel.USERs" Width="1.5" PointX="11.125" PointY="4.125" />
+        <EntityTypeShape EntityType="DBModel.USERs" Width="1.5" PointX="11.125" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.CAT" Width="1.5" PointX="6.5" PointY="1" />
         <EntityTypeShape EntityType="DBModel.CAT_PROD" Width="1.5" PointX="6.5" PointY="3.25" />
         <EntityTypeShape EntityType="DBModel.SESSIONS" Width="1.5" PointX="13.625" PointY="4.625" />

@@ -17,7 +17,7 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
         [JsonProperty(PropertyName = "User_PW")]
         public string USER_PW { get; set; }
 
-        [JsonProperty(PropertyName = "User_email")]
+        [JsonProperty(PropertyName = "User_Email")]
         public string USER_Email { get; set; }
     }
 }

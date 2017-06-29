@@ -1,43 +1,72 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Threading;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Http.Controllers;
-using TechnoBackend.Business_Logic.ProfielBewerken;
+using Newtonsoft.Json;
+using TechnoBackend.DatabaseModel;
+using TechnoBackend.Login;
+using System.Collections.Generic;
 
 
 namespace TechnoBackend.Business_Logic.ProfielBewerken
 {
     public class ProfielBewerken
     {
-        private static List<Object> getCurrentDetails()
+        public static string EditProfile(HttpActionContext actionContext)
         {
-
-            List<Object> userDetails = new List<Object>();
 
             // Geef aan met welke database de linq querry wordt uitgevoerd
             using (DBModelContainer db = new DBModelContainer())
             {
-                string Token = waar vandaan ?; 
-                
 
+                var json = actionContext.Request.Content.ReadAsStringAsync().Result;
+                JsonProfielBewerken editProfile = JsonConvert.DeserializeObject<JsonProfielBewerken>(json);
 
-                int USER_Id = (from i in db.SESSIONS where i.SESSIONS_Token = Token select i.SESSIONS.USER_Id)
+                //Get token from headers
+                string token = actionContext.Request.Headers.GetValues("Token").First();
 
-                // parser om linq querryable om te zetten naar lijst met PRODs
-                foreach (var item in Workitems)
+                //Use token to get the user id
+                var userID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == token select sessions.USER_Id.USER_Id).First();
+                var currentUser = from users in db.USERs where users.USER_Id == userID select users;                
+                Debug.WriteLine(currentUser.ToString());
+
+                List<string> lijst = new List<string>();
+                string nameInput = "x";
+                string PWInput = "y";
+                string emailInput = "z";
+
+                if (nameInput != null)
                 {
-                    Lijstje.Add(item);
+                    currentUser.USER_Name = nameInput;
+                }
+                if (PWInput != null)
+                {
+                    currentUser.USER_PW = PWInput;
+                }
+                if (emailInput != null)
+                {
+                    currentUser.USER_Email = emailInput;
                 }
 
-                // return Lijst met ongevalideerde workitems
-                return Lijstje;
+                if (nameInput != null || PWInput != null || emailInput != null)
+                { 
+                    try
+                    {
+                        db.SubmitChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        return e.ToString();
+                    }
+
+                return "Succesfully changed details";
+                }
+                else
+                {
+                    return "No changes were made";
+                }
+
+
             }
         }
 
@@ -45,13 +74,3 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
 
     }
 }
-
-
-//[USER_Id] int IDENTITY(1,1) NOT NULL,
-
-//[USER_Name] nvarchar(max)  NOT NULL,
-
-//[USER_PW] nvarchar(max)  NOT NULL,
-
-//[USER_Sec] int NOT NULL,
-//    [USER_Val_dat] datetime NOT NULL
