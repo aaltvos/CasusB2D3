@@ -30,11 +30,12 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
                 var currentUser = from users in db.USERs where users.USER_Id == userID select users;                
                 Debug.WriteLine(currentUser.ToString());
 
-                List<string> lijst = new List<string>();
-                string nameInput = "x";
-                string PWInput = "y";
-                string emailInput = "z";
-
+                //userinput would be in these variables.
+                string nameInput;
+                string PWInput;
+                string emailInput;
+                
+                //check if current data needs to be updated
                 if (nameInput != null)
                 {
                     currentUser.USER_Name = nameInput;
@@ -47,7 +48,8 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
                 {
                     currentUser.USER_Email = emailInput;
                 }
-
+                
+                //if either one of records has an update, submit changes, otherwise no nothing
                 if (nameInput != null || PWInput != null || emailInput != null)
                 { 
                     try
@@ -59,7 +61,7 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
                         return e.ToString();
                     }
 
-                return "Succesfully changed details";
+                    return "Succesfully changed details";
                 }
                 else
                 {
