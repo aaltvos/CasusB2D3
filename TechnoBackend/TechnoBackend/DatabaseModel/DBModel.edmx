@@ -67,6 +67,10 @@
       <End Role="EVENT" EntitySet="EVENTs" />
       <End Role="USERs" EntitySet="USERs" />
     </AssociationSet>
+    <AssociationSet Name="USERsPRODs" Association="DBModel.Store.USERsPRODs">
+      <End Role="USERs" EntitySet="USERs" />
+      <End Role="PRODs" EntitySet="PRODs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="HAND_GEB">
     <Key>
@@ -93,8 +97,8 @@
     <Property Name="Prod_Req" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Prod_Mov" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Prod_Views" Type="bigint" Nullable="true" />
-    <Property Name="Prod_Validator" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Prod_Val_Dat" Type="datetime" Nullable="false" />
+    <Property Name="Prod_Val_User_USER_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="HAND_SUB_GEB_PROD">
     <Key>
@@ -133,6 +137,8 @@
     <Property Name="USER_PW" Type="nvarchar(max)" Nullable="false" />
     <Property Name="USER_Sec" Type="int" Nullable="false" />
     <Property Name="USER_Val_dat" Type="datetime" Nullable="false" />
+    <Property Name="USER_Made_Work" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="USER_Email" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="CATs">
     <Key>
@@ -341,6 +347,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="USERsPRODs">
+    <End Role="USERs" Type="DBModel.Store.USERs" Multiplicity="0..1" />
+    <End Role="PRODs" Type="DBModel.Store.PRODs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERs">
+        <PropertyRef Name="USER_Id" />
+      </Principal>
+      <Dependent Role="PRODs">
+        <PropertyRef Name="Prod_Val_User_USER_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -407,6 +425,10 @@
             <End Role="EVENT" EntitySet="EVENTs" />
             <End Role="USERs" EntitySet="USERs" />
           </AssociationSet>
+          <AssociationSet Name="USERsPRODs" Association="DBModel.USERsPRODs">
+            <End Role="USERs" EntitySet="USERs" />
+            <End Role="PRODs" EntitySet="PRODs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="HAND_GEB">
           <Key>
@@ -434,12 +456,12 @@
           <Property Name="Prod_Req" Type="String" Nullable="true" />
           <Property Name="Prod_Mov" Type="String" Nullable="true" />
           <Property Name="Prod_Views" Type="Int64" Nullable="true" />
-          <Property Name="Prod_Validator" Type="String" Nullable="false" />
           <Property Name="Prod_Val_Dat" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="HAND_SUB_GEB_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
           <NavigationProperty Name="REVs" Relationship="DBModel.PRODREV" FromRole="PROD" ToRole="REV" />
           <NavigationProperty Name="CAT_PROD" Relationship="DBModel.PRODHAND_SUB_GEB_PROD" FromRole="PROD" ToRole="HAND_SUB_GEB_PROD" />
           <NavigationProperty Name="PRODTAGS" Relationship="DBModel.PRODPRODTAGS" FromRole="PROD" ToRole="PRODTAGS" />
+          <NavigationProperty Name="Prod_Val_User" Relationship="DBModel.USERsPRODs" FromRole="PRODs" ToRole="USERs" />
         </EntityType>
         <EntityType Name="HAND_SUB_GEB_PROD">
           <Key>
@@ -464,8 +486,6 @@
             <PropertyRef Name="REV_ID" />
           </Key>
           <Property Name="REV_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PROD_ID" Type="String" Nullable="false" />
-          <Property Name="USER_ID" Type="String" Nullable="false" />
           <Property Name="REV_text" Type="String" Nullable="false" />
           <NavigationProperty Name="PROD" Relationship="DBModel.PRODREV" FromRole="REV" ToRole="PROD" />
           <NavigationProperty Name="USER" Relationship="DBModel.USERREV" FromRole="REV" ToRole="USER" />
@@ -483,6 +503,9 @@
           <NavigationProperty Name="SESSIONS" Relationship="DBModel.USERSESSIONS" FromRole="USER" ToRole="SESSIONS" />
           <NavigationProperty Name="News" Relationship="DBModel.NewsUSERs" FromRole="USERs" ToRole="News" />
           <NavigationProperty Name="EVENT" Relationship="DBModel.EVENTUSERs" FromRole="USERs" ToRole="EVENT" />
+          <NavigationProperty Name="PRODs" Relationship="DBModel.USERsPRODs" FromRole="USERs" ToRole="PRODs" />
+          <Property Name="USER_Made_Work" Type="String" Nullable="false" />
+          <Property Name="USER_Email" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="CAT">
           <Key>
@@ -597,6 +620,10 @@
           <End Type="DBModel.EVENT" Role="EVENT" Multiplicity="0..1" />
           <End Type="DBModel.USERs" Role="USERs" Multiplicity="1" />
         </Association>
+        <Association Name="USERsPRODs">
+          <End Type="DBModel.USERs" Role="USERs" Multiplicity="0..1" />
+          <End Type="DBModel.PRODs" Role="PRODs" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -628,7 +655,6 @@
           <ScalarProperty Name="Prod_Req" ColumnName="Prod_Req" />
           <ScalarProperty Name="Prod_Mov" ColumnName="Prod_Mov" />
           <ScalarProperty Name="Prod_Views" ColumnName="Prod_Views" />
-          <ScalarProperty Name="Prod_Validator" ColumnName="Prod_Validator" />
           <ScalarProperty Name="Prod_Val_Dat" ColumnName="Prod_Val_Dat" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -653,8 +679,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.REVs)">
         <MappingFragment StoreEntitySet="REVs">
           <ScalarProperty Name="REV_ID" ColumnName="REV_ID" />
-          <ScalarProperty Name="PROD_ID" ColumnName="PROD_ID" />
-          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
           <ScalarProperty Name="REV_text" ColumnName="REV_text" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -667,6 +691,8 @@
           <ScalarProperty Name="USER_PW" ColumnName="USER_PW" />
           <ScalarProperty Name="USER_Sec" ColumnName="USER_Sec" />
           <ScalarProperty Name="USER_Val_dat" ColumnName="USER_Val_dat" />
+          <ScalarProperty Name="USER_Made_Work" ColumnName="USER_Made_Work" />
+          <ScalarProperty Name="USER_Email" ColumnName="USER_Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -828,6 +854,15 @@
       <EndProperty Name="EVENT">
         <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="USERsPRODs" TypeName="DBModel.USERsPRODs" StoreEntitySet="PRODs">
+      <EndProperty Name="USERs">
+        <ScalarProperty Name="USER_Id" ColumnName="Prod_Val_User_USER_Id" />
+      </EndProperty>
+      <EndProperty Name="PRODs">
+        <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+      </EndProperty>
+      <Condition ColumnName="Prod_Val_User_USER_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
