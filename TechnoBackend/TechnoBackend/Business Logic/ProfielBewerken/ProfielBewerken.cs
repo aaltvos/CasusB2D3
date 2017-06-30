@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Web;
 using System.Web.Http.Controllers;
 using Newtonsoft.Json;
 using TechnoBackend.DatabaseModel;
@@ -12,6 +13,7 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
 {
     public class ProfielBewerken
     {
+        
         public static string EditProfile(HttpActionContext actionContext)
         {
 
@@ -31,9 +33,10 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
                 Debug.WriteLine(currentUser.ToString());
 
                 //userinput would be in these variables.
-                string nameInput;
-                string PWInput;
-                string emailInput;
+
+                string nameInput = "";
+                string PWInput = "";
+                string emailInput = "";
                 
                 //check if current data needs to be updated
                 if (nameInput != null)
