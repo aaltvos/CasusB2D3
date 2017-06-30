@@ -22,19 +22,24 @@ namespace TechnoBackend.Business_Logic.GebruikersreviewPlaatsen
             {
                 //querry for most recent review
                 Int32 RevId = Convert.ToInt32(database.REVs.OrderByDescending(u => u.REV_ID).FirstOrDefault());
-
-                Int32 UserId = Convert.ToInt32(from USER_Id in database.USERSESSIONS join USER_Id in )
+                ++RevId;
 
                 SESSIONS session = database.SESSIONS.Where(s => s.SESSIONS_Token == token).First();
                 if (session == null) return "{\"status\":\"Error\", \"message\":\"No Session found\"}";
 
                 USERs user = database.USERs.Where(s => s.USER_Id == session.USER_Id.USER_Id).First();
                 if (user == null) return "{\"status\":\"Error\", \"message\":\"No User found\"}";
-                database.SaveChanges();
 
                 //create new object to add in the database
-                Review NewReview = new Review(RevId, UserId, TextualContent);
-                database.REVs.Add(NewReview);
+                Review NewReview = new Review(RevId, user.USER_Id, TextualContent);
+                database.REVs.Add(new REVs()
+                {
+                    REV_ID = RevId;
+                    
+
+                });
+
+                database.SaveChanges();
                 return "Reviewdata collected";
             }
             
