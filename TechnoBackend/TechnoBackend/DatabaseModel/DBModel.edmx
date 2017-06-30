@@ -486,8 +486,6 @@
             <PropertyRef Name="REV_ID" />
           </Key>
           <Property Name="REV_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PROD_ID" Type="String" Nullable="false" />
-          <Property Name="USER_ID" Type="String" Nullable="false" />
           <Property Name="REV_text" Type="String" Nullable="false" />
           <NavigationProperty Name="PROD" Relationship="DBModel.PRODREV" FromRole="REV" ToRole="PROD" />
           <NavigationProperty Name="USER" Relationship="DBModel.USERREV" FromRole="REV" ToRole="USER" />
@@ -681,8 +679,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.REVs)">
         <MappingFragment StoreEntitySet="REVs">
           <ScalarProperty Name="REV_ID" ColumnName="REV_ID" />
-          <ScalarProperty Name="PROD_ID" ColumnName="PROD_ID" />
-          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
           <ScalarProperty Name="REV_text" ColumnName="REV_text" />
         </MappingFragment>
       </EntityTypeMapping>
