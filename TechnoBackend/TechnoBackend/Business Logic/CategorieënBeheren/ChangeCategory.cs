@@ -28,16 +28,9 @@ namespace TechnoBackend.Business_Logic.CategorieënBeheren
             var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
             var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
 
-            //Create new Article in DB with info from tje object and the user id
-            CAT category = new CAT()
-            {
-                CAT_Id = UpdateCategory.ID, //Moet de gebruiker zelf een categorie id meegeven of gebeurt dit automatisch?
-                CAT_Name = UpdateCategory.Name,
-                CAT_IMG = UpdateCategory.Img,
-            };
             try
             {
-                db.CAT.Add(category); // HOEZO CATs1???
+                db.CAT
                 db.SaveChanges();
             }
             catch (Exception e)
