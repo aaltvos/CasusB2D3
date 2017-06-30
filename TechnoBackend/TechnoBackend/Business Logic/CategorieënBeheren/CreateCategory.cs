@@ -31,13 +31,12 @@ namespace TechnoBackend.Business_Logic.CategorieënBeheren
             //Create new Article in DB with info from tje object and the user id
             CAT category = new CAT()
             {
-                CAT_Id = newCategory.ID, //Moet de gebruiker zelf een categorie id meegeven of gebeurt dit automatisch?
                 CAT_Name = newCategory.Name,
                 CAT_IMG = newCategory.Img,
             };
             try
             {
-                db.CAT.Add(category); // HOEZO CATs1???
+                db.CATs.Add(category);
                 db.SaveChanges();
             }
             catch (Exception e)
