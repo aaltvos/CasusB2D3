@@ -7,6 +7,7 @@ using TechnoBackend.DatabaseModel;
 using TechnoBackend.Business_Logic.GebruikersreviewPlaatsen;
 using TechnoBackend.Login;
 
+
 namespace TechnoBackend.Controllers
 {
     [Route("api/GebruikersreviewPlaatsen")]
@@ -26,15 +27,18 @@ namespace TechnoBackend.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public IHttpActionResult PostReview(string ReviewContent, Int32 UserID)
+        public HttpResponseMessage Post(string ReviewContent)
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
             {
-                GebruikersreviewPlaatsen;
+                var message = Business_Logic.GebruikersreviewPlaatsen.Review.CreateReview(token, ReviewContent);
+                Request.Headers.Add("Token", newtoken.Item1);
+                var response = Request.CreateResponse(message);
+                return response;
             }
-            throw new NotImplementedException();
+            return Request.CreateResponse("Invalid action");
         }
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)

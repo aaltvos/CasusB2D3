@@ -7,16 +7,16 @@ using System.Diagnostics;
 
 namespace TechnoBackend.Business_Logic.GebruikersreviewPlaatsen
 { 
-    public class Review
+    public static class Review
     {
-        private readonly PRODs _productId;
-        private Review(Int32 productId, Int32 UserId, string ReviewText)
-        {
-            Int32 _productId = productId;
-            Int32 _UserId = UserId;
-            string _ReviewText = ReviewText;
-        }
-        public string CreateReview(string token, string TextualContent)
+        private static readonly PRODs _productId;
+        //private Review(Int32 productId, Int32 UserId, string ReviewText)
+        //{
+        //    Int32 _productId = productId;
+        //    Int32 _UserId = UserId;
+        //    string _ReviewText = ReviewText;
+        //}
+        public static string CreateReview(string token, string TextualContent)
         {
             using (DBModelContainer database = new DBModelContainer())
             {
@@ -31,12 +31,11 @@ namespace TechnoBackend.Business_Logic.GebruikersreviewPlaatsen
                 if (user == null) return "{\"status\":\"Error\", \"message\":\"No User found\"}";
 
                 //create new object to add in the database
-                Review NewReview = new Review(RevId, user.USER_Id, TextualContent);
+                // Review NewReview = new Review(RevId, user.USER_Id, TextualContent);
                 database.REVs.Add(new REVs()
                 {
-                    REV_ID = RevId;
-                    
-
+                    REV_ID = RevId,
+                    REV_text = TextualContent
                 });
 
                 database.SaveChanges();
