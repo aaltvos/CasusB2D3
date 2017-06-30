@@ -17,13 +17,11 @@ namespace TechnoBackend.Business_Logic.ProductZoeken
                 //dbModel.HAND_GEB.Select(x => new lcclsAccDueList { * }).ToList();
                 foreach (var a in dbModel.PRODs)
                 {
-                    handGebModel b = new handGebModel();
+                    ProductenZoekenModel b = new ProductenZoekenModel();
                     b.Prod_ID = a.Prod_ID;
                     b.Prod_Name = a.Prod_Name;
                     b.Prod_Cost = a.Prod_Cost;
-
-
-                    Productenlijst.Add(b);
+                    b.Prod_Size = a.Prod_Size;
                 }
                 return Productenlijst;
             }
