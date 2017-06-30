@@ -13,10 +13,10 @@ namespace TechnoBackend.Business_Logic.CategorieënBeheren
         {
 
             DBModelContainer db = new DBModelContainer();
-            var currentcategory = db.CATs1.Where(s => s.CAT_Id == catid).FirstOrDefault();
+            var currentcategory = db.CAT.Where(s => s.CAT_Id == catid).FirstOrDefault();
             if (currentcategory != null)
             {
-                db.CATs1.Remove(currentcategory);
+                db.CAT.Remove(currentcategory);
                 try
                 {
 

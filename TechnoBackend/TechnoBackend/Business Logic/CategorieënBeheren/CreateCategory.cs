@@ -37,7 +37,7 @@ namespace TechnoBackend.Business_Logic.CategorieënBeheren
             };
             try
             {
-                db.CATs1.Add(category); // HOEZO CATs1???
+                db.CAT.Add(category); // HOEZO CATs1???
                 db.SaveChanges();
             }
             catch (Exception e)
