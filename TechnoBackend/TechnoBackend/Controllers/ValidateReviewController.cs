@@ -9,6 +9,9 @@ using System.Web.Http;
 using TechnoBackend.Business_Logic.ValidateReview;
 using TechnoBackend.Login;
 
+/**
+ * @Author Patrick
+ * */
 namespace TechnoBackend.Controllers
 {
     public class ValidateReviewController : ApiController

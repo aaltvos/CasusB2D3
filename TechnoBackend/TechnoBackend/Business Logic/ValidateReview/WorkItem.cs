@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using TechnoBackend.DatabaseModel;
 
+/**
+ * @Author Patrick
+ * */
 namespace TechnoBackend.Business_Logic.ValidateReview
 {
     public class WorkItem
@@ -20,6 +23,8 @@ namespace TechnoBackend.Business_Logic.ValidateReview
          * This method is used to accept the WorkItem.
          * 
          * It gets ths current product, then gets the current user and updates the product in the database
+         * 
+         * @Author Patrick
          * */
         public string Accept(string token)
         {
@@ -44,6 +49,8 @@ namespace TechnoBackend.Business_Logic.ValidateReview
          * This method is used to deny the WorkItem.
          * 
          * It gets ths current product, then gets the current user and deletes the product from the database
+         * 
+         * @Author Patrick
          * */
         public string Deny()
         {
@@ -65,6 +72,8 @@ namespace TechnoBackend.Business_Logic.ValidateReview
          * This method is used to convert the WorkItem to a json array.
          * 
          * This can be used in the front-end to display the WorkItem
+         * 
+         * @Author Patrick
          * */
         public string ToJson()
         {
@@ -92,6 +101,7 @@ namespace TechnoBackend.Business_Logic.ValidateReview
         /**
          * This method is used to get a WorkItem given an id
          * 
+         * @Author Patrick
          * */
         public static WorkItem ForId(int id)
         {
@@ -104,6 +114,8 @@ namespace TechnoBackend.Business_Logic.ValidateReview
          * This method is used to check whether a USERs is a student
          * 
          * It will return false if the user is null
+         * 
+         * @Author Patrick
          * */
         private static bool IsUserStudent(USERs user)
         {
@@ -114,6 +126,7 @@ namespace TechnoBackend.Business_Logic.ValidateReview
         /**
          * This method is used to load all WorkItems from the database
          * 
+         * @Author Patrick
          * */
         public static List<WorkItem> LoadAll()
         {
