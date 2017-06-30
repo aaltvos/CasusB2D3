@@ -10,7 +10,7 @@ namespace TechnoBackend.Tests.Unittest
     public class ValidateReview
     {
         [TestMethod]
-        public void LoadAll()
+        public void TestValidateReviewLoadAll()
         {
             var call = WebRequest.CreateHttp("http://localhost:51516/api/ValidateReview");
             call.Method = "GET";
@@ -22,7 +22,23 @@ namespace TechnoBackend.Tests.Unittest
             using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
                 responseText = reader.ReadToEnd();
 
-            Debug.WriteLine(responseText);
+            Assert.AreEqual(responseText, "{\"status\":\"Error\", \"message\":\"No WorkItems could be loaded\"}");
+        }
+
+        [TestMethod]
+        public void TestValidateReviewSelectInvalidId()
+        {
+            var call = WebRequest.CreateHttp("http://localhost:51516/api/ValidateReview/id=-1");
+            call.Method = "GET";
+            call.Headers.Add("Token", UsecaseLogin.TestMethodLogin());
+
+            var response = call.GetResponse();
+
+            string responseText = "";
+            using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                responseText = reader.ReadToEnd();
+            
+            Assert.AreEqual(responseText, "{\"status\":\"Error\", \"message\":\"Invalid id\"}");
         }
 
     }
