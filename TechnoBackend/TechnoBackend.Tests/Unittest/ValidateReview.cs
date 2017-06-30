@@ -10,7 +10,7 @@ namespace TechnoBackend.Tests.Unittest
     public class ValidateReview
     {
         [TestMethod]
-        public void TestValidateReviewLoadAll()
+        public void TestValidateReviewLoadAllEmpty()
         {
             var call = WebRequest.CreateHttp("http://localhost:51516/api/ValidateReview");
             call.Method = "GET";
