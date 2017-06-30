@@ -21,12 +21,12 @@ public class ProductZoekenUnitTest
         var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding);
         string responseText = reader.ReadToEnd();
 
-        //The variable: responseText gets changed to a array so its possible to count the amount of events
+        //The variable: responseText gets changed to a array so its possible to count the search amount
         //The counted outcome will be stored in variable: expected
-        JArray amount_of_events = JArray.Parse(responseText);
-        var total_amount_of_events = amount_of_events.Count;
-        var expected = total_amount_of_events;
+
 
         //Here will be checked if the amount of the returned event_list is correct
         Assert.AreEqual(3, expected);
     }
+}
+    

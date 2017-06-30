@@ -24,8 +24,6 @@ namespace TechnoBackend.Business_Logic.ProductZoeken
                 }
                 return Productenlijst;
             }
-
-
         }
     }
 }
