@@ -28,8 +28,8 @@ namespace TechnoBackend.Tests.Unittest
             var response = (HttpWebResponse)request.GetResponse();
             var responseCode = response.StatusCode;
             var expected = HttpStatusCode.OK;
-            Assert.AreEqual(responseCode, expected);
+            Assert.AreEqual(expected, responseCode);
         }
     }
 }
-// getest op 27-06-17
+// getest werkend op 27-06-17

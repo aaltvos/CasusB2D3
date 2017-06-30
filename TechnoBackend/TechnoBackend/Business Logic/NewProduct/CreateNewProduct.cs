@@ -20,7 +20,7 @@ namespace TechnoBackend.Business_Logic.NewProduct
             //var UserID = (from sessions in db.SESSIONS select sessions.USER_Id.USER_Id).First(); //where sessions.SESSIONS_Token == Token 
             //var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
             //var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
-            /*USERs user = new USERs()
+            USERs user = new USERs()
             {
                 USER_PW = "somepassword",
                 USER_Name = "Kay",
@@ -29,8 +29,8 @@ namespace TechnoBackend.Business_Logic.NewProduct
                 USER_Sec = 3,
                 USER_Val_dat = DateTime.Now,
                 USER_Made_Work = "string"
-            };*/
-            USERs user = (from x in db.USERs where x.USER_Name == "Kay" select x).First();
+            };
+            //USERs user = (from x in db.USERs where x.USER_Name == "Kay" select x).First();
             PRODs product = new PRODs()
             {
                 Prod_ID = json.id,
