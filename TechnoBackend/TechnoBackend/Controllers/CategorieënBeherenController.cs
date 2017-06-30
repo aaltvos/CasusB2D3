@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Reflection.Emit;
 using System.Web.Http;
 using System.Web.WebPages;
-using TechnoBackend.Business_Logic.News;
+using TechnoBackend.Business_Logic.CategorieënBeheren;
 using TechnoBackend.DatabaseModel;
 using TechnoBackend.Login;
 
@@ -33,7 +33,7 @@ namespace TechnoBackend.Controllers
             var newtoken = SessionCheck.Check(token);
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
             {
-                var message = .AddCategory(ActionContext);
+                var message = CreateCategory.AddCategory(ActionContext);
 
                 Request.Headers.Add("Token", newtoken.Item1);
                 var response = Request.CreateResponse(message);
@@ -54,7 +54,7 @@ namespace TechnoBackend.Controllers
             var newtoken = SessionCheck.Check(token);
             if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
             {
-                var message = DeleteCategory.DeleteArticle(id);
+                var message = DeleteCategory.DelCategory(id);
 
                 Request.Headers.Add("Token", newtoken.Item1);
                 var response = Request.CreateResponse(message);
