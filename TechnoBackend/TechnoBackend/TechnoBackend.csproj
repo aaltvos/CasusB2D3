@@ -168,10 +168,15 @@
     <Compile Include="Business Logic\News\DeleteNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Business Logic\News\ShowNews.cs" />
+    <Compile Include="Business Logic\Werkoverzicht\JsonWorkitem.cs" />
+    <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtTest.cs" />
+    <Compile Include="Business Logic\Werkoverzicht\Workitem.cs" />
+    <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtStart.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CategorieënBeherenController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
+    <Compile Include="Controllers\WerkoverzichtTonenController.cs" />
     <Compile Include="DatabaseModel\CAT.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -192,6 +197,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\EVENT.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\HAND_GEB.cs">
       <DependentUpon>DBModel.tt</DependentUpon>

@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b75fe004161745a98b37c64b87c44a62" Name="Diagram1" ZoomLevel="69" >
+      <Diagram DiagramId="b75fe004161745a98b37c64b87c44a62" Name="Diagram1" ZoomLevel="86" >
         <EntityTypeShape EntityType="DBModel.HAND_GEB" Width="1.5" PointX="1.125" PointY="7.5" />
         <EntityTypeShape EntityType="DBModel.PRODs" Width="1.5" PointX="6.25" PointY="5.625" />
         <EntityTypeShape EntityType="DBModel.HAND_SUB_GEB_PROD" Width="1.5" PointX="4.25" PointY="6.25" />
         <EntityTypeShape EntityType="DBModel.SUB_GEB" Width="1.5" PointX="1.125" PointY="5" />
-        <EntityTypeShape EntityType="DBModel.REVs" Width="1.5" PointX="8.875" PointY="4.375" />
+        <EntityTypeShape EntityType="DBModel.REVs" Width="1.5" PointX="8.875" PointY="3.875" />
         <EntityTypeShape EntityType="DBModel.USERs" Width="1.5" PointX="11.125" PointY="4.125" />
         <EntityTypeShape EntityType="DBModel.CAT" Width="1.5" PointX="6.5" PointY="1" />
         <EntityTypeShape EntityType="DBModel.CAT_PROD" Width="1.5" PointX="6.5" PointY="3.25" />
-        <EntityTypeShape EntityType="DBModel.SESSIONS" Width="1.5" PointX="13.625" PointY="4.625" />
-        <EntityTypeShape EntityType="DBModel.TAGS" Width="1.5" PointX="10.625" PointY="7" />
-        <EntityTypeShape EntityType="DBModel.PRODTAGS" Width="1.5" PointX="8.375" PointY="7" />
+        <EntityTypeShape EntityType="DBModel.SESSIONS" Width="1.5" PointX="13.5" PointY="6.125" />
+        <EntityTypeShape EntityType="DBModel.TAGS" Width="1.5" PointX="10.75" PointY="8.5" />
+        <EntityTypeShape EntityType="DBModel.PRODTAGS" Width="1.5" PointX="8.375" PointY="8.375" />
         <AssociationConnector Association="DBModel.HAND_GEBHAND_SUB_GEB_PROD" />
         <AssociationConnector Association="DBModel.PRODHAND_SUB_GEB_PROD" />
         <AssociationConnector Association="DBModel.PRODREV" />
@@ -28,6 +28,9 @@
         <AssociationConnector Association="DBModel.TAGSPRODTAGS" />
         <EntityTypeShape EntityType="DBModel.NEWS" Width="1.5" PointX="11.125" PointY="1.25" />
         <AssociationConnector Association="DBModel.NewsUSERs" />
+        <EntityTypeShape EntityType="DBModel.EVENT" Width="1.5" PointX="13.5" PointY="3.75" />
+        <AssociationConnector Association="DBModel.EVENTUSERs" />
+        <AssociationConnector Association="DBModel.USERsPRODs" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
