@@ -16,6 +16,11 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             Debug.WriteLine("[WorkItem] - id=" + product.Prod_ID);
         }
 
+        /**
+         * This method is used to accept the WorkItem.
+         * 
+         * It gets ths current product, then gets the current user and updates the product in the database
+         * */
         public string Accept(string token)
         {
             DBModelContainer database = new DBModelContainer();
@@ -35,6 +40,11 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             return "{\"status\":\"Success\"}";
         }
 
+        /**
+         * This method is used to deny the WorkItem.
+         * 
+         * It gets ths current product, then gets the current user and deletes the product from the database
+         * */
         public string Deny()
         {
             DBModelContainer database = new DBModelContainer();
@@ -51,6 +61,11 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             return "{\"status\":\"Error\", \"message\":\"WorkItem not found\"}";
         }
 
+        /**
+         * This method is used to convert the WorkItem to a json array.
+         * 
+         * This can be used in the front-end to display the WorkItem
+         * */
         public string ToJson()
         {
             string result = "";
@@ -74,6 +89,10 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             return result;
         }
 
+        /**
+         * This method is used to get a WorkItem given an id
+         * 
+         * */
         public static WorkItem ForId(int id)
         {
             DBModelContainer database = new DBModelContainer();
@@ -81,12 +100,21 @@ namespace TechnoBackend.Business_Logic.ValidateReview
             return product != null ? new WorkItem(product) : null;
         }
 
+        /**
+         * This method is used to check whether a USERs is a student
+         * 
+         * It will return false if the user is null
+         * */
         private static bool IsUserStudent(USERs user)
         {
             if (user == null) return false;
             return user.USER_Sec == 3;
         }
 
+        /**
+         * This method is used to load all WorkItems from the database
+         * 
+         * */
         public static List<WorkItem> LoadAll()
         {
             List<WorkItem> result = new List<WorkItem>();
