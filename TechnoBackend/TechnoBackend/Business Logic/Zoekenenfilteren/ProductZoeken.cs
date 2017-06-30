@@ -14,14 +14,13 @@ namespace TechnoBackend.Business_Logic.ProductZoeken
             List<ProductZoekenModel> Productenlijst = new List<ProductZoekenModel>();
             using (DBModelContainer dbModel = new DBModelContainer())
             {
-                //dbModel.HAND_GEB.Select(x => new lcclsAccDueList { * }).ToList();
                 foreach (var a in dbModel.PRODs)
                 {
                     ProductenZoekenModel b = new ProductenZoekenModel();
-                    b.Prod_ID = a.Prod_ID;
+                    b.Prod_Dat = a.Prod_Dat;
                     b.Prod_Name = a.Prod_Name;
-                    b.Prod_Cost = a.Prod_Cost;
-                    b.Prod_Size = a.Prod_Size;
+                    b.Prod_Desc = a.Prod_Desc;
+                    b.Prod_IMG = a.Prod_IMG;
                 }
                 return Productenlijst;
             }

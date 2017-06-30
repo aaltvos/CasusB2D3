@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TechnoBackend.Login;
 using System.Web.Http.Controllers;
+using TechnoBackend.Business_Logic.Zoekenenfilteren;
 
 namespace TechnoBackend.Controllers
 {
@@ -21,7 +22,7 @@ namespace TechnoBackend.Controllers
             {
                 try
                 {
-                    var message = showProds.GetProds(ActionContext);
+                    var message = ProductZoeken.GetProds(ActionContext);
                     Request.Headers.Add("Token", newtoken.Item1);
                     var response = Request.CreateResponse(message);
                     return response;
