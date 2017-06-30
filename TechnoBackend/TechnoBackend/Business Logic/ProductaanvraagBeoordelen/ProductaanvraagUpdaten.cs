@@ -7,6 +7,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Web.Helpers;
 using System.Web.Http.Controllers;
+using TechnoBackend.Login;
 using TechnoBackend.DatabaseModel;
 using TechnoBackend.Business_Logic.ProductaanvraagListen;
 
@@ -15,55 +16,43 @@ namespace TechnoBackend.Business_Logic.ProductaanvraagUpdaten
 {
     public class ProductaanvraagUpdaten
     {
-        public static string ProductaanvraagUpdaten (int ToDo_Prod_ID)
+        public static string Productaanvraag_Updaten (int Product_ID, string token)
         {
             DBModelContainer db = new DBModelContainer();
 
-            //Security level bepalen van de gebruiker.
+            //Security level van de gebruiker bepalen mbv Token.
+            int Sec_Lvl = SessionCheck.GetSecRole(token);
+            
+            //Wanneer security level lager dan 3 is (1 of 2).
+            if (Sec_Lvl < 3)
             {
-                int Sec_Lvl = (from user in db.USERs where user.USER_Name == username select user.USER_Sec).First();
-                var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
-                var CurrentUser = CurrentUserQuery.FirstOrDefault<USERs>();
-                return Sec_Lvl;
-            }
 
-            //Wanneer security level hoger dan 2 is (3 of 4).
-            if (Sec_Lvl > 2)
-            {
-                //Current_User_ID initialiseren en updaten.
-                int Current_User_ID = (from user in db.USERs where user.USER_Name == username select user.USER_Id).First();
-                var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
-                var CurrentUser = CurrentUserQuery.FirstOrDefault<USERs>();
-
+                //Query die API input (Product_ID) vergelijkt met PRODs.Prod_ID en hierbij
+                //de user_ID van de huidige gebruiker in cell van Prod_Val_user_USER_Id plaats.
                 var query =
-                    from PRODs in db.PRODs
-                    where PRODs.Prod_ID == ToDo_Prod_ID
-                    select PRODs;
+                    (from PRODs in db.PRODs
+                    where PRODs.Prod_ID == Product_ID
+                    select PRODs.Prod_Val_User).SingleOrDefault();
 
-                foreach (PRODs PRODs in query)
-                {
-                    PRODs.Prod_Val_User_USER_Id = Current_User_ID;
-                    // Insert any additional changes to column values.
-                }
-
-                //TeBeoordelen is het product dat beoordeeld moet worden.
                 try
                 {
-                    db.savechanges();
+                    //Db opslaan met veranderingen.
+                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
                     // Provide for exceptions.
                 }
-                //var Beoordeeld = (from Prod_Val_User in db.PRODs where Prod_ID == PRODs.Prod_ID select Prod_ID.Prod_ID).First();
 
-                //Return te beoordelen           return Current_User_ID;
+                //Return wanneer de UseCase doorlopen is.
                 return "Het product is beoordeeld";
 
             }
+            //Als security level < 3 is.
             else
             {
+                //Return wanneer security level 2 of lager is (De IF statement).
                 return "Security level is niet hoog genoeg.";
             }
         }

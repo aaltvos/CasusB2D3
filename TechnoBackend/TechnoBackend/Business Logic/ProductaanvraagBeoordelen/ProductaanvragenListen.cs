@@ -13,24 +13,26 @@ namespace TechnoBackend.Business_Logic.ProductaanvraagListen
 {
     public class ProductaanvraagListen
     {
-        public static List<PRODs> OnbeoordeeldeProductaanvragen() //OnbeoordeeldeProductaanvragen = OP
-        {
-            DBModelContainer db = new DBModelContainer();
-            {
-                //Lijst OP initialiseren.
-                List<PRODs> OnbeoordeeldeProductaanvragen = new List<PRODs>();
+        //Deze class is wordt niet meer gebruikt, puur voor test redenen bestaat deze.
 
-                //Query aanmaken met filter op productaanvragen die gemaakt zijn door users met security level kleiner dan 3.
-                var OnbeoordeeldeProductaanvragenQuery = db.PRODs.Where(User_Sec.Prod_Val_User < 3);
+        //public static List<PRODs> OnbeoordeeldeProductaanvragen() //OnbeoordeeldeProductaanvragen = OP
+        //{
+        //    DBModelContainer db = new DBModelContainer();
+        //    {
+        //        //Lijst OP initialiseren.
+        //        List<PRODs> OnbeoordeeldeProductaanvragen = new List<PRODs>();
 
-                //Lijst OP invullen met OP's.
-                foreach (var OP in OnbeoordeeldeProductaanvragenQuery)
-                {
-                    OnbeoordeeldeProductaanvragen.Add(OP);
-                }
-                //Lijst OP returnen.
-                return OnbeoordeeldeProductaanvragen;
-            }
-        }
+        //        //Query aanmaken met filter op productaanvragen die gemaakt zijn door users met security level kleiner dan 3.
+        //        var OnbeoordeeldeProductaanvragenQuery = db.PRODs.Where(User_Sec.Prod_Val_User < 3);
+
+        //        //Lijst OP invullen met OP's.
+        //        foreach (var OP in OnbeoordeeldeProductaanvragenQuery)
+        //        {
+        //            OnbeoordeeldeProductaanvragen.Add(OP);
+        //        }
+        //        //Lijst OP returnen.
+        //        return OnbeoordeeldeProductaanvragen;
+        //    }
+        //}
     }
 }
