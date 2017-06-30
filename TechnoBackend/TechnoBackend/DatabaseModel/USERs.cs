@@ -19,6 +19,7 @@ namespace TechnoBackend.DatabaseModel
         {
             this.REVs = new HashSet<REVs>();
             this.News = new HashSet<NEWS>();
+            this.PRODs = new HashSet<PRODs>();
         }
     
         public int USER_Id { get; set; }
@@ -26,11 +27,16 @@ namespace TechnoBackend.DatabaseModel
         public string USER_PW { get; set; }
         public int USER_Sec { get; set; }
         public System.DateTime USER_Val_dat { get; set; }
+        public string USER_Made_Work { get; set; }
+        public string USER_Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REVs> REVs { get; set; }
         public virtual SESSIONS SESSIONS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS> News { get; set; }
+        public virtual EVENT EVENT { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRODs> PRODs { get; set; }
     }
 }
