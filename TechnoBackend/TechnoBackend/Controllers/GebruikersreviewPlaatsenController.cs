@@ -6,7 +6,7 @@ using System.Web.Http;
 using TechnoBackend.DatabaseModel;
 using TechnoBackend.Business_Logic.GebruikersreviewPlaatsen;
 using TechnoBackend.Login;
-
+using System.Net;
 
 namespace TechnoBackend.Controllers
 {
@@ -27,18 +27,9 @@ namespace TechnoBackend.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public HttpResponseMessage Post(string ReviewContent)
+        public HttpStatusCode Post()
         {
-            var token = ActionContext.Request.Headers.GetValues("Token").First();
-            var newtoken = SessionCheck.Check(token);
-            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
-            {
-                var message = Business_Logic.GebruikersreviewPlaatsen.Review.CreateReview(token, ReviewContent);
-                Request.Headers.Add("Token", newtoken.Item1);
-                var response = Request.CreateResponse(message);
-                return response;
-            }
-            return Request.CreateResponse("Invalid action");
+            return Review.CreateReview(ActionContext);
         }
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)

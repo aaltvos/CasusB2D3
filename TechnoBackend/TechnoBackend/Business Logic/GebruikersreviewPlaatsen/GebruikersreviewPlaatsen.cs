@@ -4,45 +4,52 @@ using System.Linq;
 using System.Web;
 using TechnoBackend.DatabaseModel;
 using System.Diagnostics;
+using System.Net;
+using System.Web.Http.Controllers;
+using Newtonsoft.Json;
 
 namespace TechnoBackend.Business_Logic.GebruikersreviewPlaatsen
 { 
     public static class Review
     {
-        private static readonly PRODs _productId;
+        // private static readonly PRODs ;
         //private Review(Int32 productId, Int32 UserId, string ReviewText)
         //{
         //    Int32 _productId = productId;
         //    Int32 _UserId = UserId;
         //    string _ReviewText = ReviewText;
         //}
-        public static string CreateReview(string token, string TextualContent)
+        public static HttpStatusCode CreateReview(HttpActionContext actionContext) //string token
         {
             using (DBModelContainer database = new DBModelContainer())
             {
                 //querry for most recent review
-                Int32 RevId = Convert.ToInt32(database.REVs.OrderByDescending(u => u.REV_ID).FirstOrDefault());
-                ++RevId;
+                int RevId;
+                try
+                {
+                    RevId = Convert.ToInt32(database.REVs.OrderByDescending(u => u.REV_ID).FirstOrDefault());
+                }
+                catch
+                {
+                    RevId = 0; 
+                }
 
-                SESSIONS session = database.SESSIONS.Where(s => s.SESSIONS_Token == token).First();
-                if (session == null) return "{\"status\":\"Error\", \"message\":\"No Session found\"}";
-
-                USERs user = database.USERs.Where(s => s.USER_Id == session.USER_Id.USER_Id).First();
-                if (user == null) return "{\"status\":\"Error\", \"message\":\"No User found\"}";
-
-                //create new object to add in the database
-                // Review NewReview = new Review(RevId, user.USER_Id, TextualContent);
+                Jsonreview json = JsonConvert.DeserializeObject<Jsonreview>(actionContext.Request.Content.ReadAsStringAsync().Result);
                 database.REVs.Add(new REVs()
                 {
                     REV_ID = RevId,
-                    REV_text = TextualContent
+                    REV_text = json.review
                 });
-
-                database.SaveChanges();
-                return "Reviewdata collected";
+                try
+                {
+                    database.SaveChanges();
+                    return HttpStatusCode.OK;
+                }
+                catch
+                {
+                    return HttpStatusCode.InternalServerError;
+                }
             }
-            
         }
-            
     }
 }
