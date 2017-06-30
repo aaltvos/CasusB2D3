@@ -106,7 +106,7 @@ namespace TechnoBackend.Controllers
                             message = "{\"status\":\"Error\", \"message\":\"Invalid Action\"}";
                     }
                     else
-                        message = "{\"status\":\"Error\", \"message\":\"No Action found in headers\"}"; ;
+                        message = "{\"status\":\"Error\", \"message\":\"No Action found in headers\"}";
                 }
                 else
                     message = "{\"status\":\"Error\", \"message\":\"No WorkItem found with id\"}";
