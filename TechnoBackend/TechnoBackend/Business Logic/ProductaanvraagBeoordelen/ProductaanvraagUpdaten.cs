@@ -15,7 +15,7 @@ namespace TechnoBackend.Business_Logic.ProductaanvraagUpdaten
 {
     public class ProductaanvraagUpdaten
     {
-        public static string ProductaanvraagUpdaten (int Prod_ID)
+        public static string ProductaanvraagUpdaten (int ToDo_Prod_ID)
         {
             DBModelContainer db = new DBModelContainer();
 
@@ -35,8 +35,28 @@ namespace TechnoBackend.Business_Logic.ProductaanvraagUpdaten
                 var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
                 var CurrentUser = CurrentUserQuery.FirstOrDefault<USERs>();
 
+                var query =
+                    from PRODs in db.PRODs
+                    where PRODs.Prod_ID == ToDo_Prod_ID
+                    select PRODs;
+
+                foreach (PRODs PRODs in query)
+                {
+                    PRODs.Prod_Val_User_USER_Id = Current_User_ID;
+                    // Insert any additional changes to column values.
+                }
+
                 //TeBeoordelen is het product dat beoordeeld moet worden.
-                var Beoordeeld = (from Prod_Val_User in db.PRODs where Prod_ID == PRODs.Prod_ID select Prod_ID.Prod_ID).First();
+                try
+                {
+                    db.savechanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Provide for exceptions.
+                }
+                //var Beoordeeld = (from Prod_Val_User in db.PRODs where Prod_ID == PRODs.Prod_ID select Prod_ID.Prod_ID).First();
 
                 //Return te beoordelen           return Current_User_ID;
                 return "Het product is beoordeeld";
