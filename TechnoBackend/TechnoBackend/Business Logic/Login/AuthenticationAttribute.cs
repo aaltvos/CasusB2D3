@@ -38,7 +38,7 @@ namespace TechnoBackend.Login
         {
             string gen = "";
             Random random = new Random();
-            var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
             for (int i = 0; i < 100; i++)
             {

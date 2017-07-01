@@ -159,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business Logic\GebruikersreviewPlaatsen\GebruikersreviewPlaatsen.cs" />
+    <Compile Include="Business Logic\GebruikersreviewPlaatsen\Jsonreview.cs" />
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
     <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\DeleteNews.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Business Logic\Werkoverzicht\Workitem.cs" />
     <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtStart.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\GebruikersreviewPlaatsenController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
     <Compile Include="Controllers\WerkoverzichtTonenController.cs" />
