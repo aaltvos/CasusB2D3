@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace TechnoBackend.Login
 {
+    //Json Object 
     public class JsonLogin
     {
         [JsonProperty(PropertyName = "Username")]

@@ -26,5 +26,21 @@ namespace TechnoBackend.Tests
             Assert.AreEqual(100, result.Length);
             return result;
         }
+
+        [TestMethod]
+        public void TestMethodLoginWrong()
+        {
+            string test = "{ 'Username':'Henk','Password':'Knabbe'}";
+            var iets = Encoding.UTF8.GetBytes(test);
+            var request = WebRequest.CreateHttp("http://localhost:51516/api/Authentication");
+            request.Method = "POST";
+            var stream = request.GetRequestStream();
+            stream.Write(iets, 0, iets.Length);
+                
+            Assert.ThrowsException<WebException>(() =>
+            {
+                var response = request.GetResponse();
+            });
+        }
     }
 }
