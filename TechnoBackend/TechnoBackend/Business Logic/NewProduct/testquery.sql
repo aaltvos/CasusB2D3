@@ -1,0 +1,2 @@
+﻿USE Ergo;
+SELECT * FROM dbo.PRODs
