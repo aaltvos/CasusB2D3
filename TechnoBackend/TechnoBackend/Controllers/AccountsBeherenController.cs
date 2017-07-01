@@ -13,22 +13,15 @@ namespace TechnoBackend.Controllers
 {
     public class AccountsBeherenController : ApiController
     {
-        // POST 
+        //POST
         public HttpResponseMessage Post()
         {
-                    try
-                    {
-                        var message = NewAccount.CreateAccount();
-                        var response = Request.CreateResponse(message);
-                        return response;
-                    }
-                    catch (Exception ex)
-                    {
-                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
-                    }
+            var message = NewAccount.CreateAccount(ActionContext);
+            var response = Request.CreateResponse(message);
+
+            return response;
         }
 
-        //Delete
         public HttpResponseMessage Delete(int id)
         {
             var message = OldAccount.DeleteAccount(id);

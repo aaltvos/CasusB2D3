@@ -159,7 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Business Logic\Accounts Beheren\AccountsBeherenModel.cs" />
+    <Compile Include="Business Logic\Accounts Beheren\JsonAccount.cs" />
     <Compile Include="Business Logic\Accounts Beheren\NewAccount.cs" />
     <Compile Include="Business Logic\Accounts Beheren\OldAccount.cs" />
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
