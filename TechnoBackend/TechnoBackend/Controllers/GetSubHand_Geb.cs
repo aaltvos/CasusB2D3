@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TechnoBackend.Login;
 using TechnoBackend.Business_Logic.Zoekenenfilteren;
-
+/*
 namespace TechnoBackend.Controllers
 {
     public class GetSubHand_Geb : ApiController
@@ -51,3 +51,4 @@ namespace TechnoBackend.Controllers
         }
     }
 }
+*/

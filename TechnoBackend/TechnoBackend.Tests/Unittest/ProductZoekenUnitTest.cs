@@ -1,5 +1,8 @@
-﻿using System;
-
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Net;
+using System.Text;
+/*
 public class ProductZoekenUnitTest
 {
     [TestMethod]
@@ -29,4 +32,4 @@ public class ProductZoekenUnitTest
         Assert.AreEqual(3, expected);
     }
 }
-    
+*/    

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TechnoBackend.DatabaseModel;
-
+/*
 namespace TechnoBackend.Business_Logic.Zoekenenfilteren
 {
     public class getsubhand_Geb
@@ -24,3 +24,4 @@ namespace TechnoBackend.Business_Logic.Zoekenenfilteren
         }
     }
 }
+*/

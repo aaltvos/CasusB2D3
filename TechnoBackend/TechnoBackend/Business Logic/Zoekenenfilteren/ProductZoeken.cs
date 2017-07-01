@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using TechnoBackend.DatabaseModel;
 using System.Linq;
-
+/*
 namespace TechnoBackend.Business_Logic.ProductZoeken
 {
     public class ProductZoeken
@@ -27,3 +27,4 @@ namespace TechnoBackend.Business_Logic.ProductZoeken
         }
     }
 }
+*/

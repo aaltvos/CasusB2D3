@@ -29,7 +29,8 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
 
                 //Use token to get the user id
                 var userID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == token select sessions.USER_Id.USER_Id).First();
-                var currentUser = from users in db.USERs where users.USER_Id == userID select users;                
+                var currentUserQuery = from users in db.USERs where users.USER_Id == userID select users;
+                var currentUser = currentUserQuery.FirstOrDefault<USERs>();
                 Debug.WriteLine(currentUser.ToString());
 
                 //userinput would be in these variables.
@@ -57,7 +58,7 @@ namespace TechnoBackend.Business_Logic.ProfielBewerken
                 { 
                     try
                     {
-                        db.SubmitChanges();
+                        db.SaveChanges();
                     }
                     catch (Exception e)
                     {

@@ -7,7 +7,7 @@ using System.Web.Http;
 using TechnoBackend.Login;
 using System.Web.Http.Controllers;
 using TechnoBackend.Business_Logic.Zoekenenfilteren;
-
+/*
 namespace TechnoBackend.Controllers
 {
     public class ProductZoekenController : ApiController
@@ -51,3 +51,4 @@ namespace TechnoBackend.Controllers
         }
     }
 }
+*/
