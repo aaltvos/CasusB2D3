@@ -17,16 +17,11 @@ namespace TechnoBackend.Tests
             request.Method = "POST";
             var stream = request.GetRequestStream();
             stream.Write(iets, 0, iets.Length);
-
             var response = request.GetResponse();
-
             var result = response.Headers.GetValues("Token").First();
-
-
             Assert.AreEqual(100, result.Length);
             return result;
         }
-
         [TestMethod]
         public void TestMethodLoginWrong()
         {

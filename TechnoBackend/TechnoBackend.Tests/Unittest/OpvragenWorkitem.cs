@@ -10,7 +10,7 @@ namespace TechnoBackend.Tests.Unittest
     public class OpvragenWorkitem
     {
         [TestMethod]
-        public void OphalenVanDezeZjwik()
+        public void ophalenWorkitem()
         {
             var request = WebRequest.CreateHttp("http://localhost:51516/api/WorkitemOpvragen");
             request.Method = "GET";

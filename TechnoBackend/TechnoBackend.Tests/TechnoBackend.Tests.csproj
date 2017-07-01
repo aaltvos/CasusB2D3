@@ -104,6 +104,7 @@
     <Compile Include="Unittest\Login.cs" />
     <Compile Include="Unittest\NewProduct.cs" />
     <Compile Include="Unittest\News.cs" />
+    <Compile Include="Unittest\OpvragenWorkitem.cs" />
     <Compile Include="Unittest\PlaatsenGebruikersreview.cs" />
     <Compile Include="Unittest\ProductZoekenUnitTest.cs" />
     <Compile Include="Unittest\showhand_geb.cs" />

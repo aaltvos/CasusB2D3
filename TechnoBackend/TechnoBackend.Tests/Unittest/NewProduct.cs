@@ -13,7 +13,7 @@ namespace TechnoBackend.Tests.Unittest
     public class NewProduct
     {
         [TestMethod]
-        public void ProductNew()
+        public void productNew()
         {
             string jsondir = "F:/Development/Github/CasusB2D3/TechnoBackend/TechnoBackend.Tests/Unittest/newProduct.json";
             StreamReader openfile = new StreamReader(jsondir);

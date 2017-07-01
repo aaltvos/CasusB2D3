@@ -188,6 +188,9 @@
     <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtTest.cs" />
     <Compile Include="Business Logic\Werkoverzicht\Workitem.cs" />
     <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtStart.cs" />
+    <Compile Include="Business Logic\WorkitemOpvragen\USERs.cs" />
+    <Compile Include="Business Logic\WorkitemOpvragen\workItemModel.cs" />
+    <Compile Include="Business Logic\WorkitemOpvragen\WorkitemOpvragen.cs" />
     <Compile Include="Business Logic\Zoekenenfilteren\getsubhand_Geb.cs" />
     <Compile Include="Business Logic\Zoekenenfilteren\handGebModel.cs" />
     <Compile Include="Business Logic\Zoekenenfilteren\Jsonzoekenenfilteren.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="Controllers\StudentProductPublicerenController.cs" />
     <Compile Include="Controllers\ValidateReviewController.cs" />
     <Compile Include="Controllers\WerkoverzichtTonenController.cs" />
+    <Compile Include="Controllers\WorkItemOpvragenController.cs" />
     <Compile Include="DatabaseModel\CAT.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -283,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Business Logic\NewProduct\testquery.sql" />
+    <Content Include="Business Logic\WorkitemOpvragen\sqlquerytest.sql" />
     <Content Include="Business Logic\Zoekenenfilteren\ProductZoekenQuery.sql" />
     <Content Include="DatabaseModel\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

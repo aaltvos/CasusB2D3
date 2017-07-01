@@ -6,9 +6,5 @@ namespace TechnoBackend.Tests.Unittest
     [TestClass]
     public class Event
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
     }
 }
