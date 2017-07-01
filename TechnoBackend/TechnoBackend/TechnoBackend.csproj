@@ -159,21 +159,64 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business Logic\AanvraagBeoordelen\AanvraagBeoordelen.cs" />
+    <Compile Include="Business Logic\CategorieënBeheren\ChangeCategory.cs" />
+    <Compile Include="Business Logic\CategorieënBeheren\CreateCategory.cs" />
+    <Compile Include="Business Logic\CategorieënBeheren\DeleteCategory.cs" />
+    <Compile Include="Business Logic\CategorieënBeheren\JsonCategory.cs" />
+    <Compile Include="Business Logic\Events\JsonEvents.cs" />
+    <Compile Include="Business Logic\Events\ShowEvents.cs" />
+    <Compile Include="Business Logic\Event\Create\CreateEvent.cs" />
+    <Compile Include="Business Logic\Event\Delete\DeleteEvent.cs" />
+    <Compile Include="Business Logic\Event\JsonEvent.cs" />
     <Compile Include="Business Logic\GebruikersreviewPlaatsen\GebruikersreviewPlaatsen.cs" />
     <Compile Include="Business Logic\GebruikersreviewPlaatsen\Jsonreview.cs" />
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
+    <Compile Include="Business Logic\NewProduct\CreateNewProduct.cs" />
+    <Compile Include="Business Logic\NewProduct\JsonProduct.cs" />
+    <Compile Include="Business Logic\NewProduct\sendEmail.cs" />
     <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\DeleteNews.cs" />
     <Compile Include="Business Logic\News\JsonNews.cs" />
     <Compile Include="Business Logic\News\ShowNews.cs" />
+    <Compile Include="Business Logic\ProductaanvraagBeoordelen\ProductaanvraagUpdaten.cs" />
+    <Compile Include="Business Logic\ProductaanvraagBeoordelen\ProductaanvragenListen.cs" />
+    <Compile Include="Business Logic\ProfielBewerken\JsonProfielBewerken.cs" />
+    <Compile Include="Business Logic\ProfielBewerken\ProfielBewerken.cs" />
+    <Compile Include="Business Logic\ValidateReview\WorkItem.cs" />
     <Compile Include="Business Logic\Werkoverzicht\JsonWorkitem.cs" />
     <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtTest.cs" />
     <Compile Include="Business Logic\Werkoverzicht\Workitem.cs" />
     <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtStart.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\getsubhand_Geb.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\handGebModel.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\Jsonzoekenenfilteren.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\ProductZoeken.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\ProductZoekenModel.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\ShowHandelingsgebieden.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\showSuphandgeb.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\ShowSupHandProd.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\showsuphandprodModel.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\SubhandModel.cs" />
+    <Compile Include="Business Logic\Zoekenenfilteren\SupHandGebModel.cs" />
+    <Compile Include="Controllers\AanvraagBeoordelenController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\CategorieënBeherenController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\GebruikersreviewPlaatsenController.cs" />
+    <Compile Include="Controllers\GetSubHandGebController.cs" />
+    <Compile Include="Controllers\GetSubHandProdController.cs" />
+    <Compile Include="Controllers\GetSubHand_Geb.cs" />
+    <Compile Include="Controllers\NewProductController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ProductaanvraagBeoordelenController.cs" />
+    <Compile Include="Controllers\ProductZoekenController.cs" />
+    <Compile Include="Controllers\ProductzoekenenfilterenController.cs" />
+    <Compile Include="Controllers\ProfielBewerkenController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
+    <Compile Include="Controllers\StudentProductPublicerenController.cs" />
+    <Compile Include="Controllers\ValidateReviewController.cs" />
     <Compile Include="Controllers\WerkoverzichtTonenController.cs" />
     <Compile Include="DatabaseModel\CAT.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -239,6 +282,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Business Logic\NewProduct\testquery.sql" />
+    <Content Include="Business Logic\Zoekenenfilteren\ProductZoekenQuery.sql" />
     <Content Include="DatabaseModel\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBModel.Context1.cs</LastGenOutput>
@@ -269,7 +314,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
