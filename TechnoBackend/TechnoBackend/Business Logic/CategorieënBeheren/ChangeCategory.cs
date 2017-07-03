@@ -33,8 +33,9 @@ namespace TechnoBackend.Business_Logic.CategorieënBeheren
                     }
                 return ("Category with ID :" + catid + "has been updated");
 
-            }
+
             return ("The Category could not be found in the databse");
+            }
         }
     }
 }

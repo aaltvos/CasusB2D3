@@ -21,12 +21,12 @@ namespace TechnoBackend.Business_Logic.CategorieënBeheren
             JsonCategory newCategory = JsonConvert.DeserializeObject<JsonCategory>(json);
 
             //Get token from headers
-            string Token = actionContext.Request.Headers.GetValues("Token").First();
+            //string Token = actionContext.Request.Headers.GetValues("Token").First();
 
             //Use token to get the user id
-            var UserID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == Token select sessions.USER_Id.USER_Id).First();
-            var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
-            var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
+            //var UserID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == Token select sessions.USER_Id.USER_Id).First();
+            //var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
+            //var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
 
             //Create new Article in DB with info from tje object and the user id
             CAT category = new CAT()
