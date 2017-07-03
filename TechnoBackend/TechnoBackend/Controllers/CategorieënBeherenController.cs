@@ -27,20 +27,24 @@ namespace TechnoBackend.Controllers
         }
 
         // POST api/<controller>
-        public HttpResponseMessage Post()
+        public class NewProductController : ApiController
         {
-            var token = ActionContext.Request.Headers.GetValues("Token").First();
-            var newtoken = SessionCheck.Check(token);
-            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 2)
+            // POST api/<controller>
+            public HttpStatusCode Post()
             {
-                var message = CreateCategory.AddCategory(ActionContext);
-
-                Request.Headers.Add("Token", newtoken.Item1);
-                var response = Request.CreateResponse(message);
-                return response;
+                try
+                {
+                    var message = CreateCategory.AddCategory(ActionContext);
+                    var response = Request.CreateResponse(message);
+                    return HttpStatusCode.OK;
+                }
+                catch (Exception)
+                {
+                    return HttpStatusCode.InternalServerError;
+                }
             }
-            return Request.CreateResponse("Invalid action");
         }
+
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]string value)
         {
