@@ -31,7 +31,7 @@ namespace TechnoBackend.Controllers
         {
             var token = ActionContext.Request.Headers.GetValues("Token").First();
             var newtoken = SessionCheck.Check(token);
-            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 4)
+            if (newtoken.Item1 != "no session" && newtoken.Item2 >= 2)
             {
                 var message = CreateCategory.AddCategory(ActionContext);
 
@@ -41,7 +41,6 @@ namespace TechnoBackend.Controllers
             }
             return Request.CreateResponse("Invalid action");
         }
-
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]string value)
         {
