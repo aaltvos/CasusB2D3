@@ -101,7 +101,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unittest\Login.cs" />
     <Compile Include="Unittest\News.cs" />
-    <Compile Include="Unittest\TestShowEvents.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
