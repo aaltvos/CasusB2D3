@@ -26,5 +26,10 @@ namespace TechnoBackend.DatabaseModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HAND_SUB_GEB_PROD> HAND_SUB_GEB_PROD { get; set; }
+
+        public static implicit operator HAND_GEB(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

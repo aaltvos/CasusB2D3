@@ -9,11 +9,9 @@ namespace TechnoBackend.Login
     public class SessionCheck
     {
 
+        //Check whether session is valid or not
         public static Tuple<string,int> Check(string token)
         {
-            //string token;
-            //token = actioncontext.Request.Headers.GetValues("Token").First();
-            
             using (DBModelContainer db = new DBModelContainer())
             {
                 try
@@ -23,6 +21,8 @@ namespace TechnoBackend.Login
                     {
                         TimeSpan TimeLeft = TTL - DateTime.UtcNow;
                         DateTime newTime = DateTime.UtcNow.AddHours(3);
+
+                        // 30 minutes left; session length updated
                         if (TimeLeft.Days == 0 & TimeLeft.Minutes < 30 & TimeLeft.Hours == 0)
                         {
                             SESSIONS CurrentSession = (from s in db.SESSIONS where s.SESSIONS_Token == token select s).First();
@@ -30,6 +30,7 @@ namespace TechnoBackend.Login
                             db.SaveChanges();
                         }
 
+                        //Session expired; So gets removed
                         else if (TimeLeft.Hours < 0)
                         {
                             SESSIONS CurrentSession = (from s in db.SESSIONS where s.SESSIONS_Token == token select s).First();
@@ -52,6 +53,7 @@ namespace TechnoBackend.Login
             }
         }
 
+        // Gets the token of the specified user
         public static Tuple<string, int> GetToken(string username)
         {
             string Token;
@@ -74,6 +76,7 @@ namespace TechnoBackend.Login
             }
         }
 
+        //Gets the Security Role
         public static int GetSecRole(string token)
         {
             using (DBModelContainer db = new DBModelContainer())

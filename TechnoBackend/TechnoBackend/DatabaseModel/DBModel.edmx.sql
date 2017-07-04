@@ -169,7 +169,7 @@ CREATE TABLE [dbo].[USERs] (
     [USER_Sec] int  NOT NULL,
     [USER_Val_dat] datetime  NOT NULL,
     [USER_Made_Work] nvarchar(max)  NOT NULL,
-    [USER_Email] nvarchar(max)  NOT NULL
+    [USER_Email] nvarchar(max)  NULL
 );
 GO
 
