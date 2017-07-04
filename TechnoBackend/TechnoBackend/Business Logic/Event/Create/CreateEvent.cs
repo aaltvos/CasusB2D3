@@ -17,13 +17,12 @@ namespace TechnoBackend.Business_Logic.Event
                 JsonEvent newEvent = JsonConvert.DeserializeObject<JsonEvent>(json);
 
                 //Get token from headers
-                string Token = actionContext.Request.Headers.GetValues("Token").First();
+                string token = actionContext.Request.Headers.GetValues("Token").First();
 
                 //Use token to get the user id
-                var UserID = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == Token select sessions.USER_Id.USER_Id).First();
-                var CurrentUserQuery = db.USERs.Where(s => s.USER_Id == UserID);
-                var currentUser = CurrentUserQuery.FirstOrDefault<USERs>();
-
+                var userId = (from sessions in db.SESSIONS where sessions.SESSIONS_Token == token select sessions.USER_Id.USER_Id).First();
+                var currentUserQuery = db.USERs.Where(s => s.USER_Id == userId);
+                var currentUser = currentUserQuery.FirstOrDefault<USERs>();
 
                 //Create new Event in DB with info from the object and the user_id
                 EVENT event_ = new EVENT()
