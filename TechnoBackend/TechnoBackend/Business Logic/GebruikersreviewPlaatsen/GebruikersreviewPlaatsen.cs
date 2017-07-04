@@ -34,6 +34,7 @@ namespace TechnoBackend.Business_Logic.GebruikersreviewPlaatsen
                     RevId = 0; 
                 }
 
+                Debug.WriteLine(actionContext.Request.Content.ReadAsStringAsync().Result);
                 Jsonreview json = JsonConvert.DeserializeObject<Jsonreview>(actionContext.Request.Content.ReadAsStringAsync().Result);
                 database.REVs.Add(new REVs()
                 {
@@ -43,10 +44,12 @@ namespace TechnoBackend.Business_Logic.GebruikersreviewPlaatsen
                 try
                 {
                     database.SaveChanges();
+                    Debug.WriteLine("changes saved");
                     return HttpStatusCode.OK;
                 }
-                catch
+                catch(Exception e)
                 {
+                    Debug.WriteLine("error, internalserver"+ e.InnerException);
                     return HttpStatusCode.InternalServerError;
                 }
             }
