@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using TechnoBackend.Business_Logic.Event;
@@ -45,11 +46,6 @@ namespace TechnoBackend.Controllers
                 return response;
             }
             return Request.CreateResponse("Invalid action");
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
         }
 
         // DELETE api/<controller>/5
