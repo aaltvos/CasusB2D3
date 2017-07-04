@@ -7,6 +7,7 @@ namespace TechnoBackend.Controllers
 {
     public class AuthenticationController : ApiController
     { 
+        //Login with credentials
         public HttpResponseMessage Post()
         {
             if(AuthenticationAttribute.Authent(ActionContext) != "Unauthorized")

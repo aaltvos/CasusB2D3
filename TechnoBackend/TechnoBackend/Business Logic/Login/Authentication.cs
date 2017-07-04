@@ -10,7 +10,7 @@ namespace TechnoBackend.Login
 
             using (DBModelContainer db = new DBModelContainer())
             {
-               
+               // Check whether the combination of username and password exists
                 try
                 {
                     var userId = (from user in db.USERs where user.USER_Name == username && user.USER_PW == password select user.USER_Id).First();

@@ -6,7 +6,7 @@ namespace TechnoBackend.Login
 {
     public class AuthenticationAttribute
     {
-
+        // Take username and password from body and call Login and SessionCheck method
         public static string Authent(HttpActionContext actionContext)
         {
             string AuthToken;
@@ -22,7 +22,7 @@ namespace TechnoBackend.Login
                 if (AuthToken == "no session")
                 {
                     AuthToken = RandomString();
-                    CreateSession newSession = new CreateSession(AuthToken, Authentication.Login(username, password));
+                    CreateSession.Create(AuthToken, Authentication.Login(username, password));
                 }
             }
 
@@ -34,11 +34,12 @@ namespace TechnoBackend.Login
             return AuthToken;
         }
 
+        //Generate Token
         public static string RandomString()
         {
             string gen = "";
             Random random = new Random();
-            var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
             for (int i = 0; i < 100; i++)
             {
