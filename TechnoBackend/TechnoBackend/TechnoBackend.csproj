@@ -159,10 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Business Logic\CategorieënBeheren\ChangeCategory.cs" />
-    <Compile Include="Business Logic\CategorieënBeheren\CreateCategory.cs" />
-    <Compile Include="Business Logic\CategorieënBeheren\DeleteCategory.cs" />
-    <Compile Include="Business Logic\CategorieënBeheren\JsonCategory.cs" />
+    <Compile Include="Business Logic\CategoryBeheren\ChangeCategory.cs" />
+    <Compile Include="Business Logic\CategoryBeheren\CreateCategory.cs" />
+    <Compile Include="Business Logic\CategoryBeheren\DeleteCategory.cs" />
+    <Compile Include="Business Logic\CategoryBeheren\JsonCategory.cs" />
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
     <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\DeleteNews.cs" />
@@ -173,7 +173,7 @@
     <Compile Include="Business Logic\Werkoverzicht\Workitem.cs" />
     <Compile Include="Business Logic\Werkoverzicht\WerkoverzichtStart.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\CategorieënBeherenController.cs" />
+    <Compile Include="Controllers\CategoryBeherenController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
     <Compile Include="Controllers\WerkoverzichtTonenController.cs" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 
-namespace TechnoBackend.Business_Logic.CategorieënBeheren
+namespace TechnoBackend.Business_Logic.CategoryBeheren
 {
     public class JsonCategory
     {

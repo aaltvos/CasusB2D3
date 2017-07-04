@@ -1,35 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Http.Controllers;
 using TechnoBackend.DatabaseModel;
 
-namespace TechnoBackend.Business_Logic.CategorieënBeheren
+namespace TechnoBackend.Business_Logic.CategoryBeheren
 {
     public class DeleteCategory
     {
-        public static string DelCategory(int catid)
+        public static HttpStatusCode DelCategory(int catid)
         {
 
             DBModelContainer db = new DBModelContainer();
+
             var currentcategory = db.CATs.Where(s => s.CAT_Id == catid).FirstOrDefault();
             if (currentcategory != null)
             {
                 db.CATs.Remove(currentcategory);
                 try
                 {
-
                     db.SaveChanges();
                 }
-                catch (Exception e)
+                catch
                 {
-                    return (e.ToString());
-
+                    return HttpStatusCode.InternalServerError;
                 }
-                return ("Category with ID :" + catid + "has been deleted");
+
             }
-            return ("The Category could not be found in the databse");
+            return HttpStatusCode.InternalServerError;
         }
     }
 }

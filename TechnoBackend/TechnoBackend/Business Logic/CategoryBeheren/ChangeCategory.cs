@@ -4,10 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Http.Controllers;
 using TechnoBackend.DatabaseModel;
-using TechnoBackend.Business_Logic.CategorieënBeheren;
 
 
-namespace TechnoBackend.Business_Logic.CategorieënBeheren
+namespace TechnoBackend.Business_Logic.CategoryBeheren
 {
     public class ChangeCategory
     {
