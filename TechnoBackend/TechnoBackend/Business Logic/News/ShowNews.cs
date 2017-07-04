@@ -24,7 +24,7 @@ namespace TechnoBackend.Business_Logic.News
             //getting highest article # from DB and getting # of articles from db
 
             newsmax = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Max();
-            newscount = (from news in db.NEWS where news.News_Id >= 1 select news.News_Id).Count();
+            newscount = (from news in db.NEWS where news.News_Title != null select news.News_Id).Count();
 
             //check if the # of requested articles isent more then the ammount of articles in the db
             if (numberOfArticles > newscount)
@@ -39,7 +39,7 @@ namespace TechnoBackend.Business_Logic.News
                 {
                     var currentarticleQuery = db.NEWS.Where(s => s.News_Id == newsmax);
                     var currentArticle = currentarticleQuery.FirstOrDefault();
-                    if (currentArticle != null)
+                    if (currentArticle.News_Title != null)
                     {
                         var wantedarticle = new JsonNews();
                         wantedarticle.Body = currentArticle.News_Body;
