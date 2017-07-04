@@ -38,5 +38,6 @@ namespace TechnoBackend.DatabaseModel
         public virtual DbSet<PRODTAGS> PRODTAGS { get; set; }
         public virtual DbSet<NEWS> NEWS { get; set; }
         public virtual DbSet<EVENT> EVENTs { get; set; }
+        public virtual DbSet<CATs1> CATs1 { get; set; }
     }
 }

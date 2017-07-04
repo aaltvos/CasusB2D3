@@ -159,6 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business Logic\EOLDControleren\EOLDTest.cs" />
+    <Compile Include="Business Logic\EOLDControleren\EOLDStart.cs" />
+    <Compile Include="Business Logic\EOLDControleren\JsonEOLD.cs" />
+    <Compile Include="Business Logic\EOLDControleren\ShowEOLD.cs" />
     <Compile Include="Business Logic\Login\JsonLogin.cs" />
     <Compile Include="Business Logic\News\CreateNews.cs" />
     <Compile Include="Business Logic\News\DeleteNews.cs" />
@@ -171,8 +175,12 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SessionCheckController.cs" />
+    <Compile Include="Controllers\EOLDCController.cs" />
     <Compile Include="Controllers\WerkoverzichtTonenController.cs" />
     <Compile Include="DatabaseModel\CAT.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\CATs1.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\CAT_PROD.cs">
@@ -266,7 +274,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\EOLDC\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
